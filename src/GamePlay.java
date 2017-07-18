@@ -8,10 +8,18 @@ public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
 	private int paintCount;
 	private boolean running;
-	private static final String MOVE_UP = "move up";
-    private static final String MOVE_DOWN = "move down";
-    private static final String MOVE_LEFT = "move left";
-    private static final String MOVE_RIGHT = "move right";
+	private long gameTime;
+
+	private boolean[] buttonsPressed;
+
+	private static final String PRESS_UP = "press up";
+    private static final String PRESS_DOWN = "press down";
+    private static final String PRESS_LEFT = "press left";
+    private static final String PRESS_RIGHT = "press right";
+    private static final String RELEASE_UP = "release up";
+    private static final String RELEASE_DOWN = "release down";
+    private static final String RELEASE_LEFT = "release left";
+    private static final String RELEASE_RIGHT = "release right";
 
     private static final int DIR_UP = 0;
     private static final int DIR_DOWN = 1;
@@ -22,6 +30,9 @@ public class GamePlay extends JPanel{
 		paintCount = 0;
 		logic = new GamePlayLogic(level);
 		running = true;
+		gameTime = 0;
+		buttonsPressed = new boolean[6];
+
 		setBindings();
 		startGameLoop();
 	}
@@ -40,20 +51,33 @@ public class GamePlay extends JPanel{
 		System.out.println("started");
 		while(running){
 			try{Thread.sleep(1000);}catch(Exception e){}
-			System.out.println("asdf");
+			logic.update(gameTime, buttonsPressed);
+			repaint();
+			gameTime += 1;
 		}
 	}
 
 	public void setBindings(){
-		this.getInputMap().put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
-		this.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
-		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
-		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), PRESS_UP);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), PRESS_DOWN);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), PRESS_LEFT);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), PRESS_RIGHT);
 
-		this.getActionMap().put(MOVE_UP, new MoveAction(DIR_UP));
-		this.getActionMap().put(MOVE_DOWN, new MoveAction(DIR_DOWN));
-		this.getActionMap().put(MOVE_LEFT, new MoveAction(DIR_LEFT));
-		this.getActionMap().put(MOVE_RIGHT, new MoveAction(DIR_RIGHT));
+		this.getActionMap().put(PRESS_UP, new DirPressedAction(DIR_UP));
+		this.getActionMap().put(PRESS_DOWN, new DirPressedAction(DIR_DOWN));
+		this.getActionMap().put(PRESS_LEFT, new DirPressedAction(DIR_LEFT));
+		this.getActionMap().put(PRESS_RIGHT, new DirPressedAction(DIR_RIGHT));
+
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released UP"), RELEASE_UP);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released DOWN"), RELEASE_DOWN);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released LEFT"), RELEASE_LEFT);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released RIGHT"), RELEASE_RIGHT);
+
+		this.getActionMap().put(RELEASE_UP, new DirReleasedAction(DIR_UP));
+		this.getActionMap().put(RELEASE_DOWN, new DirReleasedAction(DIR_DOWN));
+		this.getActionMap().put(RELEASE_LEFT, new DirReleasedAction(DIR_LEFT));
+		this.getActionMap().put(RELEASE_RIGHT, new DirReleasedAction(DIR_RIGHT));
+		System.out.println("Bindings set");
 	}
 
 	@Override
@@ -79,15 +103,29 @@ public class GamePlay extends JPanel{
 		g.drawString(String.format("%d", paintCount), 10, 40);
 	}
 
-	private class MoveAction extends AbstractAction{
+	private class DirPressedAction extends AbstractAction{
 		int direction;
 
-		MoveAction(int dir){
+		DirPressedAction(int dir){
 			direction = dir;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(Integer.toString(direction));
+			System.out.println(String.format("%d pressed", direction));
+			buttonsPressed[direction] = true;
+		}
+	}
+
+	private class DirReleasedAction extends AbstractAction{
+		int direction;
+
+		DirReleasedAction(int dir){
+			direction = dir;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(String.format("%d released", direction));
+			buttonsPressed[direction] = false;
 		}
 	}
 }

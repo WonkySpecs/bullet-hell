@@ -12,7 +12,10 @@ public class GamePlayLogic{
 		System.out.println("level loaded");
 	}
 
-	public void update(long gameTime){
+	public void update(long gameTime, boolean[] inputs){
 		System.out.println(String.format("TICK %d", gameTime));
+		for(int i = 0; i < inputs.length; i++){
+			System.out.println(inputs[i]);
+		}
 	}
 }
