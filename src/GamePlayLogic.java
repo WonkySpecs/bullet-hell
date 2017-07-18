@@ -1,3 +1,5 @@
+package src;
+
 public class GamePlayLogic{
 	private GameLevel level;
 

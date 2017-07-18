@@ -1,0 +1,1 @@
+javac -sourcepath . -d %cd%\bin %cd%\src\GameWindow.java
