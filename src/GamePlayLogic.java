@@ -2,6 +2,8 @@ package src;
 
 import src.gameobjects.*;
 
+import java.util.HashMap;
+
 public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
@@ -12,10 +14,11 @@ public class GamePlayLogic{
 		System.out.println("level loaded");
 	}
 
-	public void update(long gameTime, boolean[] inputs){
+	public void update(long gameTime, HashMap<String, Boolean> inputs){
 		System.out.println(String.format("TICK %d", gameTime));
-		for(int i = 0; i < inputs.length; i++){
-			System.out.println(inputs[i]);
+
+		for (String key : inputs.keySet()){
+			System.out.println(inputs.get(key));
 		}
 	}
 }

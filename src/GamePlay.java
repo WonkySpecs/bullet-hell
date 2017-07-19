@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.HashMap;
+
 public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
 	private int paintCount;
 	private boolean running;
 	private long gameTime;
 
-	private boolean[] buttonsPressed;
+	private HashMap<String, Boolean> buttonsPressed;
 
 	private static final String PRESS_UP = "press up";
     private static final String PRESS_DOWN = "press down";
@@ -21,17 +23,17 @@ public class GamePlay extends JPanel{
     private static final String RELEASE_LEFT = "release left";
     private static final String RELEASE_RIGHT = "release right";
 
-    private static final int DIR_UP = 0;
-    private static final int DIR_DOWN = 1;
-    private static final int DIR_LEFT = 2;
-    private static final int DIR_RIGHT = 3;
+    private static final String DIR_UP = "up";
+    private static final String DIR_DOWN = "down";
+    private static final String DIR_LEFT = "left";
+    private static final String DIR_RIGHT = "right";
 
 	public GamePlay(GameWindow mainWindow, GameLevel level){
 		paintCount = 0;
 		logic = new GamePlayLogic(level);
 		running = true;
 		gameTime = 0;
-		buttonsPressed = new boolean[6];
+		resetButtonsPressed();
 
 		setBindings();
 		startGameLoop();
@@ -50,7 +52,7 @@ public class GamePlay extends JPanel{
 	public void gameLoop(){
 		System.out.println("started");
 		while(running){
-			try{Thread.sleep(1000);}catch(Exception e){}
+			try{Thread.sleep(500);}catch(Exception e){}
 			logic.update(gameTime, buttonsPressed);
 			repaint();
 			gameTime += 1;
@@ -103,29 +105,38 @@ public class GamePlay extends JPanel{
 		g.drawString(String.format("%d", paintCount), 10, 40);
 	}
 
-	private class DirPressedAction extends AbstractAction{
-		int direction;
+	private void resetButtonsPressed(){
+		buttonsPressed = new HashMap<String, Boolean>(8);
+		buttonsPressed.put("up", false);
+		buttonsPressed.put("down", false);
+		buttonsPressed.put("left", false);
+		buttonsPressed.put("right", false);
+		buttonsPressed.put("fire_prim", false);
+		buttonsPressed.put("fire_sec", false);
+		buttonsPressed.put("special", false);
+	}
 
-		DirPressedAction(int dir){
+	private class DirPressedAction extends AbstractAction{
+		String direction;
+
+		DirPressedAction(String dir){
 			direction = dir;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(String.format("%d pressed", direction));
-			buttonsPressed[direction] = true;
+			buttonsPressed.put(direction, true);
 		}
 	}
 
 	private class DirReleasedAction extends AbstractAction{
-		int direction;
+		String direction;
 
-		DirReleasedAction(int dir){
+		DirReleasedAction(String dir){
 			direction = dir;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(String.format("%d released", direction));
-			buttonsPressed[direction] = false;
+			buttonsPressed.put(direction, false);
 		}
 	}
 }
