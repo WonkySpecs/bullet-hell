@@ -1,3 +1,17 @@
+/**
+* The GamePlay class is a JPanel extension that acts as the
+* main 'controller' class during gameplay. An instance of
+* GamePlay stored in a GameWindow instance handles user
+* with key bindings, passes these and the time to a
+* GamePlayLofic instance, which handles ingame processing,
+* before rendering the result.
+* 
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   19-07-2017
+*/
+
 package src;
 
 import javax.swing.*;

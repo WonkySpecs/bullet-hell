@@ -1,3 +1,15 @@
+/**
+* GamePlayLogic handles all of the gameplay processing based on
+* the current gametime, the level being playedm and the user's
+* input.
+* A GamePlayLogic instance is created by the games main GamePlay
+* instance, which handles rendering of the results from this class.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   17-07-2017
+*/
+
 package src;
 
 import src.gameobjects.*;

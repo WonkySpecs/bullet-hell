@@ -1,3 +1,14 @@
+/**
+* The GameWindow class is a JFrame extension that acts as
+* the container for all other components of the program.
+* GameWindow handles switching between menu and gameplay
+* contexts
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   17-07-2017
+*/
+
 package src;
 
 import javax.swing.*;
@@ -41,6 +52,7 @@ public class GameWindow extends JFrame implements ActionListener{
 	}
 
 	public void changeContentPane(JPanel newPanel){
+		//Is casting like this bad practice? REVIEW
 		JPanel jp = (JPanel) content;
 		jp.removeAll();
 		jp.add(newPanel);
