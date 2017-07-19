@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
