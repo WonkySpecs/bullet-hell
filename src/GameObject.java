@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 
+import java.awt.Point;
+
 public abstract class GameObject{
 	private int x, y;
 	//some hitbox thing
@@ -15,11 +17,11 @@ public abstract class GameObject{
 	}
 
 	public void moveRight(int dist){
-		this.x += dist;
+		x += dist;
 	}
 
-	public void moveUp(int dist){
-		this.y -= dist;
+	public void moveDown(int dist){
+		y += dist;
 	}
 
 	public int getX(){
@@ -28,6 +30,10 @@ public abstract class GameObject{
 
 	public int getY(){
 		return y;
+	}
+
+	public Point getPos(){
+		return new Point(x, y);
 	}
 
 	public void loadSpriteFromFile(String filename){

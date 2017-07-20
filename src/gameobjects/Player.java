@@ -13,6 +13,5 @@ public class Player extends Ship{
 			+ File.separator + "player.png");
 		
 		moveTo(x, y);
-		System.out.println(String.format("Player pos: %d %d", getX(), getY()));
 	}
 }

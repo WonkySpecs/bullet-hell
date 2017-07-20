@@ -21,6 +21,10 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+
 public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
 	private int paintCount;
@@ -28,6 +32,8 @@ public class GamePlay extends JPanel{
 	private long gameTime;
 
 	private HashMap<String, Boolean> buttonsPressed;
+
+	private ArrayList<SpriteData> spriteList;
 
 	private static final String PRESS_UP = "press up";
     private static final String PRESS_DOWN = "press down";
@@ -55,7 +61,6 @@ public class GamePlay extends JPanel{
 	}
 
 	public void startGameLoop(){
-		System.out.println("start");
 		Thread loop = new Thread(){
 			public void run(){
 			   gameLoop();
@@ -65,10 +70,10 @@ public class GamePlay extends JPanel{
 	}
 
 	public void gameLoop(){
-		System.out.println("started");
 		while(running){
-			try{Thread.sleep(500);}catch(Exception e){}
+			try{Thread.sleep(20);}catch(Exception e){}
 			logic.update(gameTime, buttonsPressed);
+			spriteList = logic.getSpriteList();
 			repaint();
 			gameTime += 1;
 		}
@@ -99,25 +104,40 @@ public class GamePlay extends JPanel{
 
 	@Override
 	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
 		paintCount += 1;
 		System.out.println(paintCount);
-		super.paintComponent(g);     // paint parent's background
+		super.paintComponent(g2);     // paint parent's background
 		setBackground(Color.BLACK);  // set background color for this JPanel
-	
+
+		try{
+			BufferedImage i = ImageIO.read(new File(System.getProperty("user.dir") + File.separator + "bin" + File.separator + "src" + File.separator + "gameobjects" + File.separator + "sprites" + File.separator + "player.png"));
+			g2.drawImage(i, 50, 50, null);		
+		}
+		catch(Exception e){}
 		// Your custom painting codes. For example,
 		// Drawing primitive shapes
-		g.setColor(Color.YELLOW);    // set the drawing color
-		g.drawLine(30, 40, 100, 200);
-		g.drawOval(150, 180, 10, 10);
-		g.drawRect(200, 210, 20, 30);
-		g.setColor(Color.RED);       // change the drawing color
-		g.fillOval(300, 310, 30, 50);
-		g.fillRect(400, 350, 60, 50);
+		g2.setColor(Color.YELLOW);    // set the drawing color
+		g2.drawLine(30, 40, 100, 200);
+		g2.drawOval(150, 180, 10, 10);
+		g2.drawRect(200, 210, 20, 30);
+		g2.setColor(Color.BLUE);       // change the drawing color
+		g2.fillOval(300, 310, 30, 50);
+		g2.fillRect(400, 350, 60, 50);
 		// Printing texts
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		g.drawString("Testing custom drawing ...", 10, 20);
-		g.drawString(String.format("%d", paintCount), 10, 40);
+		g2.setColor(Color.WHITE);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		g2.drawString("Testing custom drawing ...", 10, 20);
+		g2.drawString(String.format("%d", paintCount), 10, 40);
+		if(spriteList != null){
+			for(SpriteData sd : spriteList){
+				BufferedImage img = sd.getSprite();
+				int x = (int)sd.getPos().getX();
+				int y = (int)sd.getPos().getY();
+				g2.drawImage(img, x, y, null);
+				System.out.println(String.format("%d %d", x, y));
+			}			
+		}
 	}
 
 	private void resetButtonsPressed(){
