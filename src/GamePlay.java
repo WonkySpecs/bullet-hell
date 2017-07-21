@@ -110,11 +110,6 @@ public class GamePlay extends JPanel{
 		super.paintComponent(g2);     // paint parent's background
 		setBackground(Color.BLACK);  // set background color for this JPanel
 
-		try{
-			BufferedImage i = ImageIO.read(new File(System.getProperty("user.dir") + File.separator + "bin" + File.separator + "src" + File.separator + "gameobjects" + File.separator + "sprites" + File.separator + "player.png"));
-			g2.drawImage(i, 50, 50, null);		
-		}
-		catch(Exception e){}
 		// Your custom painting codes. For example,
 		// Drawing primitive shapes
 		g2.setColor(Color.YELLOW);    // set the drawing color
@@ -129,13 +124,13 @@ public class GamePlay extends JPanel{
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		g2.drawString("Testing custom drawing ...", 10, 20);
 		g2.drawString(String.format("%d", paintCount), 10, 40);
+		
 		if(spriteList != null){
 			for(SpriteData sd : spriteList){
 				BufferedImage img = sd.getSprite();
 				int x = (int)sd.getPos().getX();
 				int y = (int)sd.getPos().getY();
 				g2.drawImage(img, x, y, null);
-				System.out.println(String.format("%d %d", x, y));
 			}			
 		}
 	}

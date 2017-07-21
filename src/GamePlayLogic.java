@@ -20,13 +20,20 @@ import java.util.ArrayList;
 public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
-	private ArrayList<GameObject> gameObjectList;
+	private ArrayList<Ship> enemyShipList;
+	private ArrayList<Projectile> projectileObjectList;
+	//private ArrayList<Particle> particleList;
+
+	private static final int DEPTH_PLAYER = 0;
+	private static final int DEPTH_ENEMY = 1;
+	private static final int DEPTH_PLAYER_PROJECTILE = 2;
+	private static final int DEPTH_ENEMY_PROJECTILE = 3;
+	private static final int PARTICLE = 4;
 
 	public GamePlayLogic(GameLevel level){
 		this.level = level;
-		gameObjectList = new ArrayList<GameObject>();
+		enemyShipList = new ArrayList<Ship>();
 		player = new Player(300, 200);
-		gameObjectList.add(player);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -46,9 +53,11 @@ public class GamePlayLogic{
 
 	public ArrayList<SpriteData> getSpriteList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
-		for(GameObject go : gameObjectList){
-			spriteDataList.add(new SpriteData(go.getSprite(), go.getPos(), 0));
+		for(Ship enemy : enemyShipList){
+			spriteDataList.add(new SpriteData(enemy.getSprite(), enemy.getPos(), DEPTH_ENEMY));
 		}
+
+		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));
 
 		return spriteDataList;
 	}
