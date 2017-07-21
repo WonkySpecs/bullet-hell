@@ -1,6 +1,5 @@
 package src;
 
-import java.awt.Point;
-
 public interface Hitbox{
+	public void move(int x, int y);
 }

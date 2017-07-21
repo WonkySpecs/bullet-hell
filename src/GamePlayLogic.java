@@ -17,6 +17,8 @@ import src.gameobjects.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import java.awt.Point;
+
 public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
@@ -60,5 +62,26 @@ public class GamePlayLogic{
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));
 
 		return spriteDataList;
+	}
+
+	//Hit detection functions. May move these to a separate class/into the hitbox classes themselves
+
+	public boolean collisionBetween(HitboxCircle c1, HitboxCircle c2){
+		double dist = c1.getCenter().distance(c2.getCenter());
+
+		if(dist <= c1.getRadius() + c2.getRadius()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public boolean collisionBetween(HitboxCircle c1, HitboxPolygon c2){
+		return true;
+	}
+
+	public boolean collisionBetween(HitboxPolygon c1, HitboxPolygon c2){
+		return true;	
 	}
 }

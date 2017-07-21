@@ -24,6 +24,11 @@ public abstract class GameObject{
 		y += dist;
 	}
 
+	public void move(int x, int y){
+		moveRight(x);
+		moveDown(y);
+	}
+
 	public int getX(){
 		return x;
 	}
