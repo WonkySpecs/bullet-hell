@@ -1,3 +1,13 @@
+/**
+* GameObject is the abstract base class which is extended
+* to represent all of the objects during gameplay -
+* this includes the player, enemies, and projectiles
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   17-07-2017
+*/
+
 package src;
 
 import java.awt.image.BufferedImage;
@@ -8,7 +18,7 @@ import java.awt.Point;
 
 public abstract class GameObject{
 	private int x, y;
-	//some hitbox thing
+	private Hitbox hitbox;
 	private BufferedImage objectSprite;
 
 	public void moveTo(int x, int y){

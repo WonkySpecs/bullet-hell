@@ -1,3 +1,14 @@
+/**
+* SpriteData is a data type class used for passing sprites,
+* their positions and their depths from GamePlayLogic to GamePlay
+* 
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   20-07-2017
+*/
+
+
 package src;
 
 import java.awt.image.BufferedImage;

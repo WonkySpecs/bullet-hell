@@ -1,3 +1,16 @@
+/**
+* HitboxCircle represents the hitboxes of circular GameObjects
+* by a central Point and a radius.
+* Each hitbox works on a kind of 'local' coordinate system where
+* all points are relative to the top left point of the objects
+* sprite.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   21-07-2017
+*/
+
+
 package src;
 
 import java.awt.Point;
