@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import java.awt.Point;
+import java.awt.geom.*;
 
 public class GamePlayLogic{
 	private GameLevel level;
@@ -66,10 +67,10 @@ public class GamePlayLogic{
 
 	//Hit detection functions. May move these to a separate class/into the hitbox classes themselves
 
-	public boolean collisionBetween(HitboxCircle c1, HitboxCircle c2){
-		double dist = c1.getCenter().distance(c2.getCenter());
+	public boolean collisionBetween(HitboxCircle h1, HitboxCircle h2){
+		double dist = h1.getCenter().distance(h2.getCenter());
 
-		if(dist <= c1.getRadius() + c2.getRadius()){
+		if(dist <= h1.getRadius() + h2.getRadius()){
 			return true;
 		}
 		else{
@@ -77,11 +78,24 @@ public class GamePlayLogic{
 		}
 	}
 
-	public boolean collisionBetween(HitboxCircle c1, HitboxPolygon c2){
+	public boolean collisionBetween(HitboxCircle h1, HitboxPolygon h2){
 		return true;
 	}
 
-	public boolean collisionBetween(HitboxPolygon c1, HitboxPolygon c2){
-		return true;	
+	//Brute force checks for intersection between every edge of each polygon
+	//TODO: If performance is an issue, find a way to optimise this
+	public boolean collisionBetween(HitboxPolygon h1, HitboxPolygon h2){
+		ArrayList<Line2D.Float> edgeList1 = h1.getPolygonEdgesGlobalSpace();
+		ArrayList<Line2D.Float> edgeList2 = h2.getPolygonEdgesGlobalSpace();
+
+		for(Line2D.Float edge1 : edgeList1){
+			for(Line2D.Float edge2 : edgeList2){
+				if(edge1.intersectsLine(edge2)){
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
