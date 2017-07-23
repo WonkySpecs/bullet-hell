@@ -41,16 +41,16 @@ public class GamePlayLogic{
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
 		if(inputs.get("up") == true){
-			player.moveDown(-2);
+			player.moveUp();
 		}
 		if(inputs.get("down") == true){
-			player.moveDown(2);
+			player.moveDown();
 		}
 		if(inputs.get("left") == true){
-			player.moveRight(-2);
+			player.moveLeft();
 		}
 		if(inputs.get("right") == true){
-			player.moveRight(2);
+			player.moveRight();
 		}
 	}
 
@@ -80,6 +80,10 @@ public class GamePlayLogic{
 
 	public boolean collisionBetween(HitboxCircle h1, HitboxPolygon h2){
 		return true;
+	}
+
+	public boolean collisionBetween(HitboxPolygon h1, HitboxCircle h2){
+		return collisionBetween(h2, h1);
 	}
 
 	//Brute force checks for intersection between every edge of each polygon

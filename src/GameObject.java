@@ -17,7 +17,7 @@ import java.io.File;
 import java.awt.Point;
 
 public abstract class GameObject{
-	private int x, y;
+	private int x, y, xvel, yvel;
 	private Hitbox hitbox;
 	private BufferedImage objectSprite;
 
@@ -39,6 +39,22 @@ public abstract class GameObject{
 		moveDown(y);
 	}
 
+	public void moveRight(){
+		x += xvel;
+	}
+
+	public void moveLeft(){
+		x -= xvel;
+	}
+
+	public void moveDown(){
+		y += yvel;
+	}
+
+	public void moveUp(){
+		y -= yvel;
+	}
+
 	public int getX(){
 		return x;
 	}
@@ -49,6 +65,22 @@ public abstract class GameObject{
 
 	public Point getPos(){
 		return new Point(x, y);
+	}
+
+	public int getXvel(){
+		return xvel;
+	}
+
+	public int getYvel(){
+		return xvel;
+	}
+
+	public void setXvel(int xvel){
+		this.xvel = xvel;
+	}
+
+	public void setYvel(int yvel){
+		this.yvel = yvel;
 	}
 
 	public void loadSpriteFromFile(String filename){

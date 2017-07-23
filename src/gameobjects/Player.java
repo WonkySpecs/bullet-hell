@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class Player extends Ship{
 	public Player(int x, int y){
+		setXvel(5);
+		setYvel(5);
 		//This is 99.9% incorrect and overly localised, TODO: fix
 		loadSpriteFromFile(System.getProperty("user.dir")
 			+ File.separator + "bin"
