@@ -44,17 +44,22 @@ public class GamePlay extends JPanel{
     private static final String RELEASE_LEFT = "release left";
     private static final String RELEASE_RIGHT = "release right";
 
-    private static final String DIR_UP = "up";
-    private static final String DIR_DOWN = "down";
-    private static final String DIR_LEFT = "left";
-    private static final String DIR_RIGHT = "right";
+    public static final String PRESS_FIRE_PRIM = "fire_prim";
+    public static final String PRESS_FIRE_SEC = "fire_sec";
+    public static final String PRESS_FIRE_SPECIAL = "fire_special";
+
+    public static final String DIR_UP = "up";
+    public static final String DIR_DOWN = "down";
+    public static final String DIR_LEFT = "left";
+    public static final String DIR_RIGHT = "right";
+
 
 	public GamePlay(GameWindow mainWindow, GameLevel level){
 		paintCount = 0;
 		logic = new GamePlayLogic(level);
 		running = true;
 		gameTime = 0;
-		resetButtonsPressed();
+		resetAllButtonsPressed();
 
 		setBindings();
 		startGameLoop();
@@ -73,6 +78,7 @@ public class GamePlay extends JPanel{
 		while(running){
 			try{Thread.sleep(20);}catch(Exception e){}
 			logic.update(gameTime, buttonsPressed);
+			resetFireButtonsPressed();
 			spriteList = logic.getSpriteList();
 			repaint();
 			gameTime += 1;
@@ -99,6 +105,14 @@ public class GamePlay extends JPanel{
 		this.getActionMap().put(RELEASE_DOWN, new DirReleasedAction(DIR_DOWN));
 		this.getActionMap().put(RELEASE_LEFT, new DirReleasedAction(DIR_LEFT));
 		this.getActionMap().put(RELEASE_RIGHT, new DirReleasedAction(DIR_RIGHT));
+
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("typed z"), PRESS_FIRE_PRIM);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("typed x"), PRESS_FIRE_SEC);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("SPACE"), PRESS_FIRE_SPECIAL);
+
+		this.getActionMap().put(PRESS_FIRE_PRIM, new FirePressAction(PRESS_FIRE_PRIM));
+		this.getActionMap().put(PRESS_FIRE_SEC, new FirePressAction(PRESS_FIRE_SEC));
+		this.getActionMap().put(PRESS_FIRE_SPECIAL, new FirePressAction(PRESS_FIRE_SPECIAL));
 		System.out.println("Bindings set");
 	}
 
@@ -135,15 +149,19 @@ public class GamePlay extends JPanel{
 		}
 	}
 
-	private void resetButtonsPressed(){
+	private void resetFireButtonsPressed(){
+		buttonsPressed.put(PRESS_FIRE_PRIM, false);
+		buttonsPressed.put(PRESS_FIRE_SEC, false);
+		buttonsPressed.put(PRESS_FIRE_SPECIAL, false);
+	}
+
+	private void resetAllButtonsPressed(){
 		buttonsPressed = new HashMap<String, Boolean>(8);
-		buttonsPressed.put("up", false);
-		buttonsPressed.put("down", false);
-		buttonsPressed.put("left", false);
-		buttonsPressed.put("right", false);
-		buttonsPressed.put("fire_prim", false);
-		buttonsPressed.put("fire_sec", false);
-		buttonsPressed.put("special", false);
+		resetFireButtonsPressed();
+		buttonsPressed.put(DIR_UP, false);
+		buttonsPressed.put(DIR_DOWN , false);
+		buttonsPressed.put(DIR_LEFT , false);
+		buttonsPressed.put(DIR_RIGHT, false);		
 	}
 
 	private class DirPressedAction extends AbstractAction{
@@ -167,6 +185,18 @@ public class GamePlay extends JPanel{
 
 		public void actionPerformed(ActionEvent e) {
 			buttonsPressed.put(direction, false);
+		}
+	}
+
+	private class FirePressAction extends AbstractAction{
+		String weapon;
+
+		FirePressAction(String weapon){
+			this.weapon = weapon;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			buttonsPressed.put(weapon, true);
 		}
 	}
 }

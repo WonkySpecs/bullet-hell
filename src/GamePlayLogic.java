@@ -1,9 +1,10 @@
 /**
 * GamePlayLogic handles all of the gameplay processing based on
-* the current gametime, the level being playedm and the user's
+* the current gametime, the level being playeds and the user's
 * input.
 * A GamePlayLogic instance is created by the games main GamePlay
 * instance, which handles rendering of the results from this class.
+* Hit detection is handled by this class.
 *
 * @author  Will Taylor
 * @version 0.1
@@ -40,17 +41,26 @@ public class GamePlayLogic{
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
-		if(inputs.get("up") == true){
+		if(inputs.get(GamePlay.DIR_UP) == true){
 			player.moveUp();
 		}
-		if(inputs.get("down") == true){
+		if(inputs.get(GamePlay.DIR_DOWN) == true){
 			player.moveDown();
 		}
-		if(inputs.get("left") == true){
+		if(inputs.get(GamePlay.DIR_LEFT) == true){
 			player.moveLeft();
 		}
-		if(inputs.get("right") == true){
+		if(inputs.get(GamePlay.DIR_RIGHT) == true){
 			player.moveRight();
+		}
+		if(inputs.get(GamePlay.PRESS_FIRE_PRIM) == true){
+			System.out.println("fire prim");
+		}
+		if(inputs.get(GamePlay.PRESS_FIRE_SEC) == true){
+			System.out.println("fire sec");
+		}
+		if(inputs.get(GamePlay.PRESS_FIRE_SPECIAL) == true){
+			System.out.println("fire special");
 		}
 	}
 
