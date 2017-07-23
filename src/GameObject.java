@@ -96,4 +96,25 @@ public abstract class GameObject{
 	public BufferedImage getSprite(){
 		return objectSprite;
 	}
+
+	//Return true if whole of object sprite is offscreen, otherwise false
+	public boolean isOffScreen(int screenWidth, int screenHeight){
+		if(x + objectSprite.getWidth() < 0){
+			return true;
+		}
+
+		if(y + objectSprite.getHeight() < 0){
+			return true;
+		}
+
+		if(x > screenWidth){
+			return true;
+		}
+
+		if(y > screenHeight){
+			return true;
+		}
+
+		return false;
+	}
 }
