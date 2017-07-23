@@ -25,7 +25,7 @@ public class Player extends Ship{
 			+ File.separator + "src"
 			+ File.separator + "gameobjects"
 			+ File.separator + "sprites"
-			+ File.separator + "player.png");
+			+ File.separator + "Player.png");
 		
 		moveTo(x, y);
 

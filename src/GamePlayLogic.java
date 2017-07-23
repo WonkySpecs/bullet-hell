@@ -24,7 +24,7 @@ import java.awt.geom.*;
 public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
-	private ArrayList<Ship> enemyShipList;
+	private ArrayList<ShipEnemy> enemyShipList;
 	private ArrayList<Projectile> projectileObjectList;
 	//private ArrayList<Particle> particleList;
 
@@ -36,11 +36,17 @@ public class GamePlayLogic{
 
 	public GamePlayLogic(GameLevel level){
 		this.level = level;
-		enemyShipList = new ArrayList<Ship>();
+		enemyShipList = new ArrayList<ShipEnemy>();
 		player = new Player(300, 200);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
+		ArrayList<ShipEnemy> newEnemies = level.getEnemySpawns(gameTime);
+
+		if(newEnemies != null){
+			enemyShipList.addAll(newEnemies);			
+		}
+
 		if(inputs.get(GamePlay.DIR_UP) == true){
 			player.moveUp();
 		}
@@ -61,6 +67,10 @@ public class GamePlayLogic{
 		}
 		if(inputs.get(GamePlay.PRESS_FIRE_SPECIAL) == true){
 			System.out.println("fire special");
+		}
+
+		for(ShipEnemy enemy : enemyShipList){
+			enemy.update();
 		}
 	}
 

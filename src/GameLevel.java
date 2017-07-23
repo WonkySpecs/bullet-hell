@@ -9,7 +9,14 @@
 
 package src;
 
-public class GameLevel{
+import java.util.ArrayList;
+
+import src.gameobjects.ShipEnemy;
+
+public abstract class GameLevel{
 	public GameLevel(){
+		System.out.println("blah");
 	}
+
+	public abstract ArrayList<ShipEnemy> getEnemySpawns(long gameTime);
 }

@@ -15,6 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import src.levels.*;
+
 public class GameWindow extends JFrame implements ActionListener{
 	private Container content;
 	private static JButton startButton = new JButton("Start");
@@ -46,7 +48,7 @@ public class GameWindow extends JFrame implements ActionListener{
 	}
 
 	public void newGamePlay(){
-		GamePlay gp = new GamePlay(this, new GameLevel());
+		GamePlay gp = new GamePlay(this, new GameLevelOne());
 		gp.setFocusable(true);
 		changeContentPane((JPanel) gp);
 	}
