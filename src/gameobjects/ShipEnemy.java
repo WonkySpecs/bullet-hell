@@ -13,9 +13,11 @@ import java.io.File;
 
 public abstract class ShipEnemy extends Ship{
 	public int hitPoints;
+	public boolean removable;
 
 	public ShipEnemy(int x, int y, int hp, BufferedImage sprite){
 		moveTo(x, y);
+		removable = false;
 		if(sprite != null){
 			setSprite(sprite);			
 		}
@@ -40,6 +42,14 @@ public abstract class ShipEnemy extends Ship{
 
 	public void reduceHitpoints(int damage){
 		hitPoints -= damage;
+	}
+
+	public void setRemovable(boolean removable){
+		this.removable = removable;
+	}
+
+	public boolean isRemovable(){
+		return removable;
 	}
 
 	public abstract void update();

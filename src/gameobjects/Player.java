@@ -38,4 +38,8 @@ public class Player extends Ship{
 
 		HitboxPolygon hitbox = new HitboxPolygon(x, y, points);
 	}
+
+	public void fire(String weapon){
+		System.out.println(weapon);
+	}
 }

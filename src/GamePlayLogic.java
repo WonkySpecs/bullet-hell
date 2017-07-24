@@ -37,7 +37,7 @@ public class GamePlayLogic{
 	public GamePlayLogic(GameLevel level){
 		this.level = level;
 		enemyShipList = new ArrayList<ShipEnemy>();
-		player = new Player(300, 200);
+		player = new Player(300, 400);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -60,13 +60,13 @@ public class GamePlayLogic{
 			player.moveRight();
 		}
 		if(inputs.get(GamePlay.ACT_FIRE_PRIM) == true){
-			System.out.println("fire prim");
+			player.fire(GamePlay.ACT_FIRE_PRIM);
 		}
 		if(inputs.get(GamePlay.ACT_FIRE_SEC) == true){
-			System.out.println("fire sec");
+			player.fire(GamePlay.ACT_FIRE_SEC);
 		}
 		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
-			System.out.println("fire special");
+			player.fire(GamePlay.ACT_FIRE_SPECIAL);
 		}
 
 		for(ShipEnemy enemy : enemyShipList){
@@ -86,7 +86,6 @@ public class GamePlayLogic{
 	}
 
 	//Hit detection functions. May move these to a separate class/into the hitbox classes themselves
-
 	public boolean collisionBetween(HitboxCircle h1, HitboxCircle h2){
 		double dist = h1.getCenter().distance(h2.getCenter());
 

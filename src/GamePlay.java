@@ -41,12 +41,12 @@ public class GamePlay extends JPanel{
 	private static final String RELEASE_LEFT = "release left";
 	private static final String RELEASE_RIGHT = "release right";
 
-	public static final String PRESS_FIRE_PRIM = "press fire_prim";
-	public static final String PRESS_FIRE_SEC = "press fire_sec";
-	public static final String PRESS_FIRE_SPECIAL = "press fire_special";
-	public static final String RELEASE_FIRE_PRIM = "release fire_prim";
-	public static final String RELEASE_FIRE_SEC = "release fire_sec";
-	public static final String RELEASE_FIRE_SPECIAL = "release fire_special";
+	private static final String PRESS_FIRE_PRIM = "press fire_prim";
+	private static final String PRESS_FIRE_SEC = "press fire_sec";
+	private static final String PRESS_FIRE_SPECIAL = "press fire_special";
+	private static final String RELEASE_FIRE_PRIM = "release fire_prim";
+	private static final String RELEASE_FIRE_SEC = "release fire_sec";
+	private static final String RELEASE_FIRE_SPECIAL = "release fire_special";
 
 	public static final String ACT_UP = "up";
 	public static final String ACT_DOWN = "down";

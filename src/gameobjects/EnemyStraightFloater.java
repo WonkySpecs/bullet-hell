@@ -24,8 +24,19 @@ public class EnemyStraightFloater extends ShipEnemy{
 	}
 
 	//moves down by yvel and right by xvel - these values can be negative to move left/up
+	//Once the floater is on screen, it will be removed next time it goes off screen
 	public void update(){
 		moveDown();
 		moveRight();
+
+		//TODO: work out how to get the screen size to these methoods non-magically
+		if(!isRemovable() && !isOffScreen(640, 800)){
+			System.out.println("ASDF");
+			setRemovable(true);
+		}
+
+		if(isRemovable() && isOffScreen(640, 800)){
+			System.out.println("I should be deleted");
+		}
 	}
 }

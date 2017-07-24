@@ -23,7 +23,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
 	public GameWindow(){
 		super("As yet unnamed bullet hell game");
-		setSize(640, 480);
+		setSize(640, 800);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		content = getContentPane();
@@ -43,12 +43,21 @@ public class GameWindow extends JFrame implements ActionListener{
 		Object actionSource = e.getSource();
 
 		if(actionSource == startButton){
-			newGamePlay();
+			newGamePlay(1);
 		}
 	}
 
-	public void newGamePlay(){
-		GamePlay gp = new GamePlay(this, new GameLevelOne());
+	public void newGamePlay(int levelID){
+		GamePlay gp = null;
+		switch(levelID){
+			case 1: 
+				gp = new GamePlay(this, new GameLevelOne());
+				break;
+			default:
+				gp = new GamePlay(this, new GameLevelOne());
+				break;
+		}
+
 		gp.setFocusable(true);
 		changeContentPane((JPanel) gp);
 	}

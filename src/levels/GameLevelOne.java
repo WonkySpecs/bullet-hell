@@ -1,3 +1,12 @@
+/**
+* GameLevelOne, likely to become a demo level
+* 
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   17-07-2017
+*/
+
 package src.levels;
 
 import java.util.ArrayList;
@@ -15,8 +24,8 @@ public class GameLevelOne extends GameLevel{
 		if(gameTime == 100){
 			ArrayList<ShipEnemy> floaters = new ArrayList<>();
 
-			floaters.add(new EnemyStraightFloater(0, -30, 100, 2, 8, null));
-			floaters.add(new EnemyStraightFloater(400, -30, 100, -2, 8, null));
+			floaters.add(new EnemyStraightFloater(20, -30, 100, 2, 7, null));
+			floaters.add(new EnemyStraightFloater(600, -30, 100, -2, 7, null));
 			return floaters;
 		}
 		return null;
