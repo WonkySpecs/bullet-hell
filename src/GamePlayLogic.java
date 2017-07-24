@@ -47,25 +47,25 @@ public class GamePlayLogic{
 			enemyShipList.addAll(newEnemies);			
 		}
 
-		if(inputs.get(GamePlay.DIR_UP) == true){
+		if(inputs.get(GamePlay.ACT_UP) == true){
 			player.moveUp();
 		}
-		if(inputs.get(GamePlay.DIR_DOWN) == true){
+		if(inputs.get(GamePlay.ACT_DOWN) == true){
 			player.moveDown();
 		}
-		if(inputs.get(GamePlay.DIR_LEFT) == true){
+		if(inputs.get(GamePlay.ACT_LEFT) == true){
 			player.moveLeft();
 		}
-		if(inputs.get(GamePlay.DIR_RIGHT) == true){
+		if(inputs.get(GamePlay.ACT_RIGHT) == true){
 			player.moveRight();
 		}
-		if(inputs.get(GamePlay.PRESS_FIRE_PRIM) == true){
+		if(inputs.get(GamePlay.ACT_FIRE_PRIM) == true){
 			System.out.println("fire prim");
 		}
-		if(inputs.get(GamePlay.PRESS_FIRE_SEC) == true){
+		if(inputs.get(GamePlay.ACT_FIRE_SEC) == true){
 			System.out.println("fire sec");
 		}
-		if(inputs.get(GamePlay.PRESS_FIRE_SPECIAL) == true){
+		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
 			System.out.println("fire special");
 		}
 
