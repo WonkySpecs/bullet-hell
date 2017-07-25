@@ -11,11 +11,14 @@ package src.gameobjects;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public abstract class ShipEnemy extends Ship{
+import src.GameObject;
+
+public abstract class EnemyShip extends GameObject{
 	public int hitPoints;
 	public boolean removable;
 
-	public ShipEnemy(int x, int y, int hp, BufferedImage sprite){
+	public EnemyShip(int x, int y, int screenWidth, int screenHeight, int hp, BufferedImage sprite){
+		super(x, y, screenWidth, screenHeight);
 		moveTo(x, y);
 		removable = false;
 		if(sprite != null){
