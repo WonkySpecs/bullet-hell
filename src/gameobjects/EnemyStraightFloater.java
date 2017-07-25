@@ -29,14 +29,8 @@ public class EnemyStraightFloater extends EnemyShip{
 		moveDown();
 		moveRight();
 
-		//TODO: work out how to get the screen size to these methoods non-magically
 		if(!isRemovable() && !isOffScreen()){
-			System.out.println("ASDF");
 			setRemovable(true);
-		}
-
-		if(isRemovable() && isOffScreen()){
-			System.out.println("I should be deleted");
 		}
 	}
 }
