@@ -1,13 +1,11 @@
 /**
-* The most basic kind of enemy, EnemyStraightFloater.
-* moves at a fixed velocity until it is shot down, hits
-* the player or leaves the screen.
-* 
-*
+* The most basic kind of Projectile, ProjectileStraightLine.
+* moves at a fixed velocity until it hits something or 
+* leaves the screen.
 *
 * @author  Will Taylor
 * @version 0.1
-* @since   23-07-2017
+* @since   25-07-2017
 */
 
 package src.gameobjects;

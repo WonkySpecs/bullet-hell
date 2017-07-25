@@ -27,13 +27,7 @@ public class GameLevelOne extends GameLevel{
 		if(gameTime == 50){
 			ArrayList<EnemyShip> floaters = new ArrayList<>();
 
-			HashMap<String, Animation> floaterAnimations = new HashMap<>();
-			BufferedImage[] floaterAnimationSprites = { Sprite.getSprite(0, 0, "enemyfloater1", 32),
-														Sprite.getSprite(1, 0, "enemyfloater1", 32),
-														Sprite.getSprite(2, 0, "enemyfloater1", 32) };
-
-			floaterAnimations.put("neutral", new Animation(floaterAnimationSprites, 6));
-
+			HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap("enemyfloater1");
 			floaters.add(new EnemyStraightFloater(20, -30, screenWidth, screenHeight, 100, 2, 7, floaterAnimations));
 			floaters.add(new EnemyStraightFloater(600, -30, screenWidth, screenHeight, 100, -2, 7, floaterAnimations));
 			return floaters;

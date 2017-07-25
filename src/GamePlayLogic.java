@@ -45,10 +45,7 @@ public class GamePlayLogic{
 		enemyShipList = new ArrayList<EnemyShip>();
 		projectileList = new ArrayList<Projectile>();
 
-		HashMap<String, Animation> playerAnimations = new HashMap<>();
-		BufferedImage[] neutralImages = {Sprite.getSprite(0, 0, "player", 32), Sprite.getSprite(1, 0, "player", 32)};
-		playerAnimations.put("neutral", new Animation(neutralImages, 5));
-		player = new Player(300, 400, screenWidth, screenHeight, playerAnimations);
+		player = new Player(300, 400, screenWidth, screenHeight, AnimationMapFactory.getAnimationMap("player"));
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){

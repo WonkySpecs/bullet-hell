@@ -1,3 +1,15 @@
+/**
+* Frame is the basic data structure used to build
+* Animation objects. Stores a BufferedImage and
+* the duration the image should be shown for
+* 
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   25-07-2017
+*/
+
+
 package src.animation;
 
 import java.awt.image.BufferedImage;

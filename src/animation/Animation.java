@@ -1,3 +1,15 @@
+/**
+* Animation defines which sprite should be shown
+* at any given time for an object. The animation
+* must be told to start and update by the object
+* which uses it.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   25-07-2017
+*/
+
+
 package src.animation;
 
 import java.awt.image.BufferedImage;
