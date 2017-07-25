@@ -17,6 +17,7 @@ import src.gameobjects.*;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import java.awt.Point;
 import java.awt.geom.*;
@@ -25,7 +26,7 @@ public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
 	private ArrayList<EnemyShip> enemyShipList;
-	private ArrayList<Projectile> projectileObjectList;
+	private ArrayList<Projectile> projectileList;
 	private int screenWidth, screenHeight;
 	//private ArrayList<Particle> particleList;
 
@@ -40,16 +41,19 @@ public class GamePlayLogic{
 		this.screenHeight = screenHeight;
 		this.level = level;
 		enemyShipList = new ArrayList<EnemyShip>();
+		projectileList = new ArrayList<Projectile>();
 		player = new Player(300, 400, screenWidth, screenHeight);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
+		//Add any newly spawning enemies, as definied in the current level
 		ArrayList<EnemyShip> newEnemies = level.getEnemySpawns(gameTime);
 
 		if(newEnemies != null){
 			enemyShipList.addAll(newEnemies);			
 		}
 
+		//Execute player functions based on inputs recieved
 		if(inputs.get(GamePlay.ACT_UP) == true){
 			player.moveUp();
 		}
@@ -72,8 +76,18 @@ public class GamePlayLogic{
 			player.fire(GamePlay.ACT_FIRE_SPECIAL);
 		}
 
-		for(EnemyShip enemy : enemyShipList){
+		//Update all enemies and projectiles, deleting if offscreen
+		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
+			EnemyShip enemy = iterator.next();
 			enemy.update();
+			if(enemy.isRemovable() && enemy.isOffScreen()){
+				enemy = null;
+				iterator.remove();
+			}
+		}
+
+		for(Projectile proj : projectileList){
+			proj.update();
 		}
 	}
 
