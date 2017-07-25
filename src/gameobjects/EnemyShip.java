@@ -8,30 +8,20 @@
 
 package src.gameobjects;
 
-import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.io.File;
 
 import src.GameObject;
+import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
-	public int hitPoints;
-	public boolean removable;
+	private int hitPoints;
+	private boolean removable;
 
-	public EnemyShip(int x, int y, int screenWidth, int screenHeight, int hp, BufferedImage sprite){
-		super(x, y, screenWidth, screenHeight);
+	public EnemyShip(int x, int y, int screenWidth, int screenHeight, int hp, HashMap<String, Animation> animations){
+		super(x, y, screenWidth, screenHeight, animations);
 		moveTo(x, y);
 		removable = false;
-		if(sprite != null){
-			setSprite(sprite);			
-		}
-		else{
-			loadSpriteFromFile((System.getProperty("user.dir")
-									+ File.separator + "bin"
-									+ File.separator + "src"
-									+ File.separator + "gameobjects"
-									+ File.separator + "sprites"
-									+ File.separator + "GenericEnemy.png"));
-		}
 		setHitpoints(hp);
 	}
 

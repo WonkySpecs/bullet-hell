@@ -11,21 +11,25 @@
 package src;
 
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import java.io.File;
-
 import java.awt.Point;
+import java.util.HashMap;
+
+import src.animation.*;
 
 public abstract class GameObject{
 	private int x, y, xvel, yvel, screenWidth, screenHeight;
 	private Hitbox hitbox;
-	private BufferedImage objectSprite;
 
-	public GameObject(int x, int y, int screenWidth, int screenHeight){
+	private String curAnimationName;
+	private Animation curAnimation;
+	private HashMap<String, Animation> animations;
+
+	public GameObject(int x, int y, int screenWidth, int screenHeight, HashMap<String, Animation> animations){
 		moveTo(x, y);
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
-
+		this.animations = animations;
 	}
 
 	public void moveTo(int x, int y){
@@ -90,31 +94,36 @@ public abstract class GameObject{
 		this.yvel = yvel;
 	}
 
-	public void loadSpriteFromFile(String filename){
+	public void setCurAnimation(String animation){
+		curAnimationName = animation;
+
 		try{
-			objectSprite = ImageIO.read(new File(filename));
+			curAnimation = animations.get(curAnimationName);			
 		}
 		catch(Exception e){
-			e.printStackTrace();
-			System.out.println(String.format("Failed to load sprite from file %s", filename));
+			System.out.println("Tried to load animation which does not exist for this object");
 		}
+	}
+
+	public String getCurAnimationName(){
+		return curAnimationName;
+	}
+
+	public Animation getCurAnimation(){
+		return curAnimation;
 	}
 
 	public BufferedImage getSprite(){
-		return objectSprite;
-	}
-
-	public void setSprite(BufferedImage sprite){
-		objectSprite = sprite;
+		return curAnimation.getSprite();
 	}
 
 	//Return true if whole of object sprite is offscreen, otherwise false
 	public boolean isOffScreen(){
-		if(x + objectSprite.getWidth() < 0){
+		if(x + getSprite().getWidth() < 0){
 			return true;
 		}
 
-		if(y + objectSprite.getHeight() < 0){
+		if(y + getSprite().getHeight() < 0){
 			return true;
 		}
 

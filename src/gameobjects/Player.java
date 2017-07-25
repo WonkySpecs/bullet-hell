@@ -11,23 +11,19 @@ package src.gameobjects;
 
 import src.GameObject;
 import src.HitboxPolygon;
+import src.animation.*;
 
-import java.io.File;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends GameObject{
-	public Player(int x, int y, int screenWidth, int screenHeight){
-		super(x, y, screenWidth, screenHeight);
+	public Player(int x, int y, int screenWidth, int screenHeight, HashMap<String, Animation> animations){
+		super(x, y, screenWidth, screenHeight, animations);
 		setXvel(5);
 		setYvel(5);
-		//This is 99.9% incorrect and overly localised, TODO: fix
-		loadSpriteFromFile(System.getProperty("user.dir")
-			+ File.separator + "bin"
-			+ File.separator + "src"
-			+ File.separator + "gameobjects"
-			+ File.separator + "sprites"
-			+ File.separator + "Player.png");
+		setCurAnimation("neutral");
+		getCurAnimation().start();
 
 		//TODO: Move hitbox definition to a file
 		ArrayList<Point> points = new ArrayList<>();
@@ -37,6 +33,10 @@ public class Player extends GameObject{
 		points.add(new Point(0, 50));
 
 		HitboxPolygon hitbox = new HitboxPolygon(x, y, points);
+	}
+
+	public void update(){
+		getCurAnimation().update();
 	}
 
 	public void fire(String weapon){

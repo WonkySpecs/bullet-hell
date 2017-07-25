@@ -17,14 +17,12 @@ import java.util.HashMap;
 import src.HitboxCircle;
 import src.animation.*;
 
-public class EnemyStraightFloater extends EnemyShip{
-	public EnemyStraightFloater(int x, int y, int screenWidth, int screenHeight, int hp, int xvel, int yvel, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, hp, animations);
+public class ProjectileStraightLine extends Projectile{
+	public ProjectileStraightLine(int x, int y, int screenWidth, int screenHeight, int xvel, int yvel, HashMap<String, Animation> animations){
+		super(x, y, screenWidth, screenHeight, animations);
 		setXvel(xvel);
 		setYvel(yvel);
-		setCurAnimation("neutral");
-		getCurAnimation().start();
-		HitboxCircle hitbox = new HitboxCircle(13, 13, 26);
+		HitboxCircle hitbox = new HitboxCircle(2, 2, 1);
 	}
 
 	//moves down by yvel and right by xvel - these values can be negative to move left/up
@@ -32,7 +30,6 @@ public class EnemyStraightFloater extends EnemyShip{
 	public void update(){
 		moveDown();
 		moveRight();
-		getCurAnimation().update();
 
 		if(!isRemovable() && !isOffScreen()){
 			setRemovable(true);

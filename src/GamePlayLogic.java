@@ -13,14 +13,16 @@
 
 package src;
 
-import src.gameobjects.*;
-
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.awt.image.BufferedImage;
 import java.awt.Point;
 import java.awt.geom.*;
+
+import src.gameobjects.*;
+import src.animation.*;
 
 public class GamePlayLogic{
 	private GameLevel level;
@@ -42,7 +44,11 @@ public class GamePlayLogic{
 		this.level = level;
 		enemyShipList = new ArrayList<EnemyShip>();
 		projectileList = new ArrayList<Projectile>();
-		player = new Player(300, 400, screenWidth, screenHeight);
+
+		HashMap<String, Animation> playerAnimations = new HashMap<>();
+		BufferedImage[] neutralImages = {Sprite.getSprite(0, 0, "player", 32), Sprite.getSprite(1, 0, "player", 32)};
+		playerAnimations.put("neutral", new Animation(neutralImages, 5));
+		player = new Player(300, 400, screenWidth, screenHeight, playerAnimations);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -75,6 +81,8 @@ public class GamePlayLogic{
 		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
 			player.fire(GamePlay.ACT_FIRE_SPECIAL);
 		}
+
+		player.update();
 
 		//Update all enemies and projectiles, deleting if offscreen
 		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
