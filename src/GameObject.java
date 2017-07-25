@@ -17,9 +17,16 @@ import java.io.File;
 import java.awt.Point;
 
 public abstract class GameObject{
-	private int x, y, xvel, yvel;
+	private int x, y, xvel, yvel, screenWidth, screenHeight;
 	private Hitbox hitbox;
 	private BufferedImage objectSprite;
+
+	public GameObject(int x, int y, int screenWidth, int screenHeight){
+		moveTo(x, y);
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
+
+	}
 
 	public void moveTo(int x, int y){
 		this.x = x;
@@ -102,7 +109,7 @@ public abstract class GameObject{
 	}
 
 	//Return true if whole of object sprite is offscreen, otherwise false
-	public boolean isOffScreen(int screenWidth, int screenHeight){
+	public boolean isOffScreen(){
 		if(x + objectSprite.getWidth() < 0){
 			return true;
 		}

@@ -24,8 +24,9 @@ import java.awt.geom.*;
 public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
-	private ArrayList<ShipEnemy> enemyShipList;
+	private ArrayList<EnemyShip> enemyShipList;
 	private ArrayList<Projectile> projectileObjectList;
+	private int screenWidth, screenHeight;
 	//private ArrayList<Particle> particleList;
 
 	private static final int DEPTH_PLAYER = 0;
@@ -34,14 +35,16 @@ public class GamePlayLogic{
 	private static final int DEPTH_ENEMY_PROJECTILE = 3;
 	private static final int PARTICLE = 4;
 
-	public GamePlayLogic(GameLevel level){
+	public GamePlayLogic(GameLevel level, int screenWidth, int screenHeight){
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 		this.level = level;
-		enemyShipList = new ArrayList<ShipEnemy>();
-		player = new Player(300, 400);
+		enemyShipList = new ArrayList<EnemyShip>();
+		player = new Player(300, 400, screenWidth, screenHeight);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
-		ArrayList<ShipEnemy> newEnemies = level.getEnemySpawns(gameTime);
+		ArrayList<EnemyShip> newEnemies = level.getEnemySpawns(gameTime);
 
 		if(newEnemies != null){
 			enemyShipList.addAll(newEnemies);			
@@ -69,14 +72,14 @@ public class GamePlayLogic{
 			player.fire(GamePlay.ACT_FIRE_SPECIAL);
 		}
 
-		for(ShipEnemy enemy : enemyShipList){
+		for(EnemyShip enemy : enemyShipList){
 			enemy.update();
 		}
 	}
 
 	public ArrayList<SpriteData> getSpriteList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
-		for(Ship enemy : enemyShipList){
+		for(EnemyShip enemy : enemyShipList){
 			spriteDataList.add(new SpriteData(enemy.getSprite(), enemy.getPos(), DEPTH_ENEMY));
 		}
 

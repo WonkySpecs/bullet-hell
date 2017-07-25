@@ -51,10 +51,10 @@ public class GameWindow extends JFrame implements ActionListener{
 		GamePlay gp = null;
 		switch(levelID){
 			case 1: 
-				gp = new GamePlay(this, new GameLevelOne());
+				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
 				break;
 			default:
-				gp = new GamePlay(this, new GameLevelOne());
+				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
 				break;
 		}
 

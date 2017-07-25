@@ -9,14 +9,16 @@
 
 package src.gameobjects;
 
+import src.GameObject;
 import src.HitboxPolygon;
 
 import java.io.File;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Player extends Ship{
-	public Player(int x, int y){
+public class Player extends GameObject{
+	public Player(int x, int y, int screenWidth, int screenHeight){
+		super(x, y, screenWidth, screenHeight);
 		setXvel(5);
 		setYvel(5);
 		//This is 99.9% incorrect and overly localised, TODO: fix
@@ -26,8 +28,6 @@ public class Player extends Ship{
 			+ File.separator + "gameobjects"
 			+ File.separator + "sprites"
 			+ File.separator + "Player.png");
-		
-		moveTo(x, y);
 
 		//TODO: Move hitbox definition to a file
 		ArrayList<Point> points = new ArrayList<>();

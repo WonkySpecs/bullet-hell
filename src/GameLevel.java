@@ -11,12 +11,15 @@ package src;
 
 import java.util.ArrayList;
 
-import src.gameobjects.ShipEnemy;
+import src.gameobjects.EnemyShip;
 
 public abstract class GameLevel{
-	public GameLevel(){
-		System.out.println("blah");
+	public int screenWidth, screenHeight;
+
+	public GameLevel(int screenWidth, int screenHeight){
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 	}
 
-	public abstract ArrayList<ShipEnemy> getEnemySpawns(long gameTime);
+	public abstract ArrayList<EnemyShip> getEnemySpawns(long gameTime);
 }

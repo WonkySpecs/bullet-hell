@@ -15,9 +15,9 @@ package src.gameobjects;
 import java.awt.image.BufferedImage;
 import src.HitboxCircle;
 
-public class EnemyStraightFloater extends ShipEnemy{
-	public EnemyStraightFloater(int x, int y, int hp, int xvel, int yvel, BufferedImage sprite){
-		super(x, y, hp, sprite);
+public class EnemyStraightFloater extends EnemyShip{
+	public EnemyStraightFloater(int x, int y, int screenWidth, int screenHeight, int hp, int xvel, int yvel, BufferedImage sprite){
+		super(x, y, screenWidth, screenHeight, hp, sprite);
 		setXvel(xvel);
 		setYvel(yvel);
 		HitboxCircle hitbox = new HitboxCircle(13, 13, 26);
@@ -30,12 +30,12 @@ public class EnemyStraightFloater extends ShipEnemy{
 		moveRight();
 
 		//TODO: work out how to get the screen size to these methoods non-magically
-		if(!isRemovable() && !isOffScreen(640, 800)){
+		if(!isRemovable() && !isOffScreen()){
 			System.out.println("ASDF");
 			setRemovable(true);
 		}
 
-		if(isRemovable() && isOffScreen(640, 800)){
+		if(isRemovable() && isOffScreen()){
 			System.out.println("I should be deleted");
 		}
 	}
