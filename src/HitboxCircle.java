@@ -15,7 +15,7 @@ package src;
 
 import java.awt.Point;
 
-public class HitboxCircle implements Hitbox{
+public class HitboxCircle extends Hitbox{
 	private Point center;
 	private int radius;
 

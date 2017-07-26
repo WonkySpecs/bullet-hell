@@ -16,7 +16,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.awt.geom.*;
 
-public class HitboxPolygon implements Hitbox{
+public class HitboxPolygon extends Hitbox{
 	private ArrayList<Point> pointList;
 	private Point origin;
 
