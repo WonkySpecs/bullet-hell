@@ -24,7 +24,7 @@ public class GamePlayLogic{
 	private GameLevel level;
 	private Player player;
 	private ArrayList<EnemyShip> enemyShipList;
-	private ArrayList<Projectile> projectileList;
+	private ArrayList<Projectile> enemyProjectileList, playerProjectileList;
 	private int screenWidth, screenHeight;
 	//private ArrayList<Particle> particleList;
 
@@ -39,7 +39,8 @@ public class GamePlayLogic{
 		this.screenHeight = screenHeight;
 		this.level = level;
 		enemyShipList = new ArrayList<EnemyShip>();
-		projectileList = new ArrayList<Projectile>();
+		playerProjectileList = new ArrayList<Projectile>();
+		enemyProjectileList = new ArrayList<Projectile>();
 
 		player = new Player(300, 400, AnimationMapFactory.getAnimationMap("player"));
 	}
@@ -81,7 +82,7 @@ public class GamePlayLogic{
 		}
 
 		if(newPlayerProjectiles != null){
-			projectileList.addAll(newPlayerProjectiles);
+			playerProjectileList.addAll(newPlayerProjectiles);
 		}
 		//Update all enemies and projectiles, deleting if offscreen
 		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
@@ -93,7 +94,7 @@ public class GamePlayLogic{
 			}
 		}
 
-		for (Iterator<Projectile> iterator = projectileList.iterator(); iterator.hasNext();) {
+		for (Iterator<Projectile> iterator = playerProjectileList.iterator(); iterator.hasNext();) {
 			Projectile proj = iterator.next();
 			proj.update(screenWidth, screenHeight);
 			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
@@ -109,7 +110,7 @@ public class GamePlayLogic{
 			spriteDataList.add(new SpriteData(enemy.getSprite(), enemy.getPos(), DEPTH_ENEMY));
 		}
 
-		for(Projectile proj : projectileList){
+		for(Projectile proj : playerProjectileList){
 			spriteDataList.add(new SpriteData(proj.getSprite(), proj.getPos(), DEPTH_PLAYER_PROJECTILE));
 		}
 
