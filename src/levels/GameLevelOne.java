@@ -28,8 +28,8 @@ public class GameLevelOne extends GameLevel{
 			ArrayList<EnemyShip> floaters = new ArrayList<>();
 
 			HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap("enemyfloater1");
-			floaters.add(new EnemyStraightFloater(20, -30, screenWidth, screenHeight, 100, 2, 7, floaterAnimations));
-			floaters.add(new EnemyStraightFloater(600, -30, screenWidth, screenHeight, 100, -2, 7, floaterAnimations));
+			floaters.add(new EnemyStraightFloater(20, -30, 100, 2, 7, floaterAnimations));
+			floaters.add(new EnemyStraightFloater(screenWidth - 20, -30, 100, -2, 7, floaterAnimations));
 			return floaters;
 		}
 		return null;

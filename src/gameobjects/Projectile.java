@@ -8,8 +8,8 @@ import src.animation.*;
 public abstract class Projectile extends GameObject{
 	private boolean removable;
 
-	public Projectile(int x, int y, int screenWidth, int screenHeight, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, animations);
+	public Projectile(int x, int y, HashMap<String, Animation> animations){
+		super(x, y, animations);
 		removable = false;
 	}
 
@@ -20,6 +20,4 @@ public abstract class Projectile extends GameObject{
 	public boolean isRemovable(){
 		return removable;
 	}
-
-	public abstract void update();
 }

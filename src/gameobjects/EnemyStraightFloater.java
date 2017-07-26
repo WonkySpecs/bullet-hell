@@ -18,8 +18,8 @@ import src.HitboxCircle;
 import src.animation.*;
 
 public class EnemyStraightFloater extends EnemyShip{
-	public EnemyStraightFloater(int x, int y, int screenWidth, int screenHeight, int hp, int xvel, int yvel, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, hp, animations);
+	public EnemyStraightFloater(int x, int y, int hp, int xvel, int yvel, HashMap<String, Animation> animations){
+		super(x, y, hp, animations);
 		setXvel(xvel);
 		setYvel(yvel);
 		setCurAnimation("neutral");
@@ -29,12 +29,12 @@ public class EnemyStraightFloater extends EnemyShip{
 
 	//moves down by yvel and right by xvel - these values can be negative to move left/up
 	//Once the floater is on screen, it will be removed next time it goes off screen
-	public void update(){
+	public void update(int screenWidth, int screenHeight){
 		moveDown();
 		moveRight();
 		getCurAnimation().update();
 
-		if(!isRemovable() && !isOffScreen()){
+		if(!isRemovable() && !isOffScreen(screenWidth, screenHeight)){
 			setRemovable(true);
 		}
 	}

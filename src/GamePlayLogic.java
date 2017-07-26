@@ -41,7 +41,7 @@ public class GamePlayLogic{
 		enemyShipList = new ArrayList<EnemyShip>();
 		projectileList = new ArrayList<Projectile>();
 
-		player = new Player(300, 400, screenWidth, screenHeight, AnimationMapFactory.getAnimationMap("player"));
+		player = new Player(300, 400, AnimationMapFactory.getAnimationMap("player"));
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -66,7 +66,7 @@ public class GamePlayLogic{
 			player.moveRight();
 		}
 
-		player.update();
+		player.update(screenWidth, screenHeight);
 		ArrayList<Projectile> newPlayerProjectiles = null;
 
 		//Firing special overrides firing primary overrides firing secondary
@@ -86,8 +86,8 @@ public class GamePlayLogic{
 		//Update all enemies and projectiles, deleting if offscreen
 		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
 			EnemyShip enemy = iterator.next();
-			enemy.update();
-			if(enemy.isRemovable() && enemy.isOffScreen()){
+			enemy.update(screenWidth, screenHeight);
+			if(enemy.isRemovable() && enemy.isOffScreen(screenWidth, screenHeight)){
 				enemy = null;
 				iterator.remove();
 			}
@@ -95,8 +95,8 @@ public class GamePlayLogic{
 
 		for (Iterator<Projectile> iterator = projectileList.iterator(); iterator.hasNext();) {
 			Projectile proj = iterator.next();
-			proj.update();
-			if(proj.isRemovable() && proj.isOffScreen()){
+			proj.update(screenWidth, screenHeight);
+			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
 				proj = null;
 				iterator.remove();
 			}

@@ -18,8 +18,8 @@ public abstract class EnemyShip extends GameObject{
 	private int hitPoints;
 	private boolean removable;
 
-	public EnemyShip(int x, int y, int screenWidth, int screenHeight, int hp, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, animations);
+	public EnemyShip(int x, int y, int hp, HashMap<String, Animation> animations){
+		super(x, y, animations);
 		moveTo(x, y);
 		removable = false;
 		setHitpoints(hp);

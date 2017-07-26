@@ -20,12 +20,10 @@ import java.util.HashMap;
 public class Player extends GameObject{
 	private int fireDelay, framesSinceFired;
 
-	public Player(int x, int y, int screenWidth, int screenHeight, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, animations);
+	public Player(int x, int y, HashMap<String, Animation> animations){
+		super(x, y, animations);
 		setXvel(5);
 		setYvel(5);
-		setCurAnimation("neutral");
-		getCurAnimation().start();
 
 		fireDelay = 10;
 		framesSinceFired = fireDelay;
@@ -40,7 +38,7 @@ public class Player extends GameObject{
 		HitboxPolygon hitbox = new HitboxPolygon(x, y, points);
 	}
 
-	public void update(){
+	public void update(int screenWidth, int screenHeight){
 		getCurAnimation().update();
 
 		//Note if the player does not fire this can grow very quickly. If this
@@ -54,8 +52,8 @@ public class Player extends GameObject{
 		if(framesSinceFired > fireDelay){
 			bulletsFired = new ArrayList<Projectile>();
 			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("playerprojectile");
-			bulletsFired.add(new ProjectileStraightLine(getX(), getY() - 1, getScreenWidth(), getScreenHeight(), 0, -7, projAnimations));
-			bulletsFired.add(new ProjectileStraightLine(getX() + getSprite().getWidth() - 5, getY() - 1, getScreenWidth(), getScreenHeight(), 0, -7, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(getX(), getY() - 1, 0, -7, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(getX() + getSprite().getWidth() - 5, getY() - 1, 0, -7, projAnimations));
 			framesSinceFired = 0;
 		}
 

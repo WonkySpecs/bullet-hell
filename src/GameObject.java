@@ -18,17 +18,15 @@ import java.util.HashMap;
 import src.animation.*;
 
 public abstract class GameObject{
-	private int x, y, xvel, yvel, screenWidth, screenHeight;
+	private int x, y, xvel, yvel;
 	private Hitbox hitbox;
 
 	private String curAnimationName;
 	private Animation curAnimation;
 	private HashMap<String, Animation> animations;
 
-	public GameObject(int x, int y, int screenWidth, int screenHeight, HashMap<String, Animation> animations){
+	public GameObject(int x, int y, HashMap<String, Animation> animations){
 		moveTo(x, y);
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
 		this.animations = animations;
 
 		//All GameObjects must have a "neutral" animation that is defaulted to on contruction
@@ -121,16 +119,8 @@ public abstract class GameObject{
 		return curAnimation.getSprite();
 	}
 
-	public int getScreenWidth(){
-		return screenWidth;
-	}
-
-	public int getScreenHeight(){
-		return screenHeight;
-	}
-
 	//Return true if whole of object sprite is offscreen, otherwise false
-	public boolean isOffScreen(){
+	public boolean isOffScreen(int screenWidth, int screenHeight){
 		if(x + getSprite().getWidth() < 0){
 			return true;
 		}
@@ -150,5 +140,5 @@ public abstract class GameObject{
 		return false;
 	}
 
-	public abstract void update();
+	public abstract void update(int screenWidth, int screenHeight);
 }

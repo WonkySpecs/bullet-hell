@@ -16,8 +16,8 @@ import src.HitboxCircle;
 import src.animation.*;
 
 public class ProjectileStraightLine extends Projectile{
-	public ProjectileStraightLine(int x, int y, int screenWidth, int screenHeight, int xvel, int yvel, HashMap<String, Animation> animations){
-		super(x, y, screenWidth, screenHeight, animations);
+	public ProjectileStraightLine(int x, int y, int xvel, int yvel, HashMap<String, Animation> animations){
+		super(x, y, animations);
 		setXvel(xvel);
 		setYvel(yvel);
 		HitboxCircle hitbox = new HitboxCircle(2, 2, 1);
@@ -25,13 +25,13 @@ public class ProjectileStraightLine extends Projectile{
 
 	//moves down by yvel and right by xvel - these values can be negative to move left/up
 	//Once the floater is on screen, it will be removed next time it goes off screen
-	public void update(){
+	public void update(int screenWidth, int screenHeight){
 		moveDown();
 		moveRight();
 
 		getCurAnimation().update();
 
-		if(!isRemovable() && !isOffScreen()){
+		if(!isRemovable() && !isOffScreen(screenWidth, screenHeight)){
 			setRemovable(true);
 		}
 	}
