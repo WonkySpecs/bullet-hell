@@ -30,6 +30,10 @@ public abstract class GameObject{
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		this.animations = animations;
+
+		//All GameObjects must have a "neutral" animation that is defaulted to on contruction
+		setCurAnimation("neutral");
+		curAnimation.start();
 	}
 
 	public void moveTo(int x, int y){
@@ -137,4 +141,6 @@ public abstract class GameObject{
 
 		return false;
 	}
+
+	public abstract void update();
 }

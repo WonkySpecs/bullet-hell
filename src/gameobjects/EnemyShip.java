@@ -44,6 +44,4 @@ public abstract class EnemyShip extends GameObject{
 	public boolean isRemovable(){
 		return removable;
 	}
-
-	public abstract void update();
 }
