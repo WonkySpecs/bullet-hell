@@ -69,18 +69,24 @@ public class GamePlayLogic{
 		if(inputs.get(GamePlay.ACT_RIGHT) == true){
 			player.moveRight();
 		}
-		if(inputs.get(GamePlay.ACT_FIRE_PRIM) == true){
-			player.fire(GamePlay.ACT_FIRE_PRIM);
-		}
-		if(inputs.get(GamePlay.ACT_FIRE_SEC) == true){
-			player.fire(GamePlay.ACT_FIRE_SEC);
-		}
-		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
-			player.fire(GamePlay.ACT_FIRE_SPECIAL);
-		}
 
 		player.update();
+		ArrayList<Projectile> newPlayerProjectiles = null;
 
+		//Firing special overrides firing primary overrides firing secondary
+		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
+			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SPECIAL);
+		}
+		else if(inputs.get(GamePlay.ACT_FIRE_PRIM) == true){
+			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_PRIM);
+		}
+		else if(inputs.get(GamePlay.ACT_FIRE_SEC) == true){
+			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SEC);
+		}
+
+		if(newPlayerProjectiles != null){
+			projectileList.addAll(newPlayerProjectiles);
+		}
 		//Update all enemies and projectiles, deleting if offscreen
 		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
 			EnemyShip enemy = iterator.next();
@@ -91,8 +97,13 @@ public class GamePlayLogic{
 			}
 		}
 
-		for(Projectile proj : projectileList){
+		for (Iterator<Projectile> iterator = projectileList.iterator(); iterator.hasNext();) {
+			Projectile proj = iterator.next();
 			proj.update();
+			if(proj.isRemovable() && proj.isOffScreen()){
+				proj = null;
+				iterator.remove();
+			}
 		}
 	}
 
@@ -100,6 +111,10 @@ public class GamePlayLogic{
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
 		for(EnemyShip enemy : enemyShipList){
 			spriteDataList.add(new SpriteData(enemy.getSprite(), enemy.getPos(), DEPTH_ENEMY));
+		}
+
+		for(Projectile proj : projectileList){
+			spriteDataList.add(new SpriteData(proj.getSprite(), proj.getPos(), DEPTH_PLAYER_PROJECTILE));
 		}
 
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));

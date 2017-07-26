@@ -29,6 +29,8 @@ public class ProjectileStraightLine extends Projectile{
 		moveDown();
 		moveRight();
 
+		getCurAnimation().update();
+
 		if(!isRemovable() && !isOffScreen()){
 			setRemovable(true);
 		}

@@ -121,6 +121,14 @@ public abstract class GameObject{
 		return curAnimation.getSprite();
 	}
 
+	public int getScreenWidth(){
+		return screenWidth;
+	}
+
+	public int getScreenHeight(){
+		return screenHeight;
+	}
+
 	//Return true if whole of object sprite is offscreen, otherwise false
 	public boolean isOffScreen(){
 		if(x + getSprite().getWidth() < 0){

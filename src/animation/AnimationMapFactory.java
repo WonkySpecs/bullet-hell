@@ -43,7 +43,7 @@ public class AnimationMapFactory{
 
 		//Should make this a thrown exception but error handling QQ
 		if(animationMap.get("neutral") == null){
-			System.out.println("No neutral animation specified when ampping animations")
+			System.out.println("No neutral animation specified when ampping animations");
 		}
 
 		return animationMap;
