@@ -14,11 +14,19 @@ import java.util.ArrayList;
 import src.gameobjects.EnemyShip;
 
 public abstract class GameLevel{
-	public int screenWidth, screenHeight;
+	private int screenWidth, screenHeight;
 
 	public GameLevel(int screenWidth, int screenHeight){
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
+	}
+
+	public int getScreenWidth(){
+		return screenWidth;
+	}
+
+	public int getScreenHeight(){
+		return screenHeight;
 	}
 
 	public abstract ArrayList<EnemyShip> getEnemySpawns(long gameTime);

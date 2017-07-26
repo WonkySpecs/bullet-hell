@@ -22,8 +22,6 @@ public class EnemyStraightFloater extends EnemyShip{
 		super(x, y, hp, animations);
 		setXvel(xvel);
 		setYvel(yvel);
-		setCurAnimation("neutral");
-		getCurAnimation().start();
 		HitboxCircle hitbox = new HitboxCircle(13, 13, 26);
 	}
 
