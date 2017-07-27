@@ -35,6 +35,7 @@ public abstract class EnemyShip extends GameObject{
 	}
 
 	public void reduceHitpoints(int damage){
+		//TODO: Implement taking damge animations
 		hitPoints -= damage;
 	}
 

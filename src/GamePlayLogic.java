@@ -88,27 +88,52 @@ public class GamePlayLogic{
 		if(newPlayerProjectiles != null){
 			playerProjectileList.addAll(newPlayerProjectiles);
 		}
-		//Update all enemies and projectiles, deleting if offscreen
-		for (Iterator<EnemyShip> iterator = enemyShipList.iterator(); iterator.hasNext();) {
-			EnemyShip enemy = iterator.next();
+
+		//Update all enemies and projectiles, deleting if offscreen or collided with player
+		for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
+			boolean dead = false;
+			EnemyShip enemy = enemyIterator.next();
 			enemy.update(screenWidth, screenHeight);
 			if(enemy.isRemovable() && enemy.isOffScreen(screenWidth, screenHeight)){
-				enemy = null;
-				iterator.remove();
+				dead = true;
 			}
-			else{
-				if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox()) == true){
-					System.out.println("ASDFASDFASDF");
-				}
+				
+			if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox()) == true){
+				dead = true;
+				System.out.println("player got hit boom");
+			}
+
+			if(dead == true){
+				enemy = null;
+				enemyIterator.remove();
 			}
 		}
 
-		for (Iterator<Projectile> iterator = playerProjectileList.iterator(); iterator.hasNext();) {
-			Projectile proj = iterator.next();
+		//Update all palyer projectiles, dealing damage if enemy is hit.
+		for (Iterator<Projectile> projIterator = playerProjectileList.iterator(); projIterator.hasNext();){
+			boolean dead = false;
+			Projectile proj = projIterator.next();
 			proj.update(screenWidth, screenHeight);
 			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
+				dead = true;
+			}
+			else{
+				for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
+					EnemyShip enemy = enemyIterator.next();
+					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox()) == true){
+						enemy.reduceHitpoints(proj.getDamage());
+						if(enemy.getHitPoints() <= 0){
+							enemy = null;
+							enemyIterator.remove();							
+						}
+						dead = true;
+					}
+				}
+			}
+
+			if(dead == true){
 				proj = null;
-				iterator.remove();
+				projIterator.remove();
 			}
 		}
 	}

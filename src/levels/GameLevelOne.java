@@ -65,6 +65,18 @@ public class GameLevelOne extends GameLevel{
 				return floaters;
 			}
 		}
+
+		if(gameTime > 200){
+			if(gameTime % 30 == 0){
+				ArrayList<EnemyShip> floaters = new ArrayList<>();
+
+				fStartX = (int)(Math.random() * (double)getScreenWidth());
+				fStartY = -25;
+				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations));
+				return floaters;
+			}
+		}
 		return null;
 	}
 }

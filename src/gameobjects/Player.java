@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends GameObject{
-	private int fireDelay, framesSinceFired;
+	private int fireDelay, framesSinceFired, primDamage;
 
 	public Player(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		setXvel(5);
 		setYvel(5);
+		primDamage = 50;
 
 		fireDelay = 10;
 		framesSinceFired = fireDelay;
@@ -46,11 +47,11 @@ public class Player extends GameObject{
 			int projStartX = getX();
 			int projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, 0, -7, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -7, projHitbox, projAnimations));
 
 			projStartX = getX() + getSprite().getWidth() - 5;
 			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, 0, -7, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -7, projHitbox, projAnimations));
 			framesSinceFired = 0;
 		}
 

@@ -8,10 +8,12 @@ import src.animation.*;
 
 public abstract class Projectile extends GameObject{
 	private boolean removable;
+	private int damage;
 
-	public Projectile(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
+	public Projectile(int x, int y, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		removable = false;
+		this.damage = damage;
 	}
 
 	public void setRemovable(boolean removable){
@@ -20,5 +22,9 @@ public abstract class Projectile extends GameObject{
 
 	public boolean isRemovable(){
 		return removable;
+	}
+
+	public int getDamage(){
+		return damage;
 	}
 }
