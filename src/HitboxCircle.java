@@ -24,8 +24,12 @@ public class HitboxCircle extends Hitbox{
 		radius = r;
 	}
 
-	public void move(int x, int y){
+	public void moveTo(int x, int y){
 		center.move(x, y);
+	}
+
+	public void moveBy(int x, int y){
+		center.move((int)center.getX() + x, (int)center.getY() + y);
 	}
 
 	public Point getCenter(){

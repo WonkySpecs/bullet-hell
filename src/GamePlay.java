@@ -83,7 +83,7 @@ public class GamePlay extends JPanel{
 		while(running){
 			try{Thread.sleep(20);}catch(Exception e){}
 			logic.update(gameTime, buttonsPressed);
-			spriteList = logic.getSpriteList();
+			spriteList = logic.getSpriteDataList();
 			repaint();
 			gameTime += 1;
 		}

@@ -12,14 +12,15 @@ import java.util.HashMap;
 import java.io.File;
 
 import src.GameObject;
+import src.Hitbox;
 import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
 	private int hitPoints;
 	private boolean removable;
 
-	public EnemyShip(int x, int y, int hp, HashMap<String, Animation> animations){
-		super(x, y, animations);
+	public EnemyShip(int x, int y, int hp, Hitbox hitbox, HashMap<String, Animation> animations){
+		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
 		setHitpoints(hp);

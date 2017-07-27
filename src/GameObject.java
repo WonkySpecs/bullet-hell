@@ -19,14 +19,15 @@ import src.animation.*;
 
 public abstract class GameObject{
 	private int x, y, xvel, yvel;
-	private Hitbox hitbox;
-
+	
 	private String curAnimationName;
 	private Animation curAnimation;
 	private HashMap<String, Animation> animations;
+	private Hitbox hitbox;
 
-	public GameObject(int x, int y, HashMap<String, Animation> animations){
+	public GameObject(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
 		moveTo(x, y);
+		this.hitbox = hitbox;
 		this.animations = animations;
 
 		//All GameObjects must have a "neutral" animation that is defaulted to on contruction
@@ -96,6 +97,10 @@ public abstract class GameObject{
 		this.yvel = yvel;
 	}
 
+	public Hitbox getHitbox(){
+		return hitbox;
+	}
+
 	public void setCurAnimation(String animation){
 		curAnimationName = animation;
 
@@ -140,5 +145,8 @@ public abstract class GameObject{
 		return false;
 	}
 
-	public abstract void update(int screenWidth, int screenHeight);
+	public void update(int screenWidth, int screenHeight){
+		curAnimation.update();
+		hitbox.moveTo(x, y);
+	}
 }

@@ -9,8 +9,7 @@
 
 package src.gameobjects;
 
-import src.GameObject;
-import src.HitboxPolygon;
+import src.*;
 import src.animation.*;
 
 import java.awt.Point;
@@ -20,26 +19,18 @@ import java.util.HashMap;
 public class Player extends GameObject{
 	private int fireDelay, framesSinceFired;
 
-	public Player(int x, int y, HashMap<String, Animation> animations){
-		super(x, y, animations);
+	public Player(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
+		super(x, y, hitbox, animations);
 		setXvel(5);
 		setYvel(5);
 
 		fireDelay = 10;
 		framesSinceFired = fireDelay;
-
-		//TODO: Move hitbox definition to a file
-		ArrayList<Point> points = new ArrayList<>();
-		points.add(new Point(0, 0));
-		points.add(new Point(50, 0));
-		points.add(new Point(50, 50));
-		points.add(new Point(0, 50));
-
-		HitboxPolygon hitbox = new HitboxPolygon(x, y, points);
 	}
 
+	@Override
 	public void update(int screenWidth, int screenHeight){
-		getCurAnimation().update();
+		super.update(screenWidth, screenHeight);
 
 		//Note if the player does not fire this can grow very quickly. If this
 		//is an issue put a check to stop growth if >fireDelay + a bit
@@ -52,8 +43,14 @@ public class Player extends GameObject{
 		if(framesSinceFired > fireDelay){
 			bulletsFired = new ArrayList<Projectile>();
 			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("playerprojectile");
-			bulletsFired.add(new ProjectileStraightLine(getX(), getY() - 1, 0, -7, projAnimations));
-			bulletsFired.add(new ProjectileStraightLine(getX() + getSprite().getWidth() - 5, getY() - 1, 0, -7, projAnimations));
+			int projStartX = getX();
+			int projStartY = getY() - 1;
+			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, 0, -7, projHitbox, projAnimations));
+
+			projStartX = getX() + getSprite().getWidth() - 5;
+			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, 0, -7, projHitbox, projAnimations));
 			framesSinceFired = 0;
 		}
 

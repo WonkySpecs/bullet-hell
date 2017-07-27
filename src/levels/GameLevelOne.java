@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import src.GameLevel;
+import src.*;
 import src.gameobjects.*;
 import src.animation.*;
 
@@ -25,21 +25,42 @@ public class GameLevelOne extends GameLevel{
 	@Override
 	public ArrayList<EnemyShip> getEnemySpawns(long gameTime){
 		HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap("enemyfloater1");
+		int floaterRadius = 15;
+		int fStartX, fStartY;
 
 		if(gameTime == 35){
 			ArrayList<EnemyShip> floaters = new ArrayList<>();
 
-			floaters.add(new EnemyStraightFloater(50, -30, 100, 2, 7, floaterAnimations));
-			floaters.add(new EnemyStraightFloater(getScreenWidth() - 66, -30, 100, -2, 7, floaterAnimations));
+			fStartX = 50;
+			fStartY = -25;
+			HitboxCircle fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
+			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 2, 7, fh, floaterAnimations));
+
+			fStartX = getScreenWidth() - 65;
+			fStartY = -25;
+			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
+			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations));
 			return floaters;
 		}
 
 		if(gameTime > 110 && gameTime < 190){
 			if(gameTime % 12 == 0){
 				ArrayList<EnemyShip> floaters = new ArrayList<>();
-				floaters.add(new EnemyStraightFloater(getScreenWidth()/2, -30, 100, 0, 4, floaterAnimations));
-				floaters.add(new EnemyStraightFloater(-20, getScreenHeight()/2, 100, 3, -2, floaterAnimations));
-				floaters.add(new EnemyStraightFloater(getScreenWidth() + 20, getScreenHeight()/2, 100, -3, -2, floaterAnimations));
+
+				fStartX = getScreenWidth() / 2 - 16;
+				fStartY = -25;
+				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations));
+
+				fStartX = -20;
+				fStartY = getScreenHeight() / 2;
+				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 3, -2, fh, floaterAnimations));
+
+				fStartX = getScreenWidth() + 20;
+				fStartY = getScreenHeight() / 2;
+				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -3, -2, fh, floaterAnimations));
 
 				return floaters;
 			}

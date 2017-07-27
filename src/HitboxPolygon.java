@@ -25,8 +25,12 @@ public class HitboxPolygon extends Hitbox{
 		pointList = points;
 	}
 
-	public void move(int x, int y){
+	public void moveTo(int x, int y){
 		origin.move(x, y);
+	}
+
+	public void moveBy(int x, int y){
+		origin.move((int)origin.getX() + x, (int)origin.getY() + y);
 	}
 
 	//If not working, may be i<pointSize() - 1 instead

@@ -16,6 +16,7 @@ package src;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.Point;
 
 import src.gameobjects.*;
 import src.animation.*;
@@ -42,7 +43,10 @@ public class GamePlayLogic{
 		playerProjectileList = new ArrayList<Projectile>();
 		enemyProjectileList = new ArrayList<Projectile>();
 
-		player = new Player(300, 400, AnimationMapFactory.getAnimationMap("player"));
+		int playerStartX = screenWidth / 2 - 16;
+		int playerStartY = screenHeight / 2 - 16;
+		HitboxCircle playerHitbox = new HitboxCircle(playerStartX, playerStartY, 6);
+		player = new Player(playerStartX, playerStartY, playerHitbox, AnimationMapFactory.getAnimationMap("player"));
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -92,6 +96,11 @@ public class GamePlayLogic{
 				enemy = null;
 				iterator.remove();
 			}
+			else{
+				if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox()) == true){
+					System.out.println("ASDFASDFASDF");
+				}
+			}
 		}
 
 		for (Iterator<Projectile> iterator = playerProjectileList.iterator(); iterator.hasNext();) {
@@ -104,7 +113,7 @@ public class GamePlayLogic{
 		}
 	}
 
-	public ArrayList<SpriteData> getSpriteList(){
+	public ArrayList<SpriteData> getSpriteDataList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
 		for(EnemyShip enemy : enemyShipList){
 			spriteDataList.add(new SpriteData(enemy.getSprite(), enemy.getPos(), DEPTH_ENEMY));
