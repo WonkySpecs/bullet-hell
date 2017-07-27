@@ -56,9 +56,12 @@ public class GamePlay extends JPanel{
 	public static final String ACT_FIRE_SEC = "sec";
 	public static final String ACT_FIRE_SPECIAL = "special";
 
+	private static final int GAME_SCREEN_WIDTH = 640;
+	private static final int GAME_SCREEN_HEIGHT = 800;
+
 	public GamePlay(GameWindow mainWindow, GameLevel level){
 		paintCount = 0;
-		logic = new GamePlayLogic(level, getWidth(), getHeight());
+		logic = new GamePlayLogic(level, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
 		running = true;
 		gameTime = 0;
 		resetAllButtonsPressed();
