@@ -93,7 +93,13 @@ public class GamePlayLogic{
 		for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 			boolean dead = false;
 			EnemyShip enemy = enemyIterator.next();
+
 			enemy.update(screenWidth, screenHeight);
+			ArrayList<Projectile> newEnemyProj = enemy.fire(player.getX(), player.getY());
+			if(newEnemyProj != null){
+				enemyProjectileList.addAll(newEnemyProj);
+			}
+
 			if(enemy.isRemovable() && enemy.isOffScreen(screenWidth, screenHeight)){
 				dead = true;
 			}
@@ -109,7 +115,7 @@ public class GamePlayLogic{
 			}
 		}
 
-		//Update all palyer projectiles, dealing damage if enemy is hit.
+		//Update all player projectiles, dealing damage if enemy is hit.
 		for (Iterator<Projectile> projIterator = playerProjectileList.iterator(); projIterator.hasNext();){
 			boolean dead = false;
 			Projectile proj = projIterator.next();
@@ -136,6 +142,26 @@ public class GamePlayLogic{
 				projIterator.remove();
 			}
 		}
+
+		for (Iterator<Projectile> projIterator = enemyProjectileList.iterator(); projIterator.hasNext();){
+			boolean dead = false;
+			Projectile proj = projIterator.next();
+			proj.update(screenWidth, screenHeight);
+			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
+				dead = true;
+			}
+			else{
+				if(Hitbox.collisionBetween(proj.getHitbox(), player.getHitbox()) == true){
+					System.out.println("Shot down");
+					dead = true;
+				}
+			}
+
+			if(dead == true){
+				proj = null;
+				projIterator.remove();
+			}
+		}
 	}
 
 	public ArrayList<SpriteData> getSpriteDataList(){
@@ -146,6 +172,10 @@ public class GamePlayLogic{
 
 		for(Projectile proj : playerProjectileList){
 			spriteDataList.add(new SpriteData(proj.getSprite(), proj.getPos(), DEPTH_PLAYER_PROJECTILE));
+		}
+
+		for(Projectile proj : enemyProjectileList){
+			spriteDataList.add(new SpriteData(proj.getSprite(), proj.getPos(), DEPTH_ENEMY_PROJECTILE));
 		}
 
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));

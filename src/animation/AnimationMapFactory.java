@@ -39,11 +39,16 @@ public class AnimationMapFactory{
 													Sprite.getSprite(2, 0, "playerproj", 8) };
 				animationMap.put("neutral", new Animation(spriteArray, 4));
 				break;
+
+			case "enemyprojectilesmallblue":
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projsmallblue", 4) };
+				animationMap.put("neutral", new Animation(spriteArray, 1000));
+				break;
 		}
 
 		//Should make this a thrown exception but error handling QQ
 		if(animationMap.get("neutral") == null){
-			System.out.println("No neutral animation specified when ampping animations");
+			System.out.println("No neutral animation specified when mapping animations");
 		}
 
 		return animationMap;

@@ -9,21 +9,23 @@
 package src.gameobjects;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.io.File;
 
-import src.GameObject;
-import src.Hitbox;
+import src.*;
 import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
 	private int hitPoints;
 	private boolean removable;
+	private ProjectileData projData;
 
-	public EnemyShip(int x, int y, int hp, Hitbox hitbox, HashMap<String, Animation> animations){
+	public EnemyShip(int x, int y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
 		setHitpoints(hp);
+		this.projData = projData;
 	}
 
 	public void setHitpoints(int hp){
@@ -46,4 +48,10 @@ public abstract class EnemyShip extends GameObject{
 	public boolean isRemovable(){
 		return removable;
 	}
+
+	public ProjectileData getProjData(){
+		return projData;
+	}
+
+	public abstract ArrayList<Projectile> fire(int playerX, int playerY);
 }

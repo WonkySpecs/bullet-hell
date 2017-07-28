@@ -13,19 +13,22 @@
 package src.gameobjects;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import src.Hitbox;
 import src.animation.*;
+import src.ProjectileData;
 
 public class EnemyStraightFloater extends EnemyShip{
-	public EnemyStraightFloater(int x, int y, int hp, int xvel, int yvel, Hitbox hitbox, HashMap<String, Animation> animations){
-		super(x, y, hp, hitbox, animations);
+	public EnemyStraightFloater(int x, int y, int hp, int xvel, int yvel, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType){
+		super(x, y, hp, hitbox, animations, projType);
 		setXvel(xvel);
 		setYvel(yvel);
 	}
 
 	//moves down by yvel and right by xvel - these values can be negative to move left/up
 	//Once the floater is on screen, it will be removed next time it goes off screen
+	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
 		moveDown();
@@ -34,5 +37,10 @@ public class EnemyStraightFloater extends EnemyShip{
 		if(!isRemovable() && !isOffScreen(screenWidth, screenHeight)){
 			setRemovable(true);
 		}
+	}
+
+	@Override
+	public ArrayList<Projectile> fire(int playerX, int playerY){
+		return null;
 	}
 }

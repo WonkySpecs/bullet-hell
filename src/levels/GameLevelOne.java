@@ -34,12 +34,12 @@ public class GameLevelOne extends GameLevel{
 			fStartX = 50;
 			fStartY = -25;
 			HitboxCircle fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 2, 7, fh, floaterAnimations));
+			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 2, 7, fh, floaterAnimations, null));
 
 			fStartX = getScreenWidth() - 65;
 			fStartY = -25;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations));
+			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations, null));
 			return floaters;
 		}
 
@@ -50,31 +50,33 @@ public class GameLevelOne extends GameLevel{
 				fStartX = getScreenWidth() / 2 - 16;
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations));
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations, null));
 
 				fStartX = -20;
 				fStartY = getScreenHeight() / 2;
 				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 3, -2, fh, floaterAnimations));
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 3, -2, fh, floaterAnimations, null));
 
 				fStartX = getScreenWidth() + 20;
 				fStartY = getScreenHeight() / 2;
 				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -3, -2, fh, floaterAnimations));
+				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -3, -2, fh, floaterAnimations, null));
 
 				return floaters;
 			}
 		}
 
-		if(gameTime > 200){
-			if(gameTime % 30 == 0){
-				ArrayList<EnemyShip> floaters = new ArrayList<>();
+		if(gameTime > 220 && gameTime < 260){
+			if(gameTime % 5 == 0){
+				ArrayList<EnemyShip> floaterShooters = new ArrayList<>();
 
-				fStartX = (int)(Math.random() * (double)getScreenWidth());
+				fStartX = (int)((((float)(gameTime - 200) / 40) * (getScreenWidth() - 1)) - 16);
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations));
-				return floaters;
+				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("enemyprojectilesmallblue");
+				ProjectileData shooterProj = new ProjectileData(ProjectileData.PROJ_STRAIGHT, 0, 9, 1, new HitboxCircle(fStartX, fStartY, 2), projAnimations);
+				floaterShooters.add(new EnemyStraightFloaterShooter(fStartX, fStartY, 1, 0, 4, fh, floaterAnimations, shooterProj, 15));
+				return floaterShooters;
 			}
 		}
 		return null;
