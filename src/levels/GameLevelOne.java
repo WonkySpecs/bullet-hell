@@ -70,7 +70,7 @@ public class GameLevelOne extends GameLevel{
 			if(gameTime % 5 == 0){
 				ArrayList<EnemyShip> floaterShooters = new ArrayList<>();
 
-				fStartX = (int)((((float)(gameTime - 200) / 40) * (getScreenWidth() - 1)) - 16);
+				fStartX = (int)((((float)(gameTime - 220) / 40) * (getScreenWidth() - 1)) - 16);
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("enemyprojectilesmallblue");
