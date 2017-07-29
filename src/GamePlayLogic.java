@@ -46,7 +46,7 @@ public class GamePlayLogic{
 		int playerStartX = screenWidth / 2 - 16;
 		int playerStartY = screenHeight / 2 - 16;
 		HitboxCircle playerHitbox = new HitboxCircle(playerStartX, playerStartY, 6);
-		player = new Player(playerStartX, playerStartY, playerHitbox, AnimationMapFactory.getAnimationMap("player"));
+		player = new Player(playerStartX, playerStartY, playerHitbox, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PLAYER));
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){

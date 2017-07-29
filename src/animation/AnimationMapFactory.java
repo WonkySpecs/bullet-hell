@@ -15,32 +15,46 @@ import java.util.HashMap;
 import java.awt.image.BufferedImage;
 
 public class AnimationMapFactory{
-	public static HashMap<String, Animation> getAnimationMap(String objectName){
+
+	public static final int PLAYER = 1;
+
+	public static final int ENEMY_FLOATER_RED = 2;
+	public static final int ENEMY_FLOATER_GREEN = 3;
+	public static final int ENEMY_FLOATER_BLUE = 4;
+
+	public static final int PROJ_PLAYER = 100;
+	public static final int PROJ_TINY_BLUE = 101;
+	public static final int PROJ_SMALL_BLUE = 102;
+	public static final int PROJ_BLUE = 103;
+	public static final int PROJ_BIG_BLUE = 104;
+
+
+	public static HashMap<String, Animation> getAnimationMap(int objectType){
 		HashMap<String, Animation> animationMap = new HashMap<>();
 
 		BufferedImage[] spriteArray;
 
-		switch(objectName){
-			case "player":
+		switch(objectType){
+			case PLAYER:
 				spriteArray = new BufferedImage[] {Sprite.getSprite(0, 0, "player", 32), Sprite.getSprite(1, 0, "player", 32)};
 				animationMap.put("neutral", new Animation(spriteArray, 6));
 				break;
 
-			case "enemyfloater1":
+			case ENEMY_FLOATER_RED:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyfloater1", 32),
 													Sprite.getSprite(1, 0, "enemyfloater1", 32),
 													Sprite.getSprite(2, 0, "enemyfloater1", 32) };
 				animationMap.put("neutral", new Animation(spriteArray, 6));
 				break;
 
-			case "playerprojectile":
+			case PROJ_PLAYER:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "playerproj", 8),
 													Sprite.getSprite(1, 0, "playerproj", 8),
 													Sprite.getSprite(2, 0, "playerproj", 8) };
 				animationMap.put("neutral", new Animation(spriteArray, 4));
 				break;
 
-			case "enemyprojectilesmallblue":
+			case PROJ_TINY_BLUE:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projsmallblue", 4) };
 				animationMap.put("neutral", new Animation(spriteArray, 1000));
 				break;

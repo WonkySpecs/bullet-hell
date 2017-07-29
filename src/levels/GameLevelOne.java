@@ -24,7 +24,7 @@ public class GameLevelOne extends GameLevel{
 
 	@Override
 	public ArrayList<EnemyShip> getEnemySpawns(long gameTime){
-		HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap("enemyfloater1");
+		HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED);
 		int floaterRadius = 15;
 		int fStartX, fStartY;
 
@@ -73,7 +73,7 @@ public class GameLevelOne extends GameLevel{
 				fStartX = (int)((((float)(gameTime - 220) / 40) * (getScreenWidth() - 1)) - 16);
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("enemyprojectilesmallblue");
+				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
 				ProjectileData shooterProj = new ProjectileData(ProjectileData.PROJ_STRAIGHT, 0, 9, 1, new HitboxCircle(fStartX, fStartY, 2), projAnimations);
 				floaterShooters.add(new EnemyStraightFloaterShooter(fStartX, fStartY, 1, 0, 4, fh, floaterAnimations, shooterProj, 15));
 				return floaterShooters;

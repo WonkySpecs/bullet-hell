@@ -43,7 +43,7 @@ public class Player extends GameObject{
 
 		if(framesSinceFired > fireDelay){
 			bulletsFired = new ArrayList<Projectile>();
-			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap("playerprojectile");
+			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER);
 			int projStartX = getX();
 			int projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
