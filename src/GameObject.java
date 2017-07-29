@@ -97,6 +97,14 @@ public abstract class GameObject{
 		this.yvel = yvel;
 	}
 
+	public void increaseXvel(double increase){
+		xvel += increase;
+	}
+
+	public void increaseYvel(double increase){
+		yvel += increase;
+	}
+
 	public Hitbox getHitbox(){
 		return hitbox;
 	}

@@ -40,6 +40,12 @@ public class GameLevelOne extends GameLevel{
 			fStartY = -25;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
 			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations, null));
+
+			fStartX = getScreenWidth()/2;
+			fStartY = 200;
+			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
+			floaters.add(new EnemySuicideTracker(fStartX, fStartY, 100, 3, 0.1, fh, floaterAnimations, null));
+
 			return floaters;
 		}
 
