@@ -18,14 +18,14 @@ import java.util.HashMap;
 import src.animation.*;
 
 public abstract class GameObject{
-	private int x, y, xvel, yvel;
+	private double x, y, xvel, yvel;
 	
 	private String curAnimationName;
 	private Animation curAnimation;
 	private HashMap<String, Animation> animations;
 	private Hitbox hitbox;
 
-	public GameObject(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
+	public GameObject(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
 		moveTo(x, y);
 		this.hitbox = hitbox;
 		this.animations = animations;
@@ -35,20 +35,20 @@ public abstract class GameObject{
 		curAnimation.start();
 	}
 
-	public void moveTo(int x, int y){
+	public void moveTo(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
 
-	public void moveRight(int dist){
+	public void moveRight(double dist){
 		x += dist;
 	}
 
-	public void moveDown(int dist){
+	public void moveDown(double dist){
 		y += dist;
 	}
 
-	public void move(int x, int y){
+	public void move(double x, double y){
 		moveRight(x);
 		moveDown(y);
 	}
@@ -69,31 +69,31 @@ public abstract class GameObject{
 		y -= yvel;
 	}
 
-	public int getX(){
+	public double getX(){
 		return x;
 	}
 
-	public int getY(){
+	public double getY(){
 		return y;
 	}
 
 	public Point getPos(){
-		return new Point(x, y);
+		return new Point((int)Math.round(x), (int)Math.round(y));
 	}
 
-	public int getXvel(){
+	public double getXvel(){
 		return xvel;
 	}
 
-	public int getYvel(){
+	public double getYvel(){
 		return xvel;
 	}
 
-	public void setXvel(int xvel){
+	public void setXvel(double xvel){
 		this.xvel = xvel;
 	}
 
-	public void setYvel(int yvel){
+	public void setYvel(double yvel){
 		this.yvel = yvel;
 	}
 

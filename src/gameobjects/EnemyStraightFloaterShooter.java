@@ -20,9 +20,10 @@ import src.animation.*;
 import src.ProjectileData;
 
 public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
-	private int fireDelay, framesSinceFired, projXVel, projYVel;
+	private int fireDelay, framesSinceFired;
+	private double projXVel, projYVel;
 
-	public EnemyStraightFloaterShooter(int x, int y, int hp, int xvel, int yvel,
+	public EnemyStraightFloaterShooter(double x, double y, int hp, double xvel, double yvel,
 									   Hitbox hitbox, HashMap<String, Animation> animations,
 									   ProjectileData projType, int fireDelay){
 		super(x, y, hp, xvel, yvel, hitbox, animations, projType);
@@ -41,10 +42,10 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 	}
 
 	@Override
-	public ArrayList<Projectile> fire(int playerX, int playerY){
+	public ArrayList<Projectile> fire(double playerX, double playerY){
 		if(framesSinceFired > fireDelay){
 			ArrayList<Projectile> projectiles = new ArrayList<>();
-			projectiles.add(getProjData().newProjectile(getX() + (int)(getSprite().getWidth()/2), getY() + getSprite().getHeight() - 2));
+			projectiles.add(getProjData().newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));
 			framesSinceFired = 0;
 
 			return projectiles;

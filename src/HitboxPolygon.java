@@ -20,17 +20,17 @@ public class HitboxPolygon extends Hitbox{
 	private ArrayList<Point> pointList;
 	private Point origin;
 
-	public HitboxPolygon(int x, int y, ArrayList<Point> points){
-		origin = new Point(x, y);
+	public HitboxPolygon(double x, double y, ArrayList<Point> points){
+		origin = new Point((int)Math.round(x), (int)Math.round(y));
 		pointList = points;
 	}
 
-	public void moveTo(int x, int y){
-		origin.move(x, y);
+	public void moveTo(double x, double y){
+		origin.move((int)Math.round(x), (int)Math.round(y));
 	}
 
-	public void moveBy(int x, int y){
-		origin.move((int)origin.getX() + x, (int)origin.getY() + y);
+	public void moveBy(double x, double y){
+		origin.move((int)Math.round(origin.getX() + x), (int)Math.round(origin.getY() + y));
 	}
 
 	//If not working, may be i<pointSize() - 1 instead

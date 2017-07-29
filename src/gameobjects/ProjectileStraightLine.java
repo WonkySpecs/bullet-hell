@@ -16,7 +16,7 @@ import src.Hitbox;
 import src.animation.*;
 
 public class ProjectileStraightLine extends Projectile{
-	public ProjectileStraightLine(int x, int y, int damage, int xvel, int yvel, Hitbox hitbox, HashMap<String, Animation> animations){
+	public ProjectileStraightLine(double x, double y, int damage, double xvel, double yvel, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, damage, hitbox, animations);
 		setXvel(xvel);
 		setYvel(yvel);

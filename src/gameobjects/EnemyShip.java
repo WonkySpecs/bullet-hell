@@ -20,7 +20,7 @@ public abstract class EnemyShip extends GameObject{
 	private boolean removable;
 	private ProjectileData projData;
 
-	public EnemyShip(int x, int y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
+	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
@@ -53,5 +53,5 @@ public abstract class EnemyShip extends GameObject{
 		return projData;
 	}
 
-	public abstract ArrayList<Projectile> fire(int playerX, int playerY);
+	public abstract ArrayList<Projectile> fire(double playerX, double playerY);
 }

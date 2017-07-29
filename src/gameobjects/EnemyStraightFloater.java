@@ -20,7 +20,7 @@ import src.animation.*;
 import src.ProjectileData;
 
 public class EnemyStraightFloater extends EnemyShip{
-	public EnemyStraightFloater(int x, int y, int hp, int xvel, int yvel, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType){
+	public EnemyStraightFloater(double x, double y, int hp, double xvel, double yvel, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType){
 		super(x, y, hp, hitbox, animations, projType);
 		setXvel(xvel);
 		setYvel(yvel);
@@ -40,7 +40,7 @@ public class EnemyStraightFloater extends EnemyShip{
 	}
 
 	@Override
-	public ArrayList<Projectile> fire(int playerX, int playerY){
+	public ArrayList<Projectile> fire(double playerX, double playerY){
 		return null;
 	}
 }

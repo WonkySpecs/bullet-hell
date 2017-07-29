@@ -7,13 +7,14 @@ import src.animation.Animation;
 
 public class ProjectileData{
 	private String projType;
-	private int xVel, yVel, damage;
+	private double xVel, yVel;
+	private int damage;
 	private Hitbox hitbox;
 	private HashMap<String, Animation> animations;
 
 	public static final String PROJ_STRAIGHT = "proj_straight";
 
-	public ProjectileData(String projType, int xVel, int yVel, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
+	public ProjectileData(String projType, double xVel, double yVel, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
 		this.projType = projType;
 		this.xVel = xVel;
 		this.yVel = yVel;
@@ -22,7 +23,7 @@ public class ProjectileData{
 		this.animations = animations;
 	}
 
-	public Projectile newProjectile(int x, int y){
+	public Projectile newProjectile(double x, double y){
 		Projectile proj;
 		switch(projType){
 			case PROJ_STRAIGHT:

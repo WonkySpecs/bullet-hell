@@ -10,7 +10,7 @@ public abstract class Projectile extends GameObject{
 	private boolean removable;
 	private int damage;
 
-	public Projectile(int x, int y, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
+	public Projectile(double x, double y, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		removable = false;
 		this.damage = damage;

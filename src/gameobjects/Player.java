@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class Player extends GameObject{
 	private int fireDelay, framesSinceFired, primDamage;
 
-	public Player(int x, int y, Hitbox hitbox, HashMap<String, Animation> animations){
+	public Player(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		setXvel(5);
 		setYvel(5);
@@ -44,8 +44,8 @@ public class Player extends GameObject{
 		if(framesSinceFired > fireDelay){
 			bulletsFired = new ArrayList<Projectile>();
 			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER);
-			int projStartX = getX();
-			int projStartY = getY() - 1;
+			double projStartX = getX();
+			double projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
 			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -7, projHitbox, projAnimations));
 

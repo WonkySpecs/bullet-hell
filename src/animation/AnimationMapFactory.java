@@ -22,6 +22,8 @@ public class AnimationMapFactory{
 	public static final int ENEMY_FLOATER_GREEN = 3;
 	public static final int ENEMY_FLOATER_BLUE = 4;
 
+	public static final int ENEMY_SUICIDE_SMALL = 10;
+
 	public static final int PROJ_PLAYER = 100;
 	public static final int PROJ_TINY_BLUE = 101;
 	public static final int PROJ_SMALL_BLUE = 102;
@@ -40,12 +42,23 @@ public class AnimationMapFactory{
 				animationMap.put("neutral", new Animation(spriteArray, 6));
 				break;
 
+
+
 			case ENEMY_FLOATER_RED:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyfloaterred", 32),
+													Sprite.getSprite(1, 0, "enemyfloaterred", 32),
+													Sprite.getSprite(2, 0, "enemyfloaterred", 32) };
+				animationMap.put("neutral", new Animation(spriteArray, 6));
+				break;
+
+			case ENEMY_SUICIDE_SMALL:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyfloater1", 32),
 													Sprite.getSprite(1, 0, "enemyfloater1", 32),
 													Sprite.getSprite(2, 0, "enemyfloater1", 32) };
 				animationMap.put("neutral", new Animation(spriteArray, 6));
 				break;
+
+
 
 			case PROJ_PLAYER:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "playerproj", 8),
@@ -55,7 +68,7 @@ public class AnimationMapFactory{
 				break;
 
 			case PROJ_TINY_BLUE:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projsmallblue", 4) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projtinyblue", 4) };
 				animationMap.put("neutral", new Animation(spriteArray, 1000));
 				break;
 		}

@@ -5,8 +5,8 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 
 public abstract class Hitbox{
-	public abstract void moveBy(int x, int y);
-	public abstract void moveTo(int x, int y);
+	public abstract void moveBy(double x, double y);
+	public abstract void moveTo(double x, double y);
 
 	//Hit detection functions.
 	//TODO: Look up the proper way to handle this -
