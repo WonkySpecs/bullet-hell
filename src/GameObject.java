@@ -86,15 +86,15 @@ public abstract class GameObject{
 	}
 
 	public double getYvel(){
-		return xvel;
+		return yvel;
 	}
 
-	public void setXvel(double xvel){
-		this.xvel = xvel;
+	public void setXvel(double newxvel){
+		xvel = newxvel;
 	}
 
-	public void setYvel(double yvel){
-		this.yvel = yvel;
+	public void setYvel(double newyvel){
+		yvel = newyvel;
 	}
 
 	public void increaseXvel(double increase){
