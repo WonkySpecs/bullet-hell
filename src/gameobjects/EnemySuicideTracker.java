@@ -43,35 +43,42 @@ public class EnemySuicideTracker extends EnemyShip{
 	//set xvel and yvel based on the players position
 	@Override
 	public ArrayList<Projectile> fire(double playerX, double playerY){
+		//Gets trackers current direction of travel
+		double xv = getXvel();
+		double yv = getYvel();
+		double curAngle = Math.atan2(yv, xv);
+		
+		//Gets trackers desired direction of travel - will turn to this direction
+		//at a maximum of turnRate radians per frame
 		double dx = playerX - getX();
 		double dy = playerY - getY();
-		double angle = Math.atan2(dy, dx);
+		double targetAngle = Math.atan2(dy, dx);
 
-		double targetXvel = speed * Math.cos(angle);
-		double targetYvel = speed * Math.sin(angle);
+		//When tracker first spawns, head towards player
+		if(xv == 0 && yv == 0){
+			setXvel(speed * Math.cos(targetAngle));
+			setYvel(speed * Math.sin(targetAngle));
+			return null;
+		}
 
-		if(Math.abs(targetXvel - getXvel()) <= turnRate){
-			setXvel(targetXvel);
+		double absAngleDiff = Math.abs(targetAngle - curAngle);
+
+		if(absAngleDiff <= turnRate || absAngleDiff >= (2 * Math.PI) - turnRate){
+			setXvel(speed * Math.cos(targetAngle));
+			setYvel(speed * Math.sin(targetAngle));
 		}
 		else{
-			if(targetXvel > getXvel()){
-				increaseXvel(turnRate);
-			}
-			else{
-				increaseXvel(-turnRate);
-			}
-		}
+			System.out.println(Math.random());
+			double newAngle;
 
-		if(Math.abs(targetYvel - getYvel()) <= turnRate){
-			setYvel(targetYvel);
-		}
-		else{
-			if(targetYvel > getYvel()){
-				increaseYvel(turnRate);
+			if(targetAngle > curAngle){
+				newAngle = curAngle + turnRate;
 			}
 			else{
-				increaseYvel(-turnRate);
+				newAngle = curAngle - turnRate;
 			}
+			setXvel(speed * Math.cos(newAngle));
+			setYvel(speed * Math.sin(newAngle));
 		}
 
 		return null;
