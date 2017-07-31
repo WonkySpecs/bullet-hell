@@ -68,7 +68,6 @@ public class EnemySuicideTracker extends EnemyShip{
 			setYvel(speed * Math.sin(targetAngle));
 		}
 		else{
-			System.out.println(Math.random());
 			double newAngle;
 
 			if(targetAngle > curAngle){

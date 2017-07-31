@@ -44,7 +44,7 @@ public class GameLevelOne extends GameLevel{
 			fStartX = getScreenWidth()/2;
 			fStartY = 200;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemySuicideTracker(fStartX, fStartY, 100, 2, 0.05, fh, floaterAnimations, null));
+			floaters.add(new EnemySuicideTracker(fStartX, fStartY, 100, 2, 0.05, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL), null));
 
 			return floaters;
 		}
