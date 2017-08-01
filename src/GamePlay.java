@@ -134,27 +134,11 @@ public class GamePlay extends JPanel{
 		super.paintComponent(g2);     // paint parent's background
 		setBackground(Color.BLACK);  // set background color for this JPanel
 
-		// Your custom painting codes. For example,
-		// Drawing primitive shapes
-		//EXAMPLE CODE FROM GOOGLE SEARCHING
-		/*g2.setColor(Color.YELLOW);    // set the drawing color
-		g2.drawLine(30, 40, 100, 200);
-		g2.drawOval(150, 180, 10, 10);
-		g2.drawRect(200, 210, 20, 30);
-		g2.setColor(Color.BLUE);       // change the drawing color
-		g2.fillOval(300, 310, 30, 50);
-		g2.fillRect(400, 350, 60, 50);
-		// Printing texts
-		g2.setColor(Color.WHITE);
-		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		g2.drawString("Testing custom drawing ...", 10, 20);
-		g2.drawString(String.format("%d", paintCount), 10, 40);*/
-		
 		if(spriteList != null){
 			for(SpriteData sd : spriteList){
 				BufferedImage img = sd.getSprite();
-				int x = (int)sd.getPos().getX();
-				int y = (int)sd.getPos().getY();
+				int x = (int)Math.round(sd.getPos().getX());
+				int y = (int)Math.round(sd.getPos().getY());
 				g2.drawImage(img, x, y, null);
 			}			
 		}

@@ -1,3 +1,17 @@
+/**
+* Hitbox is the abstract superclass for all shapes of hitbox
+* (currently Circle and Polygon).
+* 
+* Also defined are the static methods for detecting collision
+* between two hitboxes
+* 
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   21-07-2017
+*/
+
+
 package src;
 
 import java.awt.Point;

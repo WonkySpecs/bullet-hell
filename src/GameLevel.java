@@ -1,6 +1,7 @@
 /**
 * The GameLevel class provides a wrapper for all of the
-* data required to define a 'level'
+* data required to define a 'level' ie. where when and
+* what type of enemies spawn.
 *
 * @author  Will Taylor
 * @version 0.1

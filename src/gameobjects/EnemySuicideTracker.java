@@ -1,6 +1,10 @@
 /**
 * EnemySuicideTracker follows the player until it is shot down,
-* hits the palyer, or goes off the screen
+* hits the player, or goes off the screen
+*
+* TODO: Currently tracking is thrown off when player passes the
+* leftmost point of the tracker at any somewhat high speed due
+* to the angle changing from -pi to pi or vice versa.
 *
 * @author  Will Taylor
 * @version 0.1

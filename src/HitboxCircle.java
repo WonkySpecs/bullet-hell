@@ -1,9 +1,12 @@
 /**
 * HitboxCircle represents the hitboxes of circular GameObjects
-* by a central Point and a radius.
-* Each hitbox works on a kind of 'local' coordinate system where
-* all points are relative to the top left point of the objects
-* sprite.
+* Each hitbox is represented by it's top left coordinate which
+* is tied to the x,y of the object, an offset for the center
+* of the circle, and the radius of the circle.
+* 
+* When constructing a hitbox circle, if the offset is not
+* explicitly given it is assumed to be equal to the radius
+* of the circle, so the circle is central to the whole object
 *
 * @author  Will Taylor
 * @version 0.1

@@ -2,7 +2,7 @@
 * AnimationMapFactory provides the getAnimationMap function
 * which loads the appropriate animation set for an object
 * given the objects name. Designed to simplify definitions
-* of GameObjects in other places (ie level definitions)
+* of GameObjects in other places (ie level definitions).
 *
 * @author  Will Taylor
 * @version 0.1
