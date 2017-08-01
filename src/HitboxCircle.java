@@ -16,20 +16,28 @@ package src;
 import java.awt.Point;
 
 public class HitboxCircle extends Hitbox{
-	private Point center;
+	private Point topLeft, center;
 	private double radius;
 
 	public HitboxCircle(double x, double y, double r){
-		center = new Point((int)Math.round(x), (int)Math.round(y));
+		topLeft = new Point((int)Math.round(x), (int)Math.round(y));
+		center = new Point((int)(topLeft.getX() + Math.round(r)), (int)(topLeft.getY() + Math.round(r)));
+
 		radius = r;
 	}
 
 	public void moveTo(double x, double y){
-		center.move((int)Math.round(x), (int)Math.round(y));
+		topLeft.move((int)Math.round(x), (int)Math.round(y));
+		center.move((int)topLeft.getX() + Math.round(radius), (int)topLeft.getY() + Math.round(radius));
 	}
 
 	public void moveBy(double x, double y){
+		topLeft.move((int)Math.round(center.getX() + x), (int)Math.round(center.getY() + y));
 		center.move((int)Math.round(center.getX() + x), (int)Math.round(center.getY() + y));
+	}
+
+	public Point getTopLeft(){
+		return topLeft;
 	}
 
 	public Point getCenter(){
