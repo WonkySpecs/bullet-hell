@@ -52,9 +52,9 @@ public class AnimationMapFactory{
 				break;
 
 			case ENEMY_SUICIDE_SMALL:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "yellowspinner", 16),
-													Sprite.getSprite(1, 0, "yellowspinner", 16),
-													Sprite.getSprite(2, 0, "yellowspinner", 16) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyyellowspinner", 16),
+													Sprite.getSprite(1, 0, "enemyyellowspinner", 16),
+													Sprite.getSprite(2, 0, "enemyyellowspinner", 16) };
 				animationMap.put("neutral", new Animation(spriteArray, 3));
 				break;
 
