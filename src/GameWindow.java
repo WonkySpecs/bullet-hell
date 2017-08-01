@@ -21,19 +21,24 @@ public class GameWindow extends JFrame implements ActionListener{
 	private Container content;
 	private static JButton startButton = new JButton("Start");
 
+	public static final int WINDOW_SCREEN_WIDTH = GamePlay.GAME_SCREEN_WIDTH;
+	public static final int WINDOW_SCREEN_HEIGHT = GamePlay.GAME_SCREEN_HEIGHT + 120;
+
 	public GameWindow(){
 		super("As yet unnamed bullet hell game");
-		setSize(640, 800);
+		setSize(WINDOW_SCREEN_WIDTH, WINDOW_SCREEN_HEIGHT);
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		content = getContentPane();
-		content.setLayout(new BorderLayout());
+		content.setLayout(new CardLayout());
 
 		JPanel jp = new JPanel();
+		jp.setSize(WINDOW_SCREEN_WIDTH, WINDOW_SCREEN_HEIGHT);
 		startButton.addActionListener(this);
 		jp.add(startButton);
 
-		content.add(jp, BorderLayout.CENTER);
+		content.add(jp);
 
 		setVisible(true);
 	}

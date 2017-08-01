@@ -56,8 +56,8 @@ public class GamePlay extends JPanel{
 	public static final String ACT_FIRE_SEC = "sec";
 	public static final String ACT_FIRE_SPECIAL = "special";
 
-	private static final int GAME_SCREEN_WIDTH = 640;
-	private static final int GAME_SCREEN_HEIGHT = 800;
+	public static final int GAME_SCREEN_WIDTH = 600;
+	public static final int GAME_SCREEN_HEIGHT = 640;
 
 	public GamePlay(GameWindow mainWindow, GameLevel level){
 		paintCount = 0;
@@ -158,6 +158,12 @@ public class GamePlay extends JPanel{
 				g2.drawImage(img, x, y, null);
 			}			
 		}
+		g2.setColor(Color.RED);
+		g2.fillRect(0, GAME_SCREEN_HEIGHT, GameWindow.WINDOW_SCREEN_WIDTH, GameWindow.WINDOW_SCREEN_HEIGHT);
+
+		g2.setColor(Color.BLACK);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		g2.drawString("GUI stuff goes here", 180, GAME_SCREEN_HEIGHT + (GameWindow.WINDOW_SCREEN_HEIGHT - GAME_SCREEN_HEIGHT)/2 - 20);
 	}
 
 	private void resetAllButtonsPressed(){

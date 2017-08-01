@@ -25,48 +25,39 @@ public class GameLevelOne extends GameLevel{
 	@Override
 	public ArrayList<EnemyShip> getEnemySpawns(long gameTime){
 		HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED);
-		int floaterRadius = 15;
-		int fStartX, fStartY;
+		HashMap<String, Animation> yellowSpinnerAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL);
+		double floaterRadius = 15;
+		double fStartX, fStartY;
+
+		ArrayList<EnemyShip> newEnemies = new ArrayList<>();
 
 		if(gameTime == 35){
-			ArrayList<EnemyShip> floaters = new ArrayList<>();
-
 			fStartX = 50;
 			fStartY = -25;
 			HitboxCircle fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 2, 7, fh, floaterAnimations, null));
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 2, 7, fh, floaterAnimations, null));
 
 			fStartX = getScreenWidth() - 65;
 			fStartY = -25;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations, null));
-
-			fStartX = getScreenWidth()/2;
-			fStartY = 200;
-			fh = new HitboxCircle(fStartX, fStartY, 8, 8, 8);
-			floaters.add(new EnemySuicideTracker(fStartX, fStartY, 100, 2, 0.05, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL), null));
-
-
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations, null));
 
 			fStartX = getScreenWidth()/2;
 			fStartY = 200;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
 
 			fStartX = getScreenWidth()/2 + 100;
 			fStartY = 200;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
 
 			fStartX = getScreenWidth()/2 - 100;
 			fStartY = 200;
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
 
-
-
-
-			return floaters;
+			return newEnemies;
 		}
 
 		if(gameTime > 110 && gameTime < 190){
@@ -76,34 +67,43 @@ public class GameLevelOne extends GameLevel{
 				fStartX = getScreenWidth() / 2 - 16;
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations, null));
+				newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 4, fh, floaterAnimations, null));
 
 				fStartX = -20;
 				fStartY = getScreenHeight() / 2;
 				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, 3, -2, fh, floaterAnimations, null));
+				newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 3, -2, fh, floaterAnimations, null));
 
 				fStartX = getScreenWidth() + 20;
 				fStartY = getScreenHeight() / 2;
 				fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
-				floaters.add(new EnemyStraightFloater(fStartX, fStartY, 100, -3, -2, fh, floaterAnimations, null));
+				newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, -3, -2, fh, floaterAnimations, null));
 
-				return floaters;
+				return newEnemies;
 			}
 		}
 
 		if(gameTime > 220 && gameTime < 260){
 			if(gameTime % 5 == 0){
-				ArrayList<EnemyShip> floaterShooters = new ArrayList<>();
-
 				fStartX = (int)((((float)(gameTime - 220) / 40) * (getScreenWidth() - 1)) - 16);
 				fStartY = -25;
 				HitboxCircle fh = new HitboxCircle(fStartX, fStartY,  floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
 				ProjectileData shooterProj = new ProjectileData(ProjectileData.PROJ_STRAIGHT, 0, 9, 1, new HitboxCircle(fStartX, fStartY, 2), projAnimations);
-				floaterShooters.add(new EnemyStraightFloaterShooter(fStartX, fStartY, 1, 0, 4, fh, floaterAnimations, shooterProj, 15));
-				return floaterShooters;
+				newEnemies.add(new EnemyStraightFloaterShooter(fStartX, fStartY, 1, 0, 4, fh, floaterAnimations, shooterProj, 15));
+				return newEnemies;
 			}
+		}
+
+		if(gameTime == 330){
+			for(double i = 0;i < getScreenWidth();){
+				fStartX = i;
+				fStartY = -10;
+				HitboxCircle fh = new HitboxCircle(fStartX, fStartY, 4);
+				newEnemies.add(new EnemySuicideTracker(fStartX, fStartY, 1, 2, 0.05, fh, yellowSpinnerAnimations, null));				
+				i += 30;
+			}
+			return newEnemies;
 		}
 		return null;
 	}

@@ -32,6 +32,18 @@ public class Player extends GameObject{
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
+		if(getX() < 0){
+			moveRight(-getX());
+		}
+		if(getX() + getSprite().getWidth() > screenWidth){
+			moveRight(screenWidth - (getX() + getSprite().getWidth()));
+		}
+		if(getY() < 0){
+			moveDown(-getY());
+		}
+		if(getY() + getSprite().getHeight() > screenHeight){
+			moveDown(screenHeight - (getY() + getSprite().getHeight()));
+		}
 
 		//Note if the player does not fire this can grow very quickly. If this
 		//is an issue put a check to stop growth if >fireDelay + a bit
