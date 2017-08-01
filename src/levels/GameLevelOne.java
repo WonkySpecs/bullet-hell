@@ -42,20 +42,12 @@ public class GameLevelOne extends GameLevel{
 			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
 			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, floaterAnimations, null));
 
-			fStartX = getScreenWidth()/2;
-			fStartY = 200;
-			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
-
-			fStartX = getScreenWidth()/2 + 100;
-			fStartY = 200;
-			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
-
-			fStartX = getScreenWidth()/2 - 100;
-			fStartY = 200;
-			fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
-			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
+			for(int i = -100;i < 101;i += 100){
+				fStartX = getScreenWidth()/2 + i;
+				fStartY = 200;
+				fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
+				newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, floaterAnimations, null));
+			}
 
 			return newEnemies;
 		}
