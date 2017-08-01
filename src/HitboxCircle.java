@@ -16,24 +16,26 @@ package src;
 import java.awt.Point;
 
 public class HitboxCircle extends Hitbox{
-	private Point topLeft, center;
-	private double radius;
+	private Point topLeft;
+	private double radius, centerOffsetX, centerOffsetY;
+
+	public HitboxCircle(double x, double y, double r, double offX, double offY){
+		topLeft = new Point((int)Math.round(x), (int)Math.round(y));
+		radius = r;
+		centerOffsetX = offX;
+		centerOffsetY = offY;
+	}
 
 	public HitboxCircle(double x, double y, double r){
-		topLeft = new Point((int)Math.round(x), (int)Math.round(y));
-		center = new Point((int)(topLeft.getX() + Math.round(r)), (int)(topLeft.getY() + Math.round(r)));
-
-		radius = r;
+		this(x, y, r, r, r);
 	}
 
 	public void moveTo(double x, double y){
 		topLeft.move((int)Math.round(x), (int)Math.round(y));
-		center.move((int)topLeft.getX() + Math.round(radius), (int)topLeft.getY() + Math.round(radius));
 	}
 
 	public void moveBy(double x, double y){
-		topLeft.move((int)Math.round(center.getX() + x), (int)Math.round(center.getY() + y));
-		center.move((int)Math.round(center.getX() + x), (int)Math.round(center.getY() + y));
+		topLeft.move((int)Math.round(topLeft.getX() + x), (int)Math.round(topLeft.getY() + y));
 	}
 
 	public Point getTopLeft(){
@@ -41,7 +43,7 @@ public class HitboxCircle extends Hitbox{
 	}
 
 	public Point getCenter(){
-		return center;
+		return new Point((int)Math.round(topLeft.getX() + centerOffsetX), (int)Math.round(topLeft.getY() + centerOffsetY));
 	}
 
 	public double getRadius(){
