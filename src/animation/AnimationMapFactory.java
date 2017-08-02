@@ -45,9 +45,9 @@ public class AnimationMapFactory{
 
 
 			case ENEMY_FLOATER_RED:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyfloaterred", 32),
-													Sprite.getSprite(1, 0, "enemyfloaterred", 32),
-													Sprite.getSprite(2, 0, "enemyfloaterred", 32) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemysmallred", 32),
+													Sprite.getSprite(1, 0, "enemysmallred", 32),
+													Sprite.getSprite(2, 0, "enemysmallred", 32) };
 				animationMap.put("neutral", new Animation(spriteArray, 6));
 				break;
 
