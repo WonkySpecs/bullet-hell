@@ -13,7 +13,6 @@
 * @since   21-07-2017
 */
 
-
 package src;
 
 import java.awt.Point;

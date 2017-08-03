@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import src.Hitbox;
+import src.HitboxCircle;
 import src.animation.*;
 import src.ProjectileData;
 
@@ -42,7 +43,7 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 	}
 
 	@Override
-	public ArrayList<Projectile> fire(double playerX, double playerY){
+	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		if(framesSinceFired > fireDelay){
 			ArrayList<Projectile> projectiles = new ArrayList<>();
 			projectiles.add(getProjData().newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));

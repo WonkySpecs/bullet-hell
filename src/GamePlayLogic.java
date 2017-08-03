@@ -4,7 +4,7 @@
 * input.
 * A GamePlayLogic instance is created by the games main GamePlay
 * instance, which handles rendering of the results from this class.
-* Hit detection is handled by this class.
+* 
 *
 * @author  Will Taylor
 * @version 0.1
@@ -95,7 +95,7 @@ public class GamePlayLogic{
 			EnemyShip enemy = enemyIterator.next();
 
 			enemy.update(screenWidth, screenHeight);
-			ArrayList<Projectile> newEnemyProj = enemy.fire(player.getX(), player.getY());
+			ArrayList<Projectile> newEnemyProj = enemy.fire((HitboxCircle)player.getHitbox());
 			if(newEnemyProj != null){
 				enemyProjectileList.addAll(newEnemyProj);
 			}

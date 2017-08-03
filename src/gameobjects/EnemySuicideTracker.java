@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import src.Hitbox;
+import src.HitboxCircle;
 import src.animation.*;
 import src.ProjectileData;
 
@@ -46,7 +47,7 @@ public class EnemySuicideTracker extends EnemyShip{
 	//The suicide tracker does not fire a projectile, but we use this method to
 	//set xvel and yvel based on the players position
 	@Override
-	public ArrayList<Projectile> fire(double playerX, double playerY){
+	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		//Gets trackers current direction of travel
 		double xv = getXvel();
 		double yv = getYvel();
@@ -54,8 +55,8 @@ public class EnemySuicideTracker extends EnemyShip{
 		
 		//Gets trackers desired direction of travel - will turn to this direction
 		//at a maximum of turnRate radians per frame
-		double dx = playerX - getX();
-		double dy = playerY - getY();
+		double dx = playerHitbox.getCenter().getX() - getX();
+		double dy =  playerHitbox.getCenter().getY() - getY();
 		double targetAngle = Math.atan2(dy, dx);
 
 		//When tracker first spawns, head towards player

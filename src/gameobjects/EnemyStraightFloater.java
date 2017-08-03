@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import src.Hitbox;
+import src.HitboxCircle;
 import src.animation.*;
 import src.ProjectileData;
 
@@ -40,7 +41,7 @@ public class EnemyStraightFloater extends EnemyShip{
 	}
 
 	@Override
-	public ArrayList<Projectile> fire(double playerX, double playerY){
+	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		return null;
 	}
 }

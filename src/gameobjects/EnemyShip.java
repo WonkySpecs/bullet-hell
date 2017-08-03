@@ -53,5 +53,5 @@ public abstract class EnemyShip extends GameObject{
 		return projData;
 	}
 
-	public abstract ArrayList<Projectile> fire(double playerX, double playerY);
+	public abstract ArrayList<Projectile> fire(HitboxCircle playerHitbox);
 }

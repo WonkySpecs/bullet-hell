@@ -25,13 +25,15 @@ public class Player extends GameObject{
 		setYvel(5);
 		primDamage = 50;
 
-		fireDelay = 10;
+		fireDelay = 8;
 		framesSinceFired = fireDelay;
 	}
 
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
+
+		//Stop player moving off screen
 		if(getX() < 0){
 			moveRight(-getX());
 		}
@@ -59,11 +61,11 @@ public class Player extends GameObject{
 			double projStartX = getX();
 			double projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -7, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -10, projHitbox, projAnimations));
 
 			projStartX = getX() + getSprite().getWidth() - 5;
 			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -7, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -10, projHitbox, projAnimations));
 			framesSinceFired = 0;
 		}
 
