@@ -39,7 +39,7 @@ public class AnimationMapFactory{
 		switch(objectType){
 			case PLAYER:
 				spriteArray = new BufferedImage[] {Sprite.getSprite(0, 0, "player", 32), Sprite.getSprite(1, 0, "player", 32)};
-				animationMap.put("neutral", new Animation(spriteArray, 6));
+				animationMap.put("neutral", new Animation(spriteArray, 12));
 				break;
 
 
@@ -48,14 +48,14 @@ public class AnimationMapFactory{
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemysmallred", 32),
 													Sprite.getSprite(1, 0, "enemysmallred", 32),
 													Sprite.getSprite(2, 0, "enemysmallred", 32) };
-				animationMap.put("neutral", new Animation(spriteArray, 6));
+				animationMap.put("neutral", new Animation(spriteArray, 15));
 				break;
 
 			case ENEMY_SUICIDE_SMALL:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyyellowspinner", 16),
 													Sprite.getSprite(1, 0, "enemyyellowspinner", 16),
 													Sprite.getSprite(2, 0, "enemyyellowspinner", 16) };
-				animationMap.put("neutral", new Animation(spriteArray, 3));
+				animationMap.put("neutral", new Animation(spriteArray, 10));
 				break;
 
 
@@ -64,7 +64,7 @@ public class AnimationMapFactory{
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "playerproj", 8),
 													Sprite.getSprite(1, 0, "playerproj", 8),
 													Sprite.getSprite(2, 0, "playerproj", 8) };
-				animationMap.put("neutral", new Animation(spriteArray, 4));
+				animationMap.put("neutral", new Animation(spriteArray, 20));
 				break;
 
 			case PROJ_TINY_BLUE:
@@ -79,5 +79,15 @@ public class AnimationMapFactory{
 		}
 
 		return animationMap;
+	}
+
+	public static HashMap<String, Animation> copyAnimationMap(HashMap<String, Animation> original){
+		HashMap<String, Animation> copy = new HashMap<>();
+
+		for(String k : original.keySet()){
+			copy.put(k, new Animation(original.get(k)));
+		}
+
+		return copy;
 	}
 }
