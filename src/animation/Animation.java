@@ -39,6 +39,15 @@ public class Animation{
 		this.totalFrames = this.frames.size();
 	}
 
+	public Animation(Animation original){
+		frameCount = 0;
+		currentFrame = 0;
+		stopped = true;
+		frameDelay = original.getFrameDelay();
+		frames = original.getFrames();
+		totalFrames = frames.size();
+	}
+
 	public void start(){
 		if (!stopped){
 			return;
@@ -101,5 +110,16 @@ public class Animation{
 				}
 			}
 		}
+	}
+
+	public int getFrameDelay(){
+		return frameDelay;
+	}
+
+	//NOTE: When used in copy constructor, I believe this returns the same Frame
+	//instances as the original uses, making the copy a shallow copy.
+	//This shouldn't be a problem as the frames of the animations do not change
+	public ArrayList<Frame> getFrames(){
+		return frames;
 	}
 }
