@@ -3,6 +3,9 @@
 * to represent all of the objects during gameplay -
 * this includes the player, enemies, and projectiles
 *
+* All fundamental methods such as moving, getters and
+* setters for hitboxes and animations etc are defined here.
+*
 * @author  Will Taylor
 * @version 0.1
 * @since   17-07-2017

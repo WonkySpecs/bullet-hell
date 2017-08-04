@@ -79,6 +79,7 @@ public class GamePlay extends JPanel{
 	}
 
 	public void gameLoop(){
+		//NOTE: 1000000000 is the number of nanoseconds in a second
 		final int TARGET_FPS = 60;
 		final long TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
 		long lastUpdateTime = System.nanoTime();
@@ -87,12 +88,14 @@ public class GamePlay extends JPanel{
 
 		while(running){
 			try{
+				//If update has taken less time than the target time, wait the appropriate time.
 				Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime))/1000000);
 			}catch(Exception e){}
 
 			logic.update(gameTime, buttonsPressed);
 			spriteList = logic.getSpriteDataList();
 			repaint();
+
 			lastUpdateTime = System.nanoTime();
 			gameTime += 1;
 			framesSinceLastCount += 1;

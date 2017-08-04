@@ -7,6 +7,11 @@
 * @since   18-07-2017
 */
 
+
+//TODO: Implement upgrades, either directly in player class or as a separate
+//class which the Player class will own.
+//Many currently hard coded values (speed, weapon details etc) will be encapsulated by upgrades
+
 package src.gameobjects;
 
 import src.*;

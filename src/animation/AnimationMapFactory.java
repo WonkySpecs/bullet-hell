@@ -81,6 +81,7 @@ public class AnimationMapFactory{
 		return animationMap;
 	}
 
+	//Creates deep copy (new instances of Animations using the copy constructir) of animation map
 	public static HashMap<String, Animation> copyAnimationMap(HashMap<String, Animation> original){
 		HashMap<String, Animation> copy = new HashMap<>();
 

@@ -1,6 +1,5 @@
 /**
-* GameLevelOne, likely to become a demo level
-* 
+* GameLevelOne currently used for testing
 *
 * @author  Will Taylor
 * @version 0.1

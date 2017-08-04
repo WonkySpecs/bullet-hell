@@ -1,5 +1,5 @@
 /**
-* Abstract superclass for all non-player ships 
+* Abstract superclass for all non-player ships.
 *
 * @author  Will Taylor
 * @version 0.1
