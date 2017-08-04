@@ -18,14 +18,18 @@ import src.gameobjects.*;
 import src.animation.*;
 
 public class GameLevelOne extends GameLevel{
+	HashMap<String, Animation> floaterAnimations;
+	HashMap<String, Animation> yellowSpinnerAnimations;
+
 	public GameLevelOne(int screnWidth, int screenHeight){
 		super(screnWidth, screenHeight);
+		floaterAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED);
+		yellowSpinnerAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL);
 	}
 
 	@Override
 	public ArrayList<EnemyShip> getEnemySpawns(long gameTime){
-		HashMap<String, Animation> floaterAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED);
-		HashMap<String, Animation> yellowSpinnerAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL);
+		
 		double floaterRadius = 15;
 		double fStartX, fStartY;
 
