@@ -25,7 +25,7 @@ import java.awt.image.BufferedImage;
 public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
 	private int fps;
-	private boolean running;
+	private boolean running, paused;
 	private long gameTime;
 
 	private HashMap<String, Boolean> buttonsPressed;
@@ -41,6 +41,9 @@ public class GamePlay extends JPanel{
 	private static final String RELEASE_LEFT = "release left";
 	private static final String RELEASE_RIGHT = "release right";
 
+	private static final String PRESS_ESC = "press esc";
+	private static final String RELEASE_ESC = "release esc";
+
 	private static final String PRESS_FIRE_PRIM = "press fire_prim";
 	private static final String PRESS_FIRE_SEC = "press fire_sec";
 	private static final String PRESS_FIRE_SPECIAL = "press fire_special";
@@ -55,6 +58,7 @@ public class GamePlay extends JPanel{
 	public static final String ACT_FIRE_PRIM = "prim";
 	public static final String ACT_FIRE_SEC = "sec";
 	public static final String ACT_FIRE_SPECIAL = "special";
+	public static final String ACT_PAUSE = "pause";
 
 	public static final int GAME_SCREEN_WIDTH = 600;
 	public static final int GAME_SCREEN_HEIGHT = 640;
@@ -84,26 +88,34 @@ public class GamePlay extends JPanel{
 		final long TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
 		long lastUpdateTime = System.nanoTime();
 		long lastFpsCountTime = System.nanoTime();
+		long pauseTime = System.nanoTime();
 		int framesSinceLastCount = 0;
+		paused = false;
 
 		while(running){
-			try{
-				//If update has taken less time than the target time, wait the appropriate time.
-				Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime))/1000000);
-			}catch(Exception e){}
+			if(buttonsPressed.get(ACT_PAUSE) == true && (System.nanoTime() - pauseTime) > 300000000){
+				paused = !paused;
+				pauseTime = System.nanoTime();
+			}
+			if(paused == false){
+				try{
+					//If update has taken less time than the target time, wait the appropriate time.
+					Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime))/1000000);
+				}catch(Exception e){}
 
-			logic.update(gameTime, buttonsPressed);
-			spriteList = logic.getSpriteDataList();
-			repaint();
+				logic.update(gameTime, buttonsPressed);
+				spriteList = logic.getSpriteDataList();
+				repaint();
 
-			lastUpdateTime = System.nanoTime();
-			gameTime += 1;
-			framesSinceLastCount += 1;
+				lastUpdateTime = System.nanoTime();
+				gameTime += 1;
+				framesSinceLastCount += 1;
 
-			if((System.nanoTime() - lastFpsCountTime) >= 1000000000){
-				fps = framesSinceLastCount;
-				framesSinceLastCount = 0;
-				lastFpsCountTime = System.nanoTime();
+				if((System.nanoTime() - lastFpsCountTime) >= 1000000000){
+					fps = framesSinceLastCount;
+					framesSinceLastCount = 0;
+					lastFpsCountTime = System.nanoTime();
+				}				
 			}
 		}
 	}
@@ -144,6 +156,13 @@ public class GamePlay extends JPanel{
 		this.getActionMap().put(RELEASE_FIRE_PRIM, new KeyReleasedAction(ACT_FIRE_PRIM));
 		this.getActionMap().put(RELEASE_FIRE_SEC, new KeyReleasedAction(ACT_FIRE_SEC));
 		this.getActionMap().put(RELEASE_FIRE_SPECIAL, new KeyReleasedAction(ACT_FIRE_SPECIAL));
+
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), PRESS_ESC);
+		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released ESCAPE"), RELEASE_ESC);
+
+		this.getActionMap().put(PRESS_ESC, new KeyPressedAction(ACT_PAUSE));
+		this.getActionMap().put(RELEASE_ESC, new KeyReleasedAction(ACT_PAUSE));
+
 		System.out.println("Bindings set");
 	}
 
@@ -174,14 +193,15 @@ public class GamePlay extends JPanel{
 	}
 
 	private void resetAllButtonsPressed(){
-		buttonsPressed = new HashMap<String, Boolean>(7);
+		buttonsPressed = new HashMap<String, Boolean>(8);
 		buttonsPressed.put(ACT_UP, false);
 		buttonsPressed.put(ACT_DOWN , false);
 		buttonsPressed.put(ACT_LEFT , false);
 		buttonsPressed.put(ACT_RIGHT, false);
 		buttonsPressed.put(ACT_FIRE_PRIM, false);
 		buttonsPressed.put(ACT_FIRE_SEC, false);
-		buttonsPressed.put(ACT_FIRE_SPECIAL, false);	
+		buttonsPressed.put(ACT_FIRE_SPECIAL, false);
+		buttonsPressed.put(ACT_PAUSE, false);
 	}
 
 	private class KeyPressedAction extends AbstractAction{

@@ -27,6 +27,8 @@ public class GamePlayLogic{
 	private ArrayList<EnemyShip> enemyShipList;
 	private ArrayList<Projectile> enemyProjectileList, playerProjectileList;
 	private int screenWidth, screenHeight;
+	private boolean paused;
+	private long pauseTime;
 	//private ArrayList<Particle> particleList;
 
 	private static final int DEPTH_PLAYER = 0;
@@ -42,6 +44,8 @@ public class GamePlayLogic{
 		enemyShipList = new ArrayList<EnemyShip>();
 		playerProjectileList = new ArrayList<Projectile>();
 		enemyProjectileList = new ArrayList<Projectile>();
+		pauseTime = System.nanoTime();
+		paused = false;
 
 		int playerStartX = screenWidth / 2 - 16;
 		int playerStartY = screenHeight / 2 - 16;
