@@ -24,7 +24,7 @@ import java.awt.image.BufferedImage;
 
 public class GamePlay extends JPanel{
 	private GamePlayLogic logic;
-	private int paintCount;
+	private int fps;
 	private boolean running;
 	private long gameTime;
 
@@ -60,7 +60,6 @@ public class GamePlay extends JPanel{
 	public static final int GAME_SCREEN_HEIGHT = 640;
 
 	public GamePlay(GameWindow mainWindow, GameLevel level){
-		paintCount = 0;
 		logic = new GamePlayLogic(level, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
 		running = true;
 		gameTime = 0;
@@ -80,12 +79,29 @@ public class GamePlay extends JPanel{
 	}
 
 	public void gameLoop(){
+		final int TARGET_FPS = 60;
+		final long TARGET_FRAME_TIME = 1000000000 / TARGET_FPS;
+		long lastUpdateTime = System.nanoTime();
+		long lastFpsCountTime = System.nanoTime();
+		int framesSinceLastCount = 0;
+
 		while(running){
-			try{Thread.sleep(20);}catch(Exception e){}
+			try{
+				Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime))/1000000);
+			}catch(Exception e){}
+
 			logic.update(gameTime, buttonsPressed);
 			spriteList = logic.getSpriteDataList();
 			repaint();
+			lastUpdateTime = System.nanoTime();
 			gameTime += 1;
+			framesSinceLastCount += 1;
+
+			if((System.nanoTime() - lastFpsCountTime) >= 1000000000){
+				fps = framesSinceLastCount;
+				framesSinceLastCount = 0;
+				lastFpsCountTime = System.nanoTime();
+			}
 		}
 	}
 
@@ -148,6 +164,10 @@ public class GamePlay extends JPanel{
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		g2.drawString("GUI stuff goes here", 180, GAME_SCREEN_HEIGHT + (GameWindow.WINDOW_SCREEN_HEIGHT - GAME_SCREEN_HEIGHT)/2 - 20);
+
+		g2.setColor(Color.WHITE);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		g2.drawString(String.format("%d fps", fps), GAME_SCREEN_WIDTH - 50, 10);
 	}
 
 	private void resetAllButtonsPressed(){
