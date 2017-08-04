@@ -18,8 +18,7 @@ import src.gameobjects.*;
 import src.animation.*;
 
 public class GameLevelOne extends GameLevel{
-	HashMap<String, Animation> floaterAnimations;
-	HashMap<String, Animation> yellowSpinnerAnimations;
+	HashMap<String, Animation> floaterAnimations, yellowSpinnerAnimations;
 
 	public GameLevelOne(int screnWidth, int screenHeight){
 		super(screnWidth, screenHeight);
@@ -95,7 +94,7 @@ public class GameLevelOne extends GameLevel{
 			for(double i = 0;i < getScreenWidth();){
 				fStartX = i;
 				fStartY = -10;
-				HitboxCircle fh = new HitboxCircle(fStartX, fStartY, 4);
+				HitboxCircle fh = new HitboxCircle(fStartX, fStartY, 8);
 				newEnemies.add(new EnemySuicideTracker(fStartX, fStartY, 1, 2, 0.05, fh, yellowSpinnerAnimations, null));				
 				i += 30;
 			}
