@@ -30,6 +30,9 @@ public class AnimationMapFactory{
 	public static final int PROJ_BLUE = 103;
 	public static final int PROJ_BIG_BLUE = 104;
 
+	public static final int ITEM_UPGRADE = 200;
+	public static final int ITEM_POINTS_SMALL = 201;
+	public static final int ITEM_POINTS_BIG = 202;
 
 	public static HashMap<String, Animation> getAnimationMap(int objectType){
 		HashMap<String, Animation> animationMap = new HashMap<>();
@@ -70,6 +73,18 @@ public class AnimationMapFactory{
 			case PROJ_TINY_BLUE:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projtinyblue", 4) };
 				animationMap.put("neutral", new Animation(spriteArray, 1000));
+				break;
+
+
+
+			case ITEM_UPGRADE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "itemupgrade", 16),
+													Sprite.getSprite(1, 0, "itemupgrade", 16),
+													Sprite.getSprite(2, 0, "itemupgrade", 16),
+													Sprite.getSprite(3, 0, "itemupgrade", 16),
+													Sprite.getSprite(4, 0, "itemupgrade", 16),
+													Sprite.getSprite(5, 0, "itemupgrade", 16) };
+				animationMap.put("neutral", new Animation(spriteArray, 8));
 				break;
 		}
 
