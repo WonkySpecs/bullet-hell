@@ -100,7 +100,7 @@ public class GamePlay extends JPanel{
 			if(paused == false){
 				try{
 					//If update has taken less time than the target time, wait the appropriate time.
-					Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime))/1000000);
+					Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime)) / 1000000);
 				}catch(Exception e){}
 
 				logic.update(gameTime, buttonsPressed);

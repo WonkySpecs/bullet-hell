@@ -61,7 +61,12 @@ public class GamePlayLogic{
 			enemyShipList.addAll(newEnemies);			
 		}
 
-		//Execute player functions based on inputs recieved
+		updatePlayer(inputs);
+		updateEnemies();
+		updateProjectiles();		
+	}
+
+	private void updatePlayer(HashMap<String, Boolean> inputs){
 		if(inputs.get(GamePlay.ACT_UP) == true){
 			player.moveUp();
 		}
@@ -92,8 +97,9 @@ public class GamePlayLogic{
 		if(newPlayerProjectiles != null){
 			playerProjectileList.addAll(newPlayerProjectiles);
 		}
+	}
 
-		//Update all enemies and projectiles, deleting if offscreen or collided with player
+	private void updateEnemies(){
 		for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 			boolean dead = false;
 			EnemyShip enemy = enemyIterator.next();
@@ -118,8 +124,9 @@ public class GamePlayLogic{
 				enemyIterator.remove();
 			}
 		}
+	}
 
-		//Update all player projectiles, dealing damage if enemy is hit.
+	private void updateProjectiles(){
 		for (Iterator<Projectile> projIterator = playerProjectileList.iterator(); projIterator.hasNext();){
 			boolean dead = false;
 			Projectile proj = projIterator.next();
@@ -167,6 +174,8 @@ public class GamePlayLogic{
 			}
 		}
 	}
+
+	private void updateItems(){}
 
 	public ArrayList<SpriteData> getSpriteDataList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();

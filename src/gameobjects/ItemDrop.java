@@ -55,7 +55,7 @@ public class ItemDrop extends GameObject{
 		//Speed decreases exponentially with respect to distance
 		// = DROP_SPEED at DEFAULT_TRACKING_RANGE
 		if(!tracking){
-			checkIfTracking(playerHitbox)
+			checkIfTracking(playerHitbox);
 		}
 
 		if(tracking){
