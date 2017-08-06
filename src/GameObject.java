@@ -21,8 +21,7 @@ import java.util.HashMap;
 import src.animation.*;
 
 public abstract class GameObject{
-	private double x, y, xvel, yvel;
-	
+	private double x, y, xvel, yvel;	
 	private String curAnimationName;
 	private Animation curAnimation;
 	private HashMap<String, Animation> animations;
