@@ -32,21 +32,25 @@ public class HitboxCircle extends Hitbox{
 		this(x, y, r, r, r);
 	}
 
+	@Override
 	public void moveTo(double x, double y){
 		topLeft.move((int)Math.round(x), (int)Math.round(y));
 	}
 
+	@Override
 	public void moveBy(double x, double y){
 		topLeft.move((int)Math.round(topLeft.getX() + x), (int)Math.round(topLeft.getY() + y));
+	}
+
+	@Override
+	public Point getCenter(){
+		return new Point((int)Math.round(topLeft.getX() + centerOffsetX), (int)Math.round(topLeft.getY() + centerOffsetY));
 	}
 
 	public Point getTopLeft(){
 		return topLeft;
 	}
 
-	public Point getCenter(){
-		return new Point((int)Math.round(topLeft.getX() + centerOffsetX), (int)Math.round(topLeft.getY() + centerOffsetY));
-	}
 
 	public double getRadius(){
 		return radius;

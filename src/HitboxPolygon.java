@@ -25,12 +25,20 @@ public class HitboxPolygon extends Hitbox{
 		pointList = points;
 	}
 
+	@Override
 	public void moveTo(double x, double y){
 		origin.move((int)Math.round(x), (int)Math.round(y));
 	}
 
+	@Override
 	public void moveBy(double x, double y){
 		origin.move((int)Math.round(origin.getX() + x), (int)Math.round(origin.getY() + y));
+	}
+
+	//TODO: IMPLEMENT this properly
+	@Override
+	public Point getCenter(){
+		return origin;
 	}
 
 	//If not working, may be i<pointSize() - 1 instead
