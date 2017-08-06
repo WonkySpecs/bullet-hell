@@ -28,8 +28,8 @@ public class ItemDrop extends GameObject{
 
 	public ItemDrop(double x, double y, double trackingRange, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
-		setXvel(DROP_SPEED);
-		setYvel(0);
+		setXvel(0);
+		setYvel(DROP_SPEED);
 		tracking = false;
 		this.trackingRange = trackingRange;
 	}
@@ -38,6 +38,11 @@ public class ItemDrop extends GameObject{
 		this(x, y, DEFAULT_TRACKING_RANGE, hitbox, animations);
 	}
 
+	/*public ItemDrop(ItemDrop original){
+		ItemDrop copy = new ItemDrop(original.getX(), original.getX(), original.getTrackingRange());
+		return copy
+	}*/
+
 	//Before getting close to the player, move straight down
 	//Once tracking range has been entered, move towards player
 	@Override
@@ -45,10 +50,6 @@ public class ItemDrop extends GameObject{
 		super.update(screenWidth, screenHeight);
 		moveDown();
 		moveRight();
-
-		//if(!isRemovable() && !isOffScreen(screenWidth, screenHeight)){
-		//	setRemovable(true);
-		//}
 	}
 
 	public void track(HitboxCircle playerHitbox){
@@ -71,7 +72,7 @@ public class ItemDrop extends GameObject{
 				speed = 1;
 			}
 			else{
-				speed = DROP_SPEED * DEFAULT_TRACKING_RANGE / dist;
+				speed = DROP_SPEED * trackingRange / dist;
 			}
 			setXvel(speed * Math.cos(targetAngle));
 			setYvel(speed * Math.sin(targetAngle));			
@@ -79,9 +80,13 @@ public class ItemDrop extends GameObject{
 	}
 
 	public void checkIfTracking(HitboxCircle playerHitbox){
-		if(playerHitbox.getCenter().distance(getHitbox().getCenter()) > trackingRange){
+		if(playerHitbox.getCenter().distance(getHitbox().getCenter()) < trackingRange){
 			System.out.println("tracking");
 			tracking = true;
 		}
+	}
+
+	public double getTrackingRange(){
+		return trackingRange;
 	}
 }

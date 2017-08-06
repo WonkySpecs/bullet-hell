@@ -26,6 +26,7 @@ public class GamePlayLogic{
 	private Player player;
 	private ArrayList<EnemyShip> enemyShipList;
 	private ArrayList<Projectile> enemyProjectileList, playerProjectileList;
+	private ArrayList<ItemDrop> itemList;
 	private int screenWidth, screenHeight;
 	private boolean paused;
 	private long pauseTime;
@@ -35,7 +36,8 @@ public class GamePlayLogic{
 	private static final int DEPTH_ENEMY = 1;
 	private static final int DEPTH_PLAYER_PROJECTILE = 2;
 	private static final int DEPTH_ENEMY_PROJECTILE = 3;
-	private static final int PARTICLE = 4;
+	private static final int DEPTH_ITEM = 4;
+	private static final int PARTICLE = 5;
 
 	public GamePlayLogic(GameLevel level, int screenWidth, int screenHeight){
 		this.screenWidth = screenWidth;
@@ -44,6 +46,7 @@ public class GamePlayLogic{
 		enemyShipList = new ArrayList<EnemyShip>();
 		playerProjectileList = new ArrayList<Projectile>();
 		enemyProjectileList = new ArrayList<Projectile>();
+		itemList = new ArrayList<ItemDrop>();
 		pauseTime = System.nanoTime();
 		paused = false;
 
@@ -64,6 +67,7 @@ public class GamePlayLogic{
 		updatePlayer(inputs);
 		updateEnemies();
 		updateProjectiles();		
+		updateItems();
 	}
 
 	private void updatePlayer(HashMap<String, Boolean> inputs){
@@ -140,6 +144,11 @@ public class GamePlayLogic{
 					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox()) == true){
 						enemy.reduceHitpoints(proj.getDamage());
 						if(enemy.getHitPoints() <= 0){
+							ItemDrop newItem = enemy.getItemDrop();
+							if(newItem != null){
+								newItem.moveTo(enemy.getX(), enemy.getY());
+								itemList.add(newItem);
+							}
 							enemy = null;
 							enemyIterator.remove();							
 						}
@@ -175,7 +184,27 @@ public class GamePlayLogic{
 		}
 	}
 
-	private void updateItems(){}
+	private void updateItems(){
+		for (Iterator<ItemDrop> itemIterator = itemList.iterator(); itemIterator.hasNext();){
+			boolean dead = false;
+			ItemDrop item = itemIterator.next();
+			item.track((HitboxCircle)player.getHitbox());
+			item.update(screenWidth, screenHeight);
+			if(item.isOffScreen(screenWidth, screenHeight)){
+				dead = true;
+			}
+			else{
+				if(Hitbox.collisionBetween(item.getHitbox(), player.getHitbox()) == true){
+					dead = true;
+				}
+			}
+
+			if(dead == true){
+				item = null;
+				itemIterator.remove();
+			}
+		}
+	}
 
 	public ArrayList<SpriteData> getSpriteDataList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
@@ -189,6 +218,10 @@ public class GamePlayLogic{
 
 		for(Projectile proj : enemyProjectileList){
 			spriteDataList.add(new SpriteData(proj.getSprite(), proj.getPos(), DEPTH_ENEMY_PROJECTILE));
+		}
+
+		for(ItemDrop item : itemList){
+			spriteDataList.add(new SpriteData(item.getSprite(), item.getPos(), DEPTH_ITEM));	
 		}
 
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));

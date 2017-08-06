@@ -19,13 +19,27 @@ public abstract class EnemyShip extends GameObject{
 	private int hitPoints;
 	private boolean removable;
 	private ProjectileData projData;
+	private ItemDrop itemDrop;
 
-	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
+	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData, ItemDrop itemDrop){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
 		setHitpoints(hp);
 		this.projData = projData;
+		this.itemDrop = itemDrop;
+	}
+
+	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
+		this(x, y, hp, hitbox, animations, projData, null);
+	}
+
+	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ItemDrop itemDrop){
+		this(x, y, hp, hitbox, animations, null, itemDrop);
+	}
+
+	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations){
+		this(x, y, hp, hitbox, animations, null, null);
 	}
 
 	public void setHitpoints(int hp){
@@ -51,6 +65,10 @@ public abstract class EnemyShip extends GameObject{
 
 	public ProjectileData getProjData(){
 		return projData;
+	}
+
+	public ItemDrop getItemDrop(){
+		return itemDrop;
 	}
 
 	public abstract ArrayList<Projectile> fire(HitboxCircle playerHitbox);
