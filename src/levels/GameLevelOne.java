@@ -44,11 +44,11 @@ public class GameLevelOne extends GameLevel{
 			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, -2, 7, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
 
 			for(int i = -100;i < 101;i += 100){
-				fStartX = getScreenWidth()/2 + i;
+				fStartX = getScreenWidth() / 2 + i;
 				fStartY = 200;
 				fh = new HitboxCircle(fStartX, fStartY, floaterRadius);
 				newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 100, 0, 0, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, 
-					new ItemDrop(fStartX, fStartY, 50, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE))));
+					new ItemDrop(fStartX, fStartY, 65, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE))));
 			}
 
 			return newEnemies;
@@ -97,6 +97,17 @@ public class GameLevelOne extends GameLevel{
 				newEnemies.add(new EnemySuicideTracker(fStartX, fStartY, 1, 2, 0.05, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL), null, null));				
 				i += 30;
 			}
+			return newEnemies;
+		}
+
+		if(gameTime == 380){
+			fStartY = -50;
+			fStartX = getScreenWidth() / 2 - 32;
+			newEnemies.add(new EnemyStraightFloater(fStartX, fStartY, 5000, 0, 0.2,
+													new HitboxCircle(32), 
+													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_BLUE),
+													null,
+													null));
 			return newEnemies;
 		}
 		return null;

@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import src.animation.*;
 
@@ -114,12 +115,14 @@ public abstract class GameObject{
 	public void setCurAnimation(String animation){
 		curAnimationName = animation;
 
-		try{
-			curAnimation = animations.get(curAnimationName);			
+		if(getAnimationNames().contains(animation)){
+			curAnimation = animations.get(curAnimationName);
+			curAnimation.start();						
 		}
-		catch(Exception e){
-			System.out.println("Tried to load animation which does not exist for this object");
+		else{
+			System.out.println("Tried to load " + animation + " which does not exist");
 		}
+		
 	}
 
 	public String getCurAnimationName(){
@@ -128,6 +131,14 @@ public abstract class GameObject{
 
 	public Animation getCurAnimation(){
 		return curAnimation;
+	}
+
+	public ArrayList<String> getAnimationNames(){
+		ArrayList<String>names = new ArrayList<>();
+		for(String k : animations.keySet()){
+			names.add(k);
+		}
+		return names;
 	}
 
 	public BufferedImage getSprite(){

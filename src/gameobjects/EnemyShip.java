@@ -16,7 +16,7 @@ import src.*;
 import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
-	private int hitPoints;
+	private int hitPoints, damageTimer;
 	private boolean removable;
 	private ProjectileData projData;
 	private ItemDrop itemDrop;
@@ -25,6 +25,7 @@ public abstract class EnemyShip extends GameObject{
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
+		damageTimer = -1;
 		setHitpoints(hp);
 		this.projData = projData;
 		this.itemDrop = itemDrop;
@@ -53,6 +54,8 @@ public abstract class EnemyShip extends GameObject{
 	public void reduceHitpoints(int damage){
 		//TODO: Implement taking damge animations
 		hitPoints -= damage;
+		setCurAnimation("damaged");
+		damageTimer = 20;
 	}
 
 	public void setRemovable(boolean removable){
@@ -69,6 +72,17 @@ public abstract class EnemyShip extends GameObject{
 
 	public ItemDrop getItemDrop(){
 		return itemDrop;
+	}
+
+	@Override
+	public void update(int screenWidth, int screenHeight){
+		super.update(screenWidth, screenHeight);
+		if(damageTimer >= 0){
+			damageTimer--;
+		}
+		if(damageTimer == 0){
+			setCurAnimation("neutral");
+		}
 	}
 
 	public abstract ArrayList<Projectile> fire(HitboxCircle playerHitbox);

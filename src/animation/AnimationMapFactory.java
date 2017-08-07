@@ -54,6 +54,21 @@ public class AnimationMapFactory{
 				animationMap.put("neutral", new Animation(spriteArray, 15));
 				break;
 
+			case ENEMY_FLOATER_BLUE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemybigblue", 64),
+													Sprite.getSprite(1, 0, "enemybigblue", 64),
+													Sprite.getSprite(2, 0, "enemybigblue", 64) };
+
+													
+				animationMap.put("neutral", new Animation(spriteArray, 20));
+
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 1, "enemybigblue", 64),
+													Sprite.getSprite(1, 1, "enemybigblue", 64),
+													Sprite.getSprite(2, 1, "enemybigblue", 64) };
+
+				animationMap.put("damaged", new Animation(spriteArray, 8));
+				break;
+
 			case ENEMY_SUICIDE_SMALL:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyyellowspinner", 16),
 													Sprite.getSprite(1, 0, "enemyyellowspinner", 16),
