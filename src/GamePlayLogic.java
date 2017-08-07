@@ -70,6 +70,8 @@ public class GamePlayLogic{
 		updateItems();
 	}
 
+	//Move and fire based on inputs
+	//New projectiles are added to playerProjectileList
 	private void updatePlayer(HashMap<String, Boolean> inputs){
 		if(inputs.get(GamePlay.ACT_UP) == true){
 			player.moveUp();
@@ -103,6 +105,7 @@ public class GamePlayLogic{
 		}
 	}
 
+	//Move all enemies, check if they should be removed, and check for collision with player
 	private void updateEnemies(){
 		for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 			boolean dead = false;
@@ -130,6 +133,8 @@ public class GamePlayLogic{
 		}
 	}
 
+	//Move player projectiles and check for enemy hits
+	//Move enemy projectiles and check for player hits
 	private void updateProjectiles(){
 		for (Iterator<Projectile> projIterator = playerProjectileList.iterator(); projIterator.hasNext();){
 			boolean dead = false;
@@ -200,8 +205,10 @@ public class GamePlayLogic{
 			}
 
 			if(dead == true){
+				System.out.println("Item gone");
 				item = null;
 				itemIterator.remove();
+				System.out.println(String.format("%d items left on screen", itemList.size()));
 			}
 		}
 	}
