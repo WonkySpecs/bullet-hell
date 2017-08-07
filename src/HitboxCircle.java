@@ -28,8 +28,16 @@ public class HitboxCircle extends Hitbox{
 		centerOffsetY = offY;
 	}
 
+	//If no offset is given, assume that hitbox is centered at (r,r) relative to topleft.
 	public HitboxCircle(double x, double y, double r){
 		this(x, y, r, r, r);
+	}
+
+	//As all hitboxes are updated to move with the GameObject they represent,
+	//Starting them at the correct position is actually rarely necessary.
+	//Tihs is a convenience constructor for easy definitions.
+	public HitboxCircle(double r){
+		this(0, 0, r);
 	}
 
 	@Override
