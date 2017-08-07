@@ -66,16 +66,17 @@ public class ItemDrop extends GameObject{
 			double dist = Math.sqrt(dx * dx + dy * dy);
 
 			double speed;
-			//If item is very close, don't want to move past. Also solves any
-			//possibility of div by 0 errors
-			if(dist < 2){
-				speed = 1;
+			speed = DROP_SPEED * trackingRange / dist;
+			
+			//If item can reach player, do so. This fixes problem over overshooting and also (low) chance of div by 0 errors
+			if(dist < speed){
+				speed = 0;
+				moveTo(playerHitbox.getCenter().getX(), playerHitbox.getCenter().getY());
 			}
 			else{
-				speed = DROP_SPEED * trackingRange / dist;
+				setXvel(speed * Math.cos(targetAngle));
+				setYvel(speed * Math.sin(targetAngle));
 			}
-			setXvel(speed * Math.cos(targetAngle));
-			setYvel(speed * Math.sin(targetAngle));			
 		}
 	}
 
