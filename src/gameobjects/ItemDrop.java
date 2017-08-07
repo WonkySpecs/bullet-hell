@@ -21,7 +21,7 @@ import src.*;
 import src.animation.*;
 
 public class ItemDrop extends GameObject{
-	private static double DROP_SPEED = 3;
+	private static double DROP_SPEED = 2.5;
 	private static double DEFAULT_TRACKING_RANGE = 20;
 	private boolean tracking;
 	private double trackingRange;
@@ -59,23 +59,18 @@ public class ItemDrop extends GameObject{
 		}
 
 		if(tracking){
-			double dx = playerHitbox.getCenter().getX() - getX();
-			double dy =  playerHitbox.getCenter().getY() - getY();
+			double dx = playerHitbox.getCenter().getX() - getHitbox().getCenter().getX();
+			double dy =  playerHitbox.getCenter().getY() - getHitbox().getCenter().getY();
 			double targetAngle = Math.atan2(dy, dx);
 			double dist = Math.sqrt(dx * dx + dy * dy);
 
-			double speed;
-			speed = DROP_SPEED * trackingRange / dist;
-			
-			//If item can reach player, do so. This fixes problem over overshooting and also (low) chance of div by 0 errors
-			if(dist < speed){
-				speed = 0;
-				moveTo(playerHitbox.getCenter().getX(), playerHitbox.getCenter().getY());
+			double speed = DROP_SPEED * trackingRange / dist;
+
+			if(dist <= speed){
+				speed = dist;
 			}
-			else{
-				setXvel(speed * Math.cos(targetAngle));
-				setYvel(speed * Math.sin(targetAngle));
-			}
+			setXvel(speed * Math.cos(targetAngle));
+			setYvel(speed * Math.sin(targetAngle));
 		}
 	}
 

@@ -55,8 +55,8 @@ public class EnemySuicideTracker extends EnemyShip{
 		
 		//Gets trackers desired direction of travel - will turn to this direction
 		//at a maximum of turnRate radians per frame
-		double dx = playerHitbox.getCenter().getX() - getX();
-		double dy =  playerHitbox.getCenter().getY() - getY();
+		double dx = playerHitbox.getCenter().getX() - getHitbox().getCenter().getX();
+		double dy =  playerHitbox.getCenter().getY() - getHitbox().getCenter().getY();
 		double targetAngle = Math.atan2(dy, dx);
 
 		//When tracker first spawns, head towards player
