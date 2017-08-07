@@ -82,7 +82,7 @@ public class GameLevelOne extends GameLevel{
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
-				ProjectileData shooterProj = new ProjectileData(ProjectileData.PROJ_STRAIGHT, 0, 9, 1, new HitboxCircle(2), projAnimations);
+				ProjectileData shooterProj = new ProjectileData(ProjectileData.PROJ_STRAIGHT, 0, 9, 1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations);
 				newEnemies.add(new EnemyStraightFloaterShooter(startX, startY, 1, 0, 4, 15, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), shooterProj, null));
 				return newEnemies;
 			}

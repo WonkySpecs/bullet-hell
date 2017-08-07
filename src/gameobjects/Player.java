@@ -66,11 +66,11 @@ public class Player extends GameObject{
 			double projStartX = getX();
 			double projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -10, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.BIG_GREEN, 0, -10, projHitbox, projAnimations));
 
 			projStartX = getX() + getSprite().getWidth() - 5;
 			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, 0, -10, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.SMALL_GREEN, 0, -10, projHitbox, projAnimations));
 			framesSinceFired = 0;
 		}
 

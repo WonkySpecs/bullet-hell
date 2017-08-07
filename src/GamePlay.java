@@ -115,7 +115,7 @@ public class GamePlay extends JPanel{
 					fps = framesSinceLastCount;
 					framesSinceLastCount = 0;
 					lastFpsCountTime = System.nanoTime();
-				}				
+				}
 			}
 		}
 	}

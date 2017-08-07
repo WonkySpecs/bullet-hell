@@ -38,6 +38,9 @@ public class AnimationMapFactory{
 	public static final int ITEM_POINTS_SMALL = 201;
 	public static final int ITEM_POINTS_BIG = 202;
 
+	public static final int PARTICLE_SMALL_GREEN = 301;
+	public static final int PARTICLE_GREEN = 302;
+
 	public static HashMap<String, Animation> getAnimationMap(int objectType){
 		HashMap<String, Animation> animationMap = new HashMap<>();
 
@@ -104,6 +107,16 @@ public class AnimationMapFactory{
 													Sprite.getSprite(5, 0, "itemupgrade", 16) };
 				animationMap.put("neutral", new Animation(spriteArray, 8));
 				break;
+
+
+
+			case PARTICLE_SMALL_GREEN:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlesmallgreen", 2) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+
+			case PARTICLE_GREEN:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 4) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
 		}
 
 		//Should make this a thrown exception but error handling QQ

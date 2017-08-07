@@ -28,14 +28,20 @@ public abstract class GameObject{
 	private HashMap<String, Animation> animations;
 	private Hitbox hitbox;
 
-	public GameObject(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
+	public GameObject(double x, double y, double xvel, double yvel, Hitbox hitbox, HashMap<String, Animation> animations){
 		moveTo(x, y);
 		this.hitbox = hitbox;
 		this.animations = animations;
+		this.xvel = xvel;
+		this.yvel = yvel;
 
 		//All GameObjects must have a "neutral" animation that is defaulted to on contruction
 		setCurAnimation("neutral");
 		curAnimation.start();
+	}
+
+	public GameObject(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
+		this(x, y, 0, 0, hitbox, animations);
 	}
 
 	public void moveTo(double x, double y){
@@ -176,6 +182,8 @@ public abstract class GameObject{
 
 	public void update(int screenWidth, int screenHeight){
 		curAnimation.update();
-		hitbox.moveTo(x, y);
+		if(hitbox != null){
+			hitbox.moveTo(x, y);			
+		}
 	}
 }

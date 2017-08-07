@@ -9,11 +9,13 @@ import src.animation.*;
 public abstract class Projectile extends GameObject{
 	private boolean removable;
 	private int damage;
+	private Particle.ExplosionType explosionType;
 
-	public Projectile(double x, double y, int damage, Hitbox hitbox, HashMap<String, Animation> animations){
+	public Projectile(double x, double y, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		removable = false;
 		this.damage = damage;
+		this.explosionType = explosionType;
 	}
 
 	public void setRemovable(boolean removable){
@@ -26,5 +28,9 @@ public abstract class Projectile extends GameObject{
 
 	public int getDamage(){
 		return damage;
+	}
+
+	public Particle.ExplosionType getExplosionType(){
+		return explosionType;
 	}
 }

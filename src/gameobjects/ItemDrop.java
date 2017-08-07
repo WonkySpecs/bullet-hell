@@ -21,8 +21,8 @@ import src.*;
 import src.animation.*;
 
 public class ItemDrop extends GameObject{
-	private static double DROP_SPEED = 2.5;
-	private static double DEFAULT_TRACKING_RANGE = 20;
+	private static double DROP_SPEED = 3;
+	private static double DEFAULT_TRACKING_RANGE = 30;
 	private boolean tracking;
 	private double trackingRange;
 
@@ -64,7 +64,7 @@ public class ItemDrop extends GameObject{
 			double targetAngle = Math.atan2(dy, dx);
 			double dist = Math.sqrt(dx * dx + dy * dy);
 
-			double speed = DROP_SPEED * trackingRange / dist;
+			double speed = DROP_SPEED * Math.pow(trackingRange / dist, 2);
 
 			if(dist <= speed){
 				speed = dist;

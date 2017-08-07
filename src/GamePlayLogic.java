@@ -16,7 +16,6 @@ package src;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Point;
 
 import src.gameobjects.*;
 import src.animation.*;
@@ -29,8 +28,8 @@ public class GamePlayLogic{
 	private ArrayList<ItemDrop> itemList;
 	private int screenWidth, screenHeight;
 	private boolean paused;
-	private long pauseTime;
-	//private ArrayList<Particle> particleList;
+	private long pauseTime, score;
+	private ArrayList<Particle> particleList;
 
 	private static final int DEPTH_PLAYER = 0;
 	private static final int DEPTH_ENEMY = 1;
@@ -47,6 +46,7 @@ public class GamePlayLogic{
 		playerProjectileList = new ArrayList<Projectile>();
 		enemyProjectileList = new ArrayList<Projectile>();
 		itemList = new ArrayList<ItemDrop>();
+		particleList = new ArrayList<Particle>();
 		pauseTime = System.nanoTime();
 		paused = false;
 
@@ -67,6 +67,7 @@ public class GamePlayLogic{
 		updateEnemies();
 		updateProjectiles();		
 		updateItems();
+		updateParticles();
 	}
 
 	//Move and fire based on inputs
@@ -136,11 +137,11 @@ public class GamePlayLogic{
 	//Move enemy projectiles and check for player hits
 	private void updateProjectiles(){
 		for (Iterator<Projectile> projIterator = playerProjectileList.iterator(); projIterator.hasNext();){
-			boolean dead = false;
+			boolean expired = false;
 			Projectile proj = projIterator.next();
 			proj.update(screenWidth, screenHeight);
 			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
-				dead = true;
+				expired = true;
 			}
 			else{
 				for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
@@ -154,34 +155,38 @@ public class GamePlayLogic{
 								itemList.add(newItem);
 							}
 							enemy = null;
-							enemyIterator.remove();							
+							enemyIterator.remove();					
 						}
-						dead = true;
+						ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(), proj.getHitbox().getCenter().getX(), proj.getHitbox().getCenter().getY());
+						if(newParticles != null){
+							particleList.addAll(newParticles);
+						}
+						expired = true;
 					}
 				}
 			}
 
-			if(dead){
+			if(expired){
 				proj = null;
 				projIterator.remove();
 			}
 		}
 
 		for (Iterator<Projectile> projIterator = enemyProjectileList.iterator(); projIterator.hasNext();){
-			boolean dead = false;
+			boolean expired = false;
 			Projectile proj = projIterator.next();
 			proj.update(screenWidth, screenHeight);
 			if(proj.isRemovable() && proj.isOffScreen(screenWidth, screenHeight)){
-				dead = true;
+				expired = true;
 			}
 			else{
 				if(Hitbox.collisionBetween(proj.getHitbox(), player.getHitbox())){
 					System.out.println("Shot down");
-					dead = true;
+					expired = true;
 				}
 			}
 
-			if(dead){
+			if(expired){
 				proj = null;
 				projIterator.remove();
 			}
@@ -210,6 +215,23 @@ public class GamePlayLogic{
 		}
 	}
 
+	private void updateParticles(){
+		for (Iterator<Particle> particleIterator = particleList.iterator(); particleIterator.hasNext();){
+			boolean dead = false;
+			Particle particle = particleIterator.next();
+			particle.update(screenWidth, screenHeight);
+
+			if(particle.isOffScreen(screenWidth, screenHeight) || particle.isDead()){
+				dead = true;
+			}
+
+			if(dead){
+				particle = null;
+				particleIterator.remove();
+			}
+		}
+	}
+
 	public ArrayList<SpriteData> getSpriteDataList(){
 		ArrayList<SpriteData> spriteDataList = new ArrayList<>();
 		for(EnemyShip enemy : enemyShipList){
@@ -226,6 +248,10 @@ public class GamePlayLogic{
 
 		for(ItemDrop item : itemList){
 			spriteDataList.add(new SpriteData(item.getSprite(), item.getPos(), DEPTH_ITEM));	
+		}
+
+		for(Particle particle : particleList){
+			spriteDataList.add(new SpriteData(particle.getSprite(), particle.getPos(), DEPTH_PARTICLE, particle.getAlpha()));
 		}
 
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));
