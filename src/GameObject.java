@@ -43,6 +43,10 @@ public abstract class GameObject{
 		this.y = y;
 	}
 
+	public void moveTo(Point p){
+		moveTo(p.getX(), p.getY());
+	}
+
 	public void moveRight(double dist){
 		x += dist;
 	}
@@ -139,6 +143,10 @@ public abstract class GameObject{
 			names.add(k);
 		}
 		return names;
+	}
+
+	public HashMap<String, Animation> getAnimationMap(){
+		return animations;
 	}
 
 	public BufferedImage getSprite(){

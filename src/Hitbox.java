@@ -21,6 +21,9 @@ import java.util.ArrayList;
 public abstract class Hitbox{
 	public abstract void moveBy(double x, double y);
 	public abstract void moveTo(double x, double y);
+	public abstract void moveCenterBy(double x, double y);
+	public abstract void moveCenterTo(double x, double y);
+	public abstract Point getPos();
 	public abstract Point getCenter();
 
 	//Hit detection functions.
@@ -84,5 +87,21 @@ public abstract class Hitbox{
 		}
 
 		return false;
+	}
+
+	public static Hitbox copy(Hitbox original){
+		try{
+			HitboxCircle copy = new HitboxCircle((HitboxCircle)original);
+			return copy;
+		}
+		catch(Exception e){}
+		
+		try{
+			HitboxPolygon copy = new HitboxPolygon((HitboxPolygon)original);
+			return copy;
+		}
+		catch(Exception e){}
+
+		return null;
 	}
 }

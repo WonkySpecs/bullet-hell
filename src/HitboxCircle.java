@@ -35,9 +35,13 @@ public class HitboxCircle extends Hitbox{
 
 	//As all hitboxes are updated to move with the GameObject they represent,
 	//Starting them at the correct position is actually rarely necessary.
-	//Tihs is a convenience constructor for easy definitions.
+	//This is a convenience constructor for easy definitions.
 	public HitboxCircle(double r){
 		this(0, 0, r);
+	}
+
+	public HitboxCircle(HitboxCircle original){
+		this(original.getPos().getX(), original.getPos().getY(), original.getRadius(), original.getCenterOffsetX(), original.getCenterOffsetY());
 	}
 
 	@Override
@@ -45,9 +49,27 @@ public class HitboxCircle extends Hitbox{
 		topLeft.move((int)Math.round(x), (int)Math.round(y));
 	}
 
+	public void moveTo(Point p){
+		moveTo(p.getX(), p.getY());
+	}
+
 	@Override
 	public void moveBy(double x, double y){
-		topLeft.move((int)Math.round(topLeft.getX() + x), (int)Math.round(topLeft.getY() + y));
+		moveTo((double)topLeft.getX() + x, (double)topLeft.getY() + y);
+	}
+
+	@Override
+	public void moveCenterTo(double x, double y){
+		moveTo(x - radius - centerOffsetX, y - radius - centerOffsetY);
+	}
+
+	public void moveCenterTo(Point p){
+		moveCenterTo(p.getX(), p.getY());
+	}
+
+	@Override
+	public void moveCenterBy(double x, double y){
+		moveTo(x - radius - centerOffsetX, y - radius - centerOffsetY);
 	}
 
 	@Override
@@ -55,10 +77,17 @@ public class HitboxCircle extends Hitbox{
 		return new Point((int)Math.round(topLeft.getX() + centerOffsetX), (int)Math.round(topLeft.getY() + centerOffsetY));
 	}
 
-	public Point getTopLeft(){
+	public Point getPos(){
 		return topLeft;
 	}
 
+	public double getCenterOffsetX(){
+		return centerOffsetX;
+	}
+
+	public double getCenterOffsetY(){
+		return centerOffsetY;
+	}
 
 	public double getRadius(){
 		return radius;

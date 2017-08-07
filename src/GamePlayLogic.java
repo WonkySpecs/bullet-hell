@@ -150,7 +150,6 @@ public class GamePlayLogic{
 						if(enemy.getHitPoints() <= 0){
 							ItemDrop newItem = enemy.getItemDrop();
 							if(newItem != null){
-								System.out.println("Item drop added");
 								newItem.moveTo(enemy.getX(), enemy.getY());
 								itemList.add(newItem);
 							}

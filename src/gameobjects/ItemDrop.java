@@ -21,7 +21,7 @@ import src.*;
 import src.animation.*;
 
 public class ItemDrop extends GameObject{
-	private static double DROP_SPEED = 4;
+	private static double DROP_SPEED = 3;
 	private static double DEFAULT_TRACKING_RANGE = 20;
 	private boolean tracking;
 	private double trackingRange;
@@ -38,10 +38,9 @@ public class ItemDrop extends GameObject{
 		this(x, y, DEFAULT_TRACKING_RANGE, hitbox, animations);
 	}
 
-	/*public ItemDrop(ItemDrop original){
-		ItemDrop copy = new ItemDrop(original.getX(), original.getX(), original.getTrackingRange());
-		return copy
-	}*/
+	public ItemDrop(ItemDrop original){
+		this(original.getX(), original.getX(), original.getTrackingRange(), Hitbox.copy(original.getHitbox()), AnimationMapFactory.copyAnimationMap(original.getAnimationMap()));
+	}
 
 	//Before getting close to the player, move straight down
 	//Once tracking range has been entered, move towards player

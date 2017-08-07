@@ -45,8 +45,8 @@ public class GameLevelOne extends GameLevel{
 			for(int i = -100;i < 101;i += 100){
 				startX = getScreenWidth() / 2 + i;
 				startY = 200;
+				ItemDrop item = new ItemDrop(startX, startY, 65, new HitboxCircle(10), AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
 				fh = new HitboxCircle(floaterRadius);
-				ItemDrop item = new ItemDrop(startX, startY, 65, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
 				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 0, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, item));
 			}
 
