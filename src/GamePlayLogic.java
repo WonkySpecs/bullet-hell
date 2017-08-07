@@ -72,16 +72,16 @@ public class GamePlayLogic{
 	//Move and fire based on inputs
 	//New projectiles are added to playerProjectileList
 	private void updatePlayer(HashMap<String, Boolean> inputs){
-		if(inputs.get(GamePlay.ACT_UP) == true){
+		if(inputs.get(GamePlay.ACT_UP)){
 			player.moveUp();
 		}
-		if(inputs.get(GamePlay.ACT_DOWN) == true){
+		if(inputs.get(GamePlay.ACT_DOWN)){
 			player.moveDown();
 		}
-		if(inputs.get(GamePlay.ACT_LEFT) == true){
+		if(inputs.get(GamePlay.ACT_LEFT)){
 			player.moveLeft();
 		}
-		if(inputs.get(GamePlay.ACT_RIGHT) == true){
+		if(inputs.get(GamePlay.ACT_RIGHT)){
 			player.moveRight();
 		}
 
@@ -89,13 +89,13 @@ public class GamePlayLogic{
 		ArrayList<Projectile> newPlayerProjectiles = null;
 
 		//Firing special overrides firing primary overrides firing secondary
-		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL) == true){
+		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL)){
 			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SPECIAL);
 		}
-		else if(inputs.get(GamePlay.ACT_FIRE_PRIM) == true){
+		else if(inputs.get(GamePlay.ACT_FIRE_PRIM)){
 			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_PRIM);
 		}
-		else if(inputs.get(GamePlay.ACT_FIRE_SEC) == true){
+		else if(inputs.get(GamePlay.ACT_FIRE_SEC)){
 			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SEC);
 		}
 
@@ -120,12 +120,12 @@ public class GamePlayLogic{
 				dead = true;
 			}
 				
-			if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox()) == true){
+			if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox())){
 				dead = true;
 				System.out.println("player got hit boom");
 			}
 
-			if(dead == true){
+			if(dead){
 				enemy = null;
 				enemyIterator.remove();
 			}
@@ -145,7 +145,7 @@ public class GamePlayLogic{
 			else{
 				for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 					EnemyShip enemy = enemyIterator.next();
-					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox()) == true){
+					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox())){
 						enemy.reduceHitpoints(proj.getDamage());
 						if(enemy.getHitPoints() <= 0){
 							ItemDrop newItem = enemy.getItemDrop();
@@ -161,7 +161,7 @@ public class GamePlayLogic{
 				}
 			}
 
-			if(dead == true){
+			if(dead){
 				proj = null;
 				projIterator.remove();
 			}
@@ -175,13 +175,13 @@ public class GamePlayLogic{
 				dead = true;
 			}
 			else{
-				if(Hitbox.collisionBetween(proj.getHitbox(), player.getHitbox()) == true){
+				if(Hitbox.collisionBetween(proj.getHitbox(), player.getHitbox())){
 					System.out.println("Shot down");
 					dead = true;
 				}
 			}
 
-			if(dead == true){
+			if(dead){
 				proj = null;
 				projIterator.remove();
 			}
@@ -198,12 +198,12 @@ public class GamePlayLogic{
 				dead = true;
 			}
 			else{
-				if(Hitbox.collisionBetween(item.getHitbox(), player.getHitbox()) == true){
+				if(Hitbox.collisionBetween(item.getHitbox(), player.getHitbox())){
 					dead = true;
 				}
 			}
 
-			if(dead == true){
+			if(dead){
 				item = null;
 				itemIterator.remove();
 			}

@@ -93,11 +93,11 @@ public class GamePlay extends JPanel{
 		paused = false;
 
 		while(running){
-			if(buttonsPressed.get(ACT_PAUSE) == true && (System.nanoTime() - pauseTime) > 300000000){
+			if(buttonsPressed.get(ACT_PAUSE) && (System.nanoTime() - pauseTime) > 300000000){
 				paused = !paused;
 				pauseTime = System.nanoTime();
 			}
-			if(paused == false){
+			if(!paused){
 				try{
 					//If update has taken less time than the target time, wait the appropriate time.
 					Thread.sleep((TARGET_FRAME_TIME - (System.nanoTime() - lastUpdateTime)) / 1000000);
