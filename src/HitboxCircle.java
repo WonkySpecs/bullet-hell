@@ -15,14 +15,14 @@
 
 package src;
 
-import java.awt.Point;
+import java.awt.geom.*;
 
 public class HitboxCircle extends Hitbox{
-	private Point topLeft;
+	private Point2D.Double topLeft;
 	private double radius, centerOffsetX, centerOffsetY;
 
 	public HitboxCircle(double x, double y, double r, double offX, double offY){
-		topLeft = new Point((int)Math.round(x), (int)Math.round(y));
+		topLeft = new Point2D.Double(x, y);
 		radius = r;
 		centerOffsetX = offX;
 		centerOffsetY = offY;
@@ -46,10 +46,10 @@ public class HitboxCircle extends Hitbox{
 
 	@Override
 	public void moveTo(double x, double y){
-		topLeft.move((int)Math.round(x), (int)Math.round(y));
+		topLeft.setLocation(x, y);
 	}
 
-	public void moveTo(Point p){
+	public void moveTo(Point2D.Double p){
 		moveTo(p.getX(), p.getY());
 	}
 
@@ -63,7 +63,7 @@ public class HitboxCircle extends Hitbox{
 		moveTo(x - radius - centerOffsetX, y - radius - centerOffsetY);
 	}
 
-	public void moveCenterTo(Point p){
+	public void moveCenterTo(Point2D.Double p){
 		moveCenterTo(p.getX(), p.getY());
 	}
 
@@ -73,11 +73,11 @@ public class HitboxCircle extends Hitbox{
 	}
 
 	@Override
-	public Point getCenter(){
-		return new Point((int)Math.round(topLeft.getX() + centerOffsetX), (int)Math.round(topLeft.getY() + centerOffsetY));
+	public Point2D.Double getCenter(){
+		return new Point2D.Double(topLeft.getX() + centerOffsetX, topLeft.getY() + centerOffsetY);
 	}
 
-	public Point getPos(){
+	public Point2D.Double getPos(){
 		return topLeft;
 	}
 

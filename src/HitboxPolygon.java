@@ -2,7 +2,7 @@
 * HitboxPolygon represents the hitboxes of non-circular GameObjects
 * by an ordered ArrayList of Points.
 * Each hitbox works on a kind of 'local' coordinate system where
-* all points are relative to the top left point of the objects
+* all points are relative to the top left point2D.Double of the objects
 * sprite.
 *
 * @author  Will Taylor
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.awt.geom.*;
 
 public class HitboxPolygon extends Hitbox{
-	private ArrayList<Point> pointList;
-	private Point origin;
+	private ArrayList<Point2D.Double> pointList;
+	private Point2D.Double origin;
 
-	public HitboxPolygon(double x, double y, ArrayList<Point> points){
-		origin = new Point((int)Math.round(x), (int)Math.round(y));
+	public HitboxPolygon(double x, double y, ArrayList<Point2D.Double> points){
+		origin = new Point2D.Double(x, y);
 		pointList = points;
 	}
 
@@ -31,12 +31,12 @@ public class HitboxPolygon extends Hitbox{
 
 	@Override
 	public void moveTo(double x, double y){
-		origin.move((int)Math.round(x), (int)Math.round(y));
+		origin.setLocation(x, y);
 	}
 
 	@Override
 	public void moveBy(double x, double y){
-		origin.move((int)Math.round(origin.getX() + x), (int)Math.round(origin.getY() + y));
+		origin.setLocation(origin.getX() + x, origin.getY() + y);
 	}
 
 	@Override
@@ -51,16 +51,16 @@ public class HitboxPolygon extends Hitbox{
 
 	//TODO: IMPLEMENT this properly
 	@Override
-	public Point getCenter(){
+	public Point2D.Double getCenter(){
 		return origin;
 	}
 
 	@Override
-	public Point getPos(){
+	public Point2D.Double getPos(){
 		return origin;
 	}
 
-	public ArrayList<Point> getPointList(){
+	public ArrayList<Point2D.Double> getPointList(){
 		return pointList;
 	}
 
@@ -91,7 +91,7 @@ public class HitboxPolygon extends Hitbox{
 		return localEdges;
 	}
 
-	public Point getorigin(){
+	public Point2D.Double getorigin(){
 		return origin;
 	}
 }

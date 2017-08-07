@@ -14,7 +14,6 @@
 
 package src;
 
-import java.awt.Point;
 import java.awt.geom.*;
 import java.util.ArrayList;
 
@@ -23,8 +22,8 @@ public abstract class Hitbox{
 	public abstract void moveTo(double x, double y);
 	public abstract void moveCenterBy(double x, double y);
 	public abstract void moveCenterTo(double x, double y);
-	public abstract Point getPos();
-	public abstract Point getCenter();
+	public abstract Point2D.Double getPos();
+	public abstract Point2D.Double getCenter();
 
 	//Hit detection functions.
 	//TODO: Look up the proper way to handle this -
