@@ -18,11 +18,17 @@ public class SpriteData{
 	private BufferedImage sprite;
 	private Point pos;
 	private int depth;
+	private float alpha;
 
-	public SpriteData(BufferedImage i, Point p, int d){
+	public SpriteData(BufferedImage i, Point p, int d, float a){
 		sprite = i;
 		pos = p;
 		depth = d;
+		alpha = a;
+	}
+
+	public SpriteData(BufferedImage i, Point p, int d){
+		this(i, p, d, (float)1.0);
 	}
 
 	public BufferedImage getSprite(){
@@ -37,8 +43,12 @@ public class SpriteData{
 		return depth;
 	}
 
+	public float getAlpha(){
+		return alpha;
+	}
+
 	@Override
 	public String toString(){
-		return String.format("Image at %f %f at depth %d", getPos().getX(), getPos().getY(), getDepth());
+		return String.format("Image at %f %f at depth %d, alpha %f", getPos().getX(), getPos().getY(), getDepth(), getAlpha());
 	}
 }

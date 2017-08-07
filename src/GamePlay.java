@@ -177,6 +177,7 @@ public class GamePlay extends JPanel{
 				BufferedImage img = sd.getSprite();
 				int x = (int)Math.round(sd.getPos().getX());
 				int y = (int)Math.round(sd.getPos().getY());
+				g2.setComposite(AlphaComposite.SrcOver.derive(sd.getAlpha()));
 				g2.drawImage(img, x, y, null);
 			}			
 		}
