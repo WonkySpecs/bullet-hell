@@ -22,6 +22,10 @@ public class AnimationMapFactory{
 	public static final int ENEMY_FLOATER_GREEN = 3;
 	public static final int ENEMY_FLOATER_BLUE = 4;
 
+	public static final int ENEMY_FLOATER_BIG_RED = 11;
+	public static final int ENEMY_FLOATER_BIG_GREEN = 12;
+	public static final int ENEMY_FLOATER_BIG_BLUE = 13;
+
 	public static final int ENEMY_SUICIDE_SMALL = 10;
 
 	public static final int PROJ_PLAYER = 100;
@@ -54,12 +58,11 @@ public class AnimationMapFactory{
 				animationMap.put("neutral", new Animation(spriteArray, 15));
 				break;
 
-			case ENEMY_FLOATER_BLUE:
+			case ENEMY_FLOATER_BIG_BLUE:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemybigblue", 64),
 													Sprite.getSprite(1, 0, "enemybigblue", 64),
 													Sprite.getSprite(2, 0, "enemybigblue", 64) };
 
-													
 				animationMap.put("neutral", new Animation(spriteArray, 20));
 
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 1, "enemybigblue", 64),
@@ -111,7 +114,7 @@ public class AnimationMapFactory{
 		return animationMap;
 	}
 
-	//Creates deep copy (new instances of Animations using the copy constructir) of animation map
+	//Creates deep copy (new instances of Animations using the copy constructor) of animation map
 	public static HashMap<String, Animation> copyAnimationMap(HashMap<String, Animation> original){
 		HashMap<String, Animation> copy = new HashMap<>();
 

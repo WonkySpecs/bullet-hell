@@ -81,7 +81,6 @@ public class ItemDrop extends GameObject{
 
 	public void checkIfTracking(HitboxCircle playerHitbox){
 		if(playerHitbox.getCenter().distance(getHitbox().getCenter()) < trackingRange){
-			System.out.println("tracking");
 			tracking = true;
 		}
 	}

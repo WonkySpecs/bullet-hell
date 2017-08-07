@@ -37,7 +37,7 @@ public class GamePlayLogic{
 	private static final int DEPTH_PLAYER_PROJECTILE = 2;
 	private static final int DEPTH_ENEMY_PROJECTILE = 3;
 	private static final int DEPTH_ITEM = 4;
-	private static final int PARTICLE = 5;
+	private static final int DEPTH_PARTICLE = 5;
 
 	public GamePlayLogic(GameLevel level, int screenWidth, int screenHeight){
 		this.screenWidth = screenWidth;
@@ -50,10 +50,9 @@ public class GamePlayLogic{
 		pauseTime = System.nanoTime();
 		paused = false;
 
-		int playerStartX = screenWidth / 2 - 16;
-		int playerStartY = screenHeight / 2 - 16;
-		HitboxCircle playerHitbox = new HitboxCircle(playerStartX, playerStartY, 2, 16, 16);
-		player = new Player(playerStartX, playerStartY, playerHitbox, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PLAYER));
+		HitboxCircle playerHitbox = new HitboxCircle(0, 0, 2, 16, 16);
+		player = new Player(0, 0, playerHitbox, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PLAYER));
+		player.moveTo(screenWidth / 2 - (player.getSprite().getWidth() / 2), screenHeight / 1.5);
 	}
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
@@ -205,10 +204,8 @@ public class GamePlayLogic{
 			}
 
 			if(dead == true){
-				System.out.println("Item gone");
 				item = null;
 				itemIterator.remove();
-				System.out.println(String.format("%d items left on screen", itemList.size()));
 			}
 		}
 	}

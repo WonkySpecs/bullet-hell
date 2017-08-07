@@ -111,7 +111,7 @@ public class Animation{
 	}
 
 	//NOTE: When used in copy constructor, I believe this returns the same Frame
-	//instances as the original uses, making the copy a shallow copy.
+	//instances as the original uses, technically making the copy a shallow copy.
 	//This shouldn't be a problem as the frames of the animations do not change
 	public ArrayList<Frame> getFrames(){
 		return frames;
