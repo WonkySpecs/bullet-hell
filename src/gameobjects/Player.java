@@ -23,11 +23,13 @@ import java.util.HashMap;
 
 public class Player extends GameObject{
 	private int fireDelay, framesSinceFired, primDamage;
+	private double speed;
 
 	public Player(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
-		setXvel(5);
-		setYvel(5);
+		speed = 6.5;
+		setXvel(speed);
+		setYvel(speed);
 		primDamage = 50;
 
 		fireDelay = 8;
@@ -37,6 +39,15 @@ public class Player extends GameObject{
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
+
+		if(framesSinceFired < fireDelay){
+			setXvel(speed * 0.55);
+			setYvel(speed * 0.55);
+		}
+		else{
+			setXvel(speed);
+			setYvel(speed);
+		}
 
 		//Stop player moving off screen
 		if(getX() < 0){
@@ -66,7 +77,7 @@ public class Player extends GameObject{
 			double projStartX = getX();
 			double projStartY = getY() - 1;
 			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.BIG_GREEN, 0, -10, projHitbox, projAnimations));
+			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.SMALL_GREEN, 0, -10, projHitbox, projAnimations));
 
 			projStartX = getX() + getSprite().getWidth() - 5;
 			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
