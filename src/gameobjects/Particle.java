@@ -1,3 +1,13 @@
+/**
+* Particles are simple GameObjects which move linearly whilst
+* fading away. Particles are creted by the static method
+* explosion() and are the lowest depth in drawing.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   07-08-2017
+*/
+
 package src.gameobjects;
 
 import java.util.ArrayList;
@@ -35,35 +45,51 @@ public class Particle extends GameObject{
 	}
 
 	public enum ExplosionType{
-		SMALL_GREEN, BIG_GREEN,
-		SMALL_BLUE, BIG_BLUE;
+		SMALL_GREEN, GREEN, BIG_GREEN,
+		SMALL_BLUE, BLUE, BIG_BLUE,
+		SMALL_RED, RED, BIG_RED;
 	}
 
 	public static ArrayList<Particle> explosion(ExplosionType explosionType, double x, double y){
 		ArrayList<Particle> explosionParticles = new ArrayList<>();
-		int numParticles;
+		int numParticles, fadeTime;
+		HashMap<String, Animation> animationMap = null;
+
+		if(explosionType == ExplosionType.SMALL_GREEN || explosionType == ExplosionType.SMALL_BLUE || explosionType == ExplosionType.SMALL_RED){
+			numParticles = (int)Math.round(Math.random() * 5 + 5);
+			fadeTime = 20;
+		}
+		else{
+			numParticles = (int)Math.round(Math.random() * 8 + 8);
+			fadeTime = 30;
+		}
 
 		switch(explosionType){
 			case SMALL_GREEN:
-				numParticles = (int)Math.round(Math.random() * 5 + 5);
-				for(int i = 0; i < numParticles; i++){
-					explosionParticles.add(
-						new Particle(x, y, 4 * Math.random() - 2, 2 * Math.random(), 20, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_GREEN)));
-				}
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_GREEN);
+				break;
+
+			case GREEN:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_GREEN);
 				break;
 
 			case BIG_GREEN:
-				numParticles = (int)Math.round(Math.random() * 8 + 10);
-				for(int i = 0; i < numParticles; i++){
-					explosionParticles.add(
-						new Particle(x, y, 4 * Math.random() - 2, 2 * Math.random(), 20, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_GREEN)));
-				}
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_GREEN);
 				break;
 
 			default:
 				System.out.println("Nonexistent explosion type specified in Particle.explosion()");
 				explosionParticles = null;
 				break;
+		}
+		for(int i = 0; i < numParticles; i++){
+			//NOTE: Do not need to use AnimationMapFactory.copy as animations are all static for particles -
+			//change this if no longer true
+			double xvel = 4 * Math.random() - 2;
+			double yvel = 2 * Math.random();
+
+			explosionParticles.add(
+				new Particle(x, y, xvel, yvel, fadeTime, animationMap));
 		}
 
 		return explosionParticles;

@@ -40,6 +40,13 @@ public class AnimationMapFactory{
 
 	public static final int PARTICLE_SMALL_GREEN = 301;
 	public static final int PARTICLE_GREEN = 302;
+	public static final int PARTICLE_BIG_GREEN = 303;
+	public static final int PARTICLE_SMALL_BLUE = 304;
+	public static final int PARTICLE_BLUE = 305;
+	public static final int PARTICLE_BIG_BLUE = 306;
+	public static final int PARTICLE_SMALL_RED = 307;
+	public static final int PARTICLE_RED = 308;
+	public static final int PARTICLE_BIG_RED = 309;
 
 	public static HashMap<String, Animation> getAnimationMap(int objectType){
 		HashMap<String, Animation> animationMap = new HashMap<>();
@@ -111,11 +118,15 @@ public class AnimationMapFactory{
 
 
 			case PARTICLE_SMALL_GREEN:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlesmallgreen", 2) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 1) };
 				animationMap.put("neutral", new Animation(spriteArray, 500));
 
 			case PARTICLE_GREEN:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 4) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 2) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+
+			case PARTICLE_BIG_GREEN:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlebiggreen", 4) };
 				animationMap.put("neutral", new Animation(spriteArray, 500));
 		}
 
