@@ -120,14 +120,47 @@ public class AnimationMapFactory{
 			case PARTICLE_SMALL_GREEN:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 1) };
 				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
 
 			case PARTICLE_GREEN:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 2) };
 				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
 
 			case PARTICLE_BIG_GREEN:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlebiggreen", 4) };
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlegreen", 4) };
 				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_SMALL_BLUE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particleblue", 1) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_BLUE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particleblue", 2) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_BIG_BLUE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particleblue", 4) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_SMALL_RED:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlered", 1) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_RED:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlered", 2) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
+
+			case PARTICLE_BIG_RED:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "particlered", 4) };
+				animationMap.put("neutral", new Animation(spriteArray, 500));
+				break;
 		}
 
 		//Should make this a thrown exception but error handling QQ

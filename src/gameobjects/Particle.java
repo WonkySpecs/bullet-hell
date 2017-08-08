@@ -47,7 +47,8 @@ public class Particle extends GameObject{
 	public enum ExplosionType{
 		SMALL_GREEN, GREEN, BIG_GREEN,
 		SMALL_BLUE, BLUE, BIG_BLUE,
-		SMALL_RED, RED, BIG_RED;
+		SMALL_RED, RED, BIG_RED,
+		SMALL_RANDOM, RANDOM, BIG_RANDOM;
 	}
 
 	public static ArrayList<Particle> explosion(ExplosionType explosionType, double x, double y){
@@ -55,7 +56,7 @@ public class Particle extends GameObject{
 		int numParticles, fadeTime;
 		HashMap<String, Animation> animationMap = null;
 
-		if(explosionType == ExplosionType.SMALL_GREEN || explosionType == ExplosionType.SMALL_BLUE || explosionType == ExplosionType.SMALL_RED){
+		if(explosionType == ExplosionType.SMALL_GREEN || explosionType == ExplosionType.SMALL_BLUE || explosionType == ExplosionType.SMALL_RED || explosionType == ExplosionType.SMALL_RANDOM){
 			numParticles = (int)Math.round(Math.random() * 5 + 5);
 			fadeTime = 20;
 		}
@@ -77,11 +78,36 @@ public class Particle extends GameObject{
 				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_GREEN);
 				break;
 
+			case SMALL_BLUE:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_BLUE);
+				break;
+
+			case BLUE:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BLUE);
+				break;
+
+			case BIG_BLUE:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_BLUE);
+				break;
+
+			case SMALL_RED:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_RED);
+				break;
+
+			case RED:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_RED);
+				break;
+
+			case BIG_RED:
+				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_RED);
+				break;
+
 			default:
 				System.out.println("Nonexistent explosion type specified in Particle.explosion()");
 				explosionParticles = null;
 				break;
 		}
+
 		for(int i = 0; i < numParticles; i++){
 			//NOTE: Do not need to use AnimationMapFactory.copy as animations are all static for particles -
 			//change this if no longer true
