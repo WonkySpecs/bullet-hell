@@ -42,12 +42,12 @@ public class HitboxRectangle extends Hitbox{
 
 	@Override
 	public void moveCenterTo(double x, double y){
-		
+		moveTo(x - width / 2, y - height / 2);
 	}
 
 	@Override
 	public void moveCenterBy(double x, double y){
-		
+		moveCenterTo(topLeft.getX() + x, topLeft.getY() + y);
 	}
 
 	public double getWidth(){

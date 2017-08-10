@@ -1,6 +1,6 @@
 /**
 * Hitbox is the abstract superclass for all shapes of hitbox
-* (currently Circle and Polygon).
+* (currently Circle and Rectangle).
 * 
 * Also defined are the static methods for detecting collision
 * between two hitboxes
@@ -35,17 +35,17 @@ public abstract class Hitbox{
 		catch(Exception e){}
 
 		try{
-			return collisionBetween((HitboxPolygon) h1, (HitboxCircle) h2);
+			return collisionBetween((HitboxRectangle) h1, (HitboxCircle) h2);
 		}
 		catch(Exception e){}
 
 		try{
-			return collisionBetween((HitboxCircle) h1, (HitboxPolygon) h2);
+			return collisionBetween((HitboxCircle) h1, (HitboxRectangle) h2);
 		}
 		catch(Exception e){}
 
 		try{
-			return collisionBetween((HitboxPolygon) h1, (HitboxPolygon) h2);
+			return collisionBetween((HitboxRectangle) h1, (HitboxRectangle) h2);
 		}
 		catch(Exception e){}
 
@@ -63,22 +63,22 @@ public abstract class Hitbox{
 		}
 	}
 
-	public static boolean collisionBetween(HitboxCircle h1, HitboxPolygon h2){
+	public static boolean collisionBetween(HitboxCircle h1, HitboxRectangle h2){
 		return true;
 	}
 
-	public static boolean collisionBetween(HitboxPolygon h1, HitboxCircle h2){
+	public static boolean collisionBetween(HitboxRectangle h1, HitboxCircle h2){
 		return collisionBetween(h2, h1);
 	}
 
-	//Brute force checks for intersection between every edge of each polygon
+	//Brute force checks for intersection between every edge of each Rectangle
 	//TODO: If performance is an issue, find a way to optimise this
-	public static boolean collisionBetween(HitboxPolygon h1, HitboxPolygon h2){
-		ArrayList<Line2D.Float> edgeList1 = h1.getPolygonEdgesGlobalSpace();
-		ArrayList<Line2D.Float> edgeList2 = h2.getPolygonEdgesGlobalSpace();
+	public static boolean collisionBetween(HitboxRectangle h1, HitboxRectangle h2){
+		ArrayList<Line2D.Double> edgeList1 = h1.getRectangleEdgesGlobalSpace();
+		ArrayList<Line2D.Double> edgeList2 = h2.getRectangleEdgesGlobalSpace();
 
-		for(Line2D.Float edge1 : edgeList1){
-			for(Line2D.Float edge2 : edgeList2){
+		for(Line2D.Double edge1 : edgeList1){
+			for(Line2D.Double edge2 : edgeList2){
 				if(edge1.intersectsLine(edge2)){
 					return true;
 				}
@@ -96,7 +96,7 @@ public abstract class Hitbox{
 		catch(Exception e){}
 		
 		try{
-			HitboxPolygon copy = new HitboxPolygon((HitboxPolygon)original);
+			HitboxRectangle copy = new HitboxRectangle((HitboxRectangle)original);
 			return copy;
 		}
 		catch(Exception e){}
