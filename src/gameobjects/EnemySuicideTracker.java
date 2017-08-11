@@ -23,8 +23,8 @@ import src.ProjectileData;
 
 public class EnemySuicideTracker extends EnemyShip{
 	private double speed, turnRate;
-	public EnemySuicideTracker(double x, double y, int hp, double speed, double turnRate, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType, ItemDrop itemDrop){
-		super(x, y, hp, hitbox, animations, projType, itemDrop);
+	public EnemySuicideTracker(double x, double y, int hp, double speed, double turnRate, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType, ItemDrop itemDrop){
+		super(x, y, hp, score, hitbox, animations, projType, itemDrop);
 		this.speed = speed;
 		this.turnRate = turnRate;
 		setXvel(0);

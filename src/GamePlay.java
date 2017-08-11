@@ -181,16 +181,26 @@ public class GamePlay extends JPanel{
 				g2.drawImage(img, x, y, null);
 			}			
 		}
-		g2.setColor(Color.RED);
+
+		paintGUIElements(g2);
+	}
+
+	public void paintGUIElements(Graphics2D g2){
+		//Bottom GUI panel
+		g2.setColor(Color.GRAY);
 		g2.fillRect(0, GAME_SCREEN_HEIGHT, GameWindow.WINDOW_SCREEN_WIDTH, GameWindow.WINDOW_SCREEN_HEIGHT);
 
 		g2.setColor(Color.BLACK);
-		g2.setFont(new Font("Monospaced", Font.PLAIN, 18));
-		g2.drawString("GUI stuff goes here", 180, GAME_SCREEN_HEIGHT + (GameWindow.WINDOW_SCREEN_HEIGHT - GAME_SCREEN_HEIGHT)/2 - 20);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
+		g2.drawString(String.format("SCORE: %d", logic.getScore()), 50, GAME_SCREEN_HEIGHT + 30);
+		g2.drawString(String.format("SCORE MULTIPLIER: %.1f", logic.getScoreMult()), 50, GAME_SCREEN_HEIGHT + 60);
+		
+
+		//FPS counter
 		g2.setColor(Color.WHITE);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		g2.drawString(String.format("%d fps", fps), GAME_SCREEN_WIDTH - 50, 10);
+		g2.drawString(String.format("%d fps", fps), GAME_SCREEN_WIDTH - 50, 10);		
 	}
 
 	private void resetAllButtonsPressed(){

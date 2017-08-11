@@ -16,31 +16,32 @@ import src.*;
 import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
-	private int hitPoints, damageTimer;
+	private int hitPoints, damageTimer, score;
 	private boolean removable;
 	private ProjectileData projData;
 	private ItemDrop itemDrop;
 
-	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData, ItemDrop itemDrop){
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData, ItemDrop itemDrop){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
 		damageTimer = -1;
 		setHitpoints(hp);
+		this.score = score;
 		this.projData = projData;
 		this.itemDrop = itemDrop;
 	}
 
-	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
-		this(x, y, hp, hitbox, animations, projData, null);
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
+		this(x, y, hp, score, hitbox, animations, projData, null);
 	}
 
-	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations, ItemDrop itemDrop){
-		this(x, y, hp, hitbox, animations, null, itemDrop);
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ItemDrop itemDrop){
+		this(x, y, hp, score, hitbox, animations, null, itemDrop);
 	}
 
-	public EnemyShip(double x, double y, int hp, Hitbox hitbox, HashMap<String, Animation> animations){
-		this(x, y, hp, hitbox, animations, null, null);
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations){
+		this(x, y, hp, score, hitbox, animations, null, null);
 	}
 
 	public void setHitpoints(int hp){
@@ -56,6 +57,10 @@ public abstract class EnemyShip extends GameObject{
 		hitPoints -= damage;
 		setCurAnimation("damaged");
 		damageTimer = 20;
+	}
+
+	public int getScore(){
+		return score;
 	}
 
 	public void setRemovable(boolean removable){

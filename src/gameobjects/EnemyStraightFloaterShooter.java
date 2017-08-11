@@ -25,9 +25,9 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 	private double projXVel, projYVel;
 
 	public EnemyStraightFloaterShooter(double x, double y, int hp, double xvel, double yvel, int fireDelay,
-									   Hitbox hitbox, HashMap<String, Animation> animations,
+									   int score, Hitbox hitbox, HashMap<String, Animation> animations,
 									   ProjectileData projType, ItemDrop itemDrop){
-		super(x, y, hp, xvel, yvel, hitbox, animations, projType, itemDrop);
+		super(x, y, hp, xvel, yvel, score, hitbox, animations, projType, itemDrop);
 		this.fireDelay = fireDelay;
 		this.projXVel = projXVel;
 		this.projYVel = projYVel;

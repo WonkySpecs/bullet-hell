@@ -29,6 +29,7 @@ public class GamePlayLogic{
 	private int screenWidth, screenHeight;
 	private boolean paused;
 	private long pauseTime, score;
+	private double scoreMult;
 	private ArrayList<Particle> particleList;
 
 	private static final int DEPTH_PLAYER = 0;
@@ -37,6 +38,8 @@ public class GamePlayLogic{
 	private static final int DEPTH_ENEMY_PROJECTILE = 3;
 	private static final int DEPTH_ITEM = 4;
 	private static final int DEPTH_PARTICLE = 5;
+
+	private static final double SCORE_MULT_INCREMENT = 0.1;
 
 	public GamePlayLogic(GameLevel level, int screenWidth, int screenHeight){
 		this.screenWidth = screenWidth;
@@ -49,6 +52,9 @@ public class GamePlayLogic{
 		particleList = new ArrayList<Particle>();
 		pauseTime = System.nanoTime();
 		paused = false;
+
+		score = 0;
+		scoreMult = 1;
 
 		HitboxCircle playerHitbox = new HitboxCircle(0, 0, 2, 16, 16);
 		player = new Player(0, 0, playerHitbox, AnimationMapFactory.getAnimationMap(AnimationMapFactory.PLAYER));
@@ -148,7 +154,13 @@ public class GamePlayLogic{
 					EnemyShip enemy = enemyIterator.next();
 					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox())){
 						enemy.reduceHitpoints(proj.getDamage());
+
+						//Enemy killed
 						if(enemy.getHitPoints() <= 0){
+							//Increase score
+							scoreMult += SCORE_MULT_INCREMENT;
+							score += enemy.getScore() * scoreMult;
+							//Drop item if any
 							ItemDrop newItem = enemy.getItemDrop();
 							if(newItem != null){
 								newItem.moveTo(enemy.getX(), enemy.getY());
@@ -257,5 +269,13 @@ public class GamePlayLogic{
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));
 
 		return spriteDataList;
+	}
+
+	public long getScore(){
+		return score;
+	}
+
+	public double getScoreMult(){
+		return scoreMult;
 	}
 }
