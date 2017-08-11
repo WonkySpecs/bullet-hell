@@ -28,11 +28,13 @@ public class AnimationMapFactory{
 
 	public static final int ENEMY_SUICIDE_SMALL = 10;
 
-	public static final int PROJ_PLAYER = 100;
-	public static final int PROJ_TINY_BLUE = 101;
-	public static final int PROJ_SMALL_BLUE = 102;
-	public static final int PROJ_BLUE = 103;
-	public static final int PROJ_BIG_BLUE = 104;
+	public static final int PROJ_PLAYER_PRIM_1 = 100;
+	public static final int PROJ_PLAYER_PRIM_2 = 101;
+	public static final int PROJ_PLAYER_PRIM_3 = 102;
+	public static final int PROJ_TINY_BLUE = 111;
+	public static final int PROJ_SMALL_BLUE = 112;
+	public static final int PROJ_BLUE = 113;
+	public static final int PROJ_BIG_BLUE = 114;
 
 	public static final int ITEM_UPGRADE = 200;
 	public static final int ITEM_POINTS_SMALL = 201;
@@ -91,10 +93,18 @@ public class AnimationMapFactory{
 
 
 
-			case PROJ_PLAYER:
-				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "playerproj", 8),
-													Sprite.getSprite(1, 0, "playerproj", 8),
-													Sprite.getSprite(2, 0, "playerproj", 8) };
+			case PROJ_PLAYER_PRIM_1:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projplayerprim1", 4)};
+				animationMap.put("neutral", new Animation(spriteArray, 20));
+				break;
+
+			case PROJ_PLAYER_PRIM_2:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projplayerprim2", 8)};
+				animationMap.put("neutral", new Animation(spriteArray, 20));
+				break;
+
+			case PROJ_PLAYER_PRIM_3:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projplayerprim3", 8)};
 				animationMap.put("neutral", new Animation(spriteArray, 20));
 				break;
 

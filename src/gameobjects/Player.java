@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends GameObject{
-	private int fireDelay, framesSinceFired, primDamage;
+	private PlayerWeapon primWeapon, secWeapon;
 	private double speed;
 
 	public Player(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
@@ -30,24 +30,14 @@ public class Player extends GameObject{
 		speed = 6.5;
 		setXvel(speed);
 		setYvel(speed);
-		primDamage = 50;
 
-		fireDelay = 8;
-		framesSinceFired = fireDelay;
+		primWeapon = new PlayerWeapon(PlayerWeapon.WeaponType.PRIM);
+		secWeapon = new PlayerWeapon(PlayerWeapon.WeaponType.SEC);
 	}
 
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
-
-		if(framesSinceFired < fireDelay){
-			setXvel(speed * 0.55);
-			setYvel(speed * 0.55);
-		}
-		else{
-			setXvel(speed);
-			setYvel(speed);
-		}
 
 		//Stop player moving off screen
 		if(getX() < 0){
@@ -63,28 +53,20 @@ public class Player extends GameObject{
 			moveDown(screenHeight - (getY() + getSprite().getHeight()));
 		}
 
-		//Note if the player does not fire this can grow very quickly. If this
-		//is an issue put a check to stop growth if >fireDelay + a bit
-		framesSinceFired++;
+		primWeapon.incrementTimer();
+		secWeapon.incrementTimer();
 	}
 
-	public ArrayList<Projectile> fire(String weapon){
-		ArrayList<Projectile> bulletsFired = null;
-
-		if(framesSinceFired > fireDelay){
-			bulletsFired = new ArrayList<Projectile>();
-			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER);
-			double projStartX = getX();
-			double projStartY = getY() - 1;
-			HitboxCircle projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.GREEN, 0, -10, projHitbox, projAnimations));
-
-			projStartX = getX() + getSprite().getWidth() - 5;
-			projHitbox = new HitboxCircle(projStartX, projStartY, 2);
-			bulletsFired.add(new ProjectileStraightLine(projStartX, projStartY, primDamage, Particle.ExplosionType.GREEN, 0, -10, projHitbox, projAnimations));
-			framesSinceFired = 0;
+	public ArrayList<Projectile> fire(PlayerWeapon.WeaponType weapon){
+		if(weapon == PlayerWeapon.WeaponType.PRIM){
+			return primWeapon.fire(getX(), getY());
 		}
-
-		return bulletsFired;
+		else if(weapon == PlayerWeapon.WeaponType.SEC){
+			return secWeapon.fire(getX(), getY());
+		}
+		else{
+			System.out.println("Invalid weapon passed to Player.fire()");
+			return null;
+		}
 	}
 }

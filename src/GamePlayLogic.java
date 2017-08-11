@@ -97,13 +97,13 @@ public class GamePlayLogic{
 
 		//Firing special overrides firing primary overrides firing secondary
 		if(inputs.get(GamePlay.ACT_FIRE_SPECIAL)){
-			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SPECIAL);
+
 		}
 		else if(inputs.get(GamePlay.ACT_FIRE_PRIM)){
-			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_PRIM);
+			newPlayerProjectiles = player.fire(PlayerWeapon.WeaponType.PRIM);
 		}
 		else if(inputs.get(GamePlay.ACT_FIRE_SEC)){
-			newPlayerProjectiles = player.fire(GamePlay.ACT_FIRE_SEC);
+			newPlayerProjectiles = player.fire(PlayerWeapon.WeaponType.SEC);
 		}
 
 		if(newPlayerProjectiles != null){

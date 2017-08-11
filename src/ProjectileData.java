@@ -6,16 +6,18 @@ import src.gameobjects.*;
 import src.animation.Animation;
 
 public class ProjectileData{
-	private String projType;
+	private ProjType projType;
 	private double xVel, yVel;
 	private int damage;
 	private Particle.ExplosionType explosionType;
 	private Hitbox hitbox;
 	private HashMap<String, Animation> animations;
 
-	public static final String PROJ_STRAIGHT = "proj_straight";
+	public enum ProjType{
+		STRAIGHT;
+	}
 
-	public ProjectileData(String projType, double xVel, double yVel, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
+	public ProjectileData(ProjType projType, double xVel, double yVel, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
 		this.projType = projType;
 		this.xVel = xVel;
 		this.yVel = yVel;
@@ -28,7 +30,7 @@ public class ProjectileData{
 	public Projectile newProjectile(double x, double y){
 		Projectile proj;
 		switch(projType){
-			case PROJ_STRAIGHT:
+			case STRAIGHT:
 				proj = new ProjectileStraightLine(x, y, damage, explosionType, xVel, yVel, hitbox, animations);
 				break;
 
