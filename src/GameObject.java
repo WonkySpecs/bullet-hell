@@ -122,15 +122,14 @@ public abstract class GameObject{
 		return hitbox;
 	}
 
-	public void setCurAnimation(String animation){
-		curAnimationName = animation;
-
-		if(getAnimationNames().contains(animation)){
+	public void setCurAnimation(String animationName){
+		if(hasAnimation(animationName)){
+			curAnimationName = animationName;
 			curAnimation = animations.get(curAnimationName);
 			curAnimation.start();						
 		}
 		else{
-			System.out.println("Tried to load " + animation + " which does not exist");
+			System.out.println("Tried to load " + animationName + " animation which does not exist");
 		}
 		
 	}
@@ -149,6 +148,15 @@ public abstract class GameObject{
 			names.add(k);
 		}
 		return names;
+	}
+
+	public boolean hasAnimation(String animationName){
+		if(getAnimationNames().contains(animationName)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public HashMap<String, Animation> getAnimationMap(){
