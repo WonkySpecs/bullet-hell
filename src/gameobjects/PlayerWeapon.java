@@ -51,9 +51,9 @@ public class PlayerWeapon{
 				//right place relative to the palyer sprite
 
 				if(level > 1){
-					shotsFired.add(projData.newProjectile(x, y));
-					shotsFired.add(projData.newProjectile(x + 7, y));
+					shotsFired.add(projData.newProjectile(x + 4, y));
 					shotsFired.add(projData.newProjectile(x + 14, y));
+					shotsFired.add(projData.newProjectile(x + 24, y));
 				}
 				else{
 					shotsFired.add(projData.newProjectile(x + 5, y));

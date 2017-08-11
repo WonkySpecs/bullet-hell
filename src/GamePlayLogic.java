@@ -217,6 +217,8 @@ public class GamePlayLogic{
 			else{
 				if(Hitbox.collisionBetween(item.getHitbox(), player.getHitbox())){
 					dead = true;
+					//TODO: Get actual behaviour from item object and act on it accordingly
+					player.upgradeWeapon();
 				}
 			}
 

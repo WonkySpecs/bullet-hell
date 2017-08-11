@@ -69,4 +69,8 @@ public class Player extends GameObject{
 			return null;
 		}
 	}
+
+	public void upgradeWeapon(){
+		primWeapon.upgrade();
+	}
 }
