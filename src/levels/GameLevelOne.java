@@ -106,8 +106,8 @@ public class GameLevelOne extends GameLevel{
 		if(gameTime == 420){
 			startY = -50;
 			startX = getScreenWidth() / 2 - 32;
-			newEnemies.add(new EnemyStraightFloater(startX, startY, 5000, 0, 0.2, SCORE_BIG_FLOATER,
-													new HitboxCircle(32), 
+			newEnemies.add(new EnemyStraightFloater(startX, startY, 10000, 0, 0.2, SCORE_BIG_FLOATER,
+													new HitboxCircle(33), 
 													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_BIG_BLUE),
 													null,
 													null));
