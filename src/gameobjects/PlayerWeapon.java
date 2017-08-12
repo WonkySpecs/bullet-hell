@@ -22,7 +22,7 @@ public class PlayerWeapon{
 		if(weaponType == WeaponType.PRIM){
 			maxLevel = 3;
 			projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-											0, -8, 20, Particle.ExplosionType.SMALL_GREEN,
+											0, -7, 30, Particle.ExplosionType.SMALL_GREEN,
 											new HitboxCircle(2),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_1));
 			fireDelay = 10;
@@ -60,6 +60,9 @@ public class PlayerWeapon{
 					shotsFired.add(projData.newProjectile(x + 23, y));
 				}
 			}
+			else if(weaponType == WeaponType.SEC){
+				//Fire secondary - what is this even?
+			}
 			framesSinceFired = 0;
 		}
 		if(shotsFired.size() > 0){
@@ -78,18 +81,18 @@ public class PlayerWeapon{
 				switch(level){
 					case 2:
 						projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-														0, -11, 50, Particle.ExplosionType.GREEN,
+														0, -9, 45, Particle.ExplosionType.GREEN,
 														new HitboxCircle(3),
 														AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_2));
-						fireDelay = 8;
+						fireDelay = 9;
 						break;
 
 					case 3:
 						projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-														0, -12, 100, Particle.ExplosionType.RED,
+														0, -12, 75, Particle.ExplosionType.RED,
 														new HitboxCircle(3),
 														AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_3));
-						fireDelay = 4;
+						fireDelay = 7;
 						break;
 				}
 			}

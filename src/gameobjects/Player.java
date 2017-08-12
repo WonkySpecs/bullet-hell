@@ -38,6 +38,8 @@ public class Player extends GameObject{
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
+		setXvel(speed);
+		setYvel(speed);
 
 		//Stop player moving off screen
 		if(getX() < 0){
@@ -59,9 +61,13 @@ public class Player extends GameObject{
 
 	public ArrayList<Projectile> fire(PlayerWeapon.WeaponType weapon){
 		if(weapon == PlayerWeapon.WeaponType.PRIM){
+			setXvel(speed * 0.6);
+			setYvel(speed * 0.6);
 			return primWeapon.fire(getX(), getY());
 		}
 		else if(weapon == PlayerWeapon.WeaponType.SEC){
+			setXvel(speed * 0.6);
+			setYvel(speed * 0.6);
 			return secWeapon.fire(getX(), getY());
 		}
 		else{
