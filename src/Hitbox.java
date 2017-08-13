@@ -71,21 +71,47 @@ public abstract class Hitbox{
 		return collisionBetween(h2, h1);
 	}
 
-	//Brute force checks for intersection between every edge of each Rectangle
-	//TODO: If performance is an issue, find a way to optimise this
 	public static boolean collisionBetween(HitboxRectangle h1, HitboxRectangle h2){
-		ArrayList<Line2D.Double> edgeList1 = h1.getRectangleEdgesGlobalSpace();
-		ArrayList<Line2D.Double> edgeList2 = h2.getRectangleEdgesGlobalSpace();
+		Point2D.Double pos1 = h1.getPos();
+		Point2D.Double pos2 = h2.getPos();
+		double width1 = h1.getWidth();
+		double width2 = h2.getWidth();
+		double height1 = h1.getHeight();
+		double height2 = h2.getHeight();
 
-		for(Line2D.Double edge1 : edgeList1){
-			for(Line2D.Double edge2 : edgeList2){
-				if(edge1.intersectsLine(edge2)){
-					return true;
-				}
+		boolean withinX = false;
+		boolean withinY = false;
+
+		//Check if boxes overlap in y direction
+		if(pos1.getY() <  pos2.getY()){
+			if(pos2.getY() <= pos1.getY() + height1){
+				withinY = true;
+			}
+		}
+		else{
+			if(pos1.getY() <= pos2.getY() + height2){
+				withinY = true;
 			}
 		}
 
-		return false;
+		//Check if boxes overlap in x direction
+		if(pos1.getX() <  pos2.getX()){
+			if(pos2.getX() <= pos1.getX() + width1){
+				withinX = true;
+			}
+		}
+		else{
+			if(pos1.getX() <= pos2.getX() + width2){
+				withinX = true;
+			}
+		}
+
+		if(withinX && withinY){
+			return true;
+		}
+		else{
+			return false;			
+		}
 	}
 
 	public static Hitbox copy(Hitbox original){

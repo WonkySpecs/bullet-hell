@@ -26,6 +26,10 @@ public class HitboxRectangle extends Hitbox{
 		this.height = height;
 	}
 
+	public HitboxRectangle(double width, double height){
+		this(0, 0, width, height);
+	}
+
 	public HitboxRectangle(HitboxRectangle original){
 		this(original.getPos().getX(), original.getPos().getY(), original.getWidth(), original.getHeight());
 	}
