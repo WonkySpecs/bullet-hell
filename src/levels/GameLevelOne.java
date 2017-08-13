@@ -38,19 +38,25 @@ public class GameLevelOne extends GameLevel{
 		if(gameTime == 35){
 			startX = 50;
 			startY = -25;
-			HitboxCircle fh = new HitboxCircle(floaterRadius);
-			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 2, 7, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
+			HitboxRectangle squareHitbox = new HitboxRectangle(startX, startY, 16, 16);
+			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0.4, 2, SCORE_RED_FLOATER,
+													squareHitbox,
+													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
+													null, null));
 
 			startX = getScreenWidth() - 65;
 			startY = -25;
-			fh = new HitboxCircle(floaterRadius);
-			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -2, 7, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
+			squareHitbox = new HitboxRectangle(startX, startY, 16, 16);
+			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -0.4, 2, SCORE_RED_FLOATER,
+													squareHitbox,
+													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
+													null, null));
 
 			for(int i = -100;i < 101;i += 100){
 				startX = getScreenWidth() / 2 + i;
 				startY = 200;
 				ItemDrop item = new ItemDrop(startX, startY, 65, new HitboxCircle(10), AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
-				fh = new HitboxCircle(floaterRadius);
+				HitboxCircle fh = new HitboxCircle(floaterRadius);
 				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 0, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, item));
 			}
 

@@ -25,8 +25,8 @@ public class AnimationMapFactory{
 	public static final int ENEMY_FLOATER_BIG_RED = 11;
 	public static final int ENEMY_FLOATER_BIG_GREEN = 12;
 	public static final int ENEMY_FLOATER_BIG_BLUE = 13;
-
-	public static final int ENEMY_SUICIDE_SMALL = 10;
+	public static final int ENEMY_SUICIDE_SMALL = 20;
+	public static final int ENEMY_HYPNOSQUARE = 30;
 
 	public static final int PROJ_PLAYER_PRIM_1 = 100;
 	public static final int PROJ_PLAYER_PRIM_2 = 101;
@@ -91,7 +91,19 @@ public class AnimationMapFactory{
 				animationMap.put("neutral", new Animation(spriteArray, 10));
 				break;
 
-
+			case ENEMY_HYPNOSQUARE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(1, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(2, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(3, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(4, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(5, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(6, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(7, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(8, 0, "enemyhypnosquare", 16),
+													Sprite.getSprite(9, 0, "enemyhypnosquare", 16)};
+				animationMap.put("neutral", new Animation(spriteArray, 10));
+				break;
 
 			case PROJ_PLAYER_PRIM_1:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projplayerprim1", 4)};
