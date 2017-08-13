@@ -73,7 +73,7 @@ public class HitboxRectangle extends Hitbox{
 		return topLeft;
 	}
 	
-	public ArrayList<Line2D.Double> getRectangleEdges(){
+	public ArrayList<Line2D.Double> getEdges(){
 		ArrayList<Line2D.Double> edges = new ArrayList<>();
 		//Top left - top right
 		edges.add(new Line2D.Double(topLeft.getX(), topLeft.getY(), topLeft.getX() + width, topLeft.getY()));
@@ -85,26 +85,5 @@ public class HitboxRectangle extends Hitbox{
 		edges.add(new Line2D.Double(topLeft.getX(), topLeft.getY() + height, topLeft.getX(), topLeft.getY()));
 
 		return edges;
-	}
-
-	//All points in pointList are relative to topLeft.
-	//getRectangleEdgesGlobalSpace translates the poitns to the
-	//global coordinate space before calculating the edges.
-	public ArrayList<Line2D.Double> getRectangleEdgesGlobalSpace(){
-		ArrayList<Line2D.Double> localEdges = getRectangleEdges();
-
-		for(Line2D.Double edge : localEdges){
-
-			edge.setLine(edge.getX1() + topLeft.getX(),
-						 edge.getX2() + topLeft.getX(),
-						 edge.getY1() + topLeft.getY(),
-						 edge.getY2() + topLeft.getY());
-		}
-
-		return localEdges;
-	}
-
-	public Point2D.Double gettopLeft(){
-		return topLeft;
 	}
 }
