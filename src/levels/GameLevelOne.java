@@ -11,6 +11,7 @@ package src.levels;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.awt.geom.*;
 
 import src.*;
 import src.gameobjects.*;
@@ -117,6 +118,24 @@ public class GameLevelOne extends GameLevel{
 													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_BIG_BLUE),
 													null,
 													null));
+			return newEnemies;
+		}
+
+		if(gameTime >= 460 && gameTime <= 560 && (gameTime - 460) % 50 == 0){
+			ArrayList<Point2D.Double> path = new ArrayList<>();
+			path.add(new Point2D.Double(getScreenWidth() / 2, -20));
+			path.add(new Point2D.Double(getScreenWidth() / 2, 100));
+			path.add(new Point2D.Double(getScreenWidth() / 2 - 50, 150));
+			path.add(new Point2D.Double(getScreenWidth() / 2 + 50, 250));
+			path.add(new Point2D.Double(getScreenWidth() / 2, getScreenHeight() + 50));
+
+			HitboxCircle fh = new HitboxCircle(floaterRadius);
+			newEnemies.add(new EnemyStraightPathFollower(250,
+										path, Math.random() + 1,
+										500, 
+										fh,
+										AnimationMapFactory.copyAnimationMap(floaterAnimations),
+										null, null));
 			return newEnemies;
 		}
 		return null;
