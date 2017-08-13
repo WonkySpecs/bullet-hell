@@ -12,22 +12,22 @@
 package src;
 
 import java.awt.image.BufferedImage;
-import java.awt.Point;
+import java.awt.geom.*;
 
 public class SpriteData{
 	private BufferedImage sprite;
-	private Point pos;
+	private Point2D.Double pos;
 	private int depth;
 	private float alpha;
 
-	public SpriteData(BufferedImage i, Point p, int d, float a){
+	public SpriteData(BufferedImage i, Point2D.Double p, int d, float a){
 		sprite = i;
 		pos = p;
 		depth = d;
 		alpha = a;
 	}
 
-	public SpriteData(BufferedImage i, Point p, int d){
+	public SpriteData(BufferedImage i, Point2D.Double p, int d){
 		this(i, p, d, (float)1.0);
 	}
 
@@ -35,7 +35,7 @@ public class SpriteData{
 		return sprite;
 	}
 
-	public Point getPos(){
+	public Point2D.Double getPos(){
 		return pos;
 	}
 

@@ -18,6 +18,7 @@ import java.io.File;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.awt.geom.*;
 
 import src.animation.*;
 
@@ -90,8 +91,8 @@ public abstract class GameObject{
 		return y;
 	}
 
-	public Point getPos(){
-		return new Point((int)Math.round(x), (int)Math.round(y));
+	public Point2D.Double getPos(){
+		return new Point2D.Double(x, y);
 	}
 
 	public double getXvel(){
