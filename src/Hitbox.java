@@ -64,7 +64,32 @@ public abstract class Hitbox{
 	}
 
 	public static boolean collisionBetween(HitboxCircle h1, HitboxRectangle h2){
-		return true;
+		Point2D.Double circleCenter = h1.getCenter();
+		double circleRadius = h1.getRadius();
+
+		Point2D.Double rectPos = h2.getPos();
+		double width = h2.getWidth();
+		double height = h2.getHeight();
+
+		//True returned in 2 cases:
+		//1.Circle center is within rectangle
+		if(circleCenter.getX() >= rectPos.getX() && circleCenter.getX() <= rectPos.getX() + width){
+			if(circleCenter.getY() >= rectPos.getY() && circleCenter.getY() <= rectPos.getY() + height){
+				return true;
+			}
+		}
+
+		//2. Rectangle edge within circle
+		if(false){
+			ArrayList<Line2D.Double> edges = h2.getEdges();
+			for(Line2D.Double edge : edges){
+				if(edge.ptLineDist(circleCenter) < circleRadius){
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	public static boolean collisionBetween(HitboxRectangle h1, HitboxCircle h2){
