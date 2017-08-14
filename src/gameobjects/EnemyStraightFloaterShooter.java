@@ -46,7 +46,7 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		if(framesSinceFired > fireDelay){
 			ArrayList<Projectile> projectiles = new ArrayList<>();
-			projectiles.add(getProjData().newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));
+			projectiles.add(getProjectileData().newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));
 			framesSinceFired = 0;
 
 			return projectiles;

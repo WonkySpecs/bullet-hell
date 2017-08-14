@@ -18,22 +18,22 @@ import src.animation.*;
 public abstract class EnemyShip extends GameObject{
 	private int hitPoints, damageTimer, score;
 	private boolean removable;
-	private ProjectileData projData;
+	private ProjectileData projectileData;
 	private ItemDrop itemDrop;
 
-	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData, ItemDrop itemDrop){
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData, ItemDrop itemDrop){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
 		damageTimer = -1;
 		setHitpoints(hp);
 		this.score = score;
-		this.projData = projData;
+		this.projectileData = projectileData;
 		this.itemDrop = itemDrop;
 	}
 
-	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projData){
-		this(x, y, hp, score, hitbox, animations, projData, null);
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData){
+		this(x, y, hp, score, hitbox, animations, projectileData, null);
 	}
 
 	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ItemDrop itemDrop){
@@ -76,8 +76,8 @@ public abstract class EnemyShip extends GameObject{
 		return removable;
 	}
 
-	public ProjectileData getProjData(){
-		return projData;
+	public ProjectileData getProjectileData(){
+		return projectileData;
 	}
 
 	public ItemDrop getItemDrop(){
