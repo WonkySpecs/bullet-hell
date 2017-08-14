@@ -1,3 +1,15 @@
+/**
+* EnemyStraightPathFollower defines anj EnemyShip sub class which
+* contains an ArrayList of points which it moves between in order.
+* Individual speeds for each point can be specified at construction
+* in an ArrayList<Double> or a single speed value can be specified
+* which will then be used for all movement.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   13-08-2017
+*/
+
 package src.gameobjects;
 
 import java.util.HashMap;

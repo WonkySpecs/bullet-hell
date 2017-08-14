@@ -87,9 +87,9 @@ public class GameLevelOne extends GameLevel{
 			}
 		}
 
-		if(gameTime > 220 && gameTime < 260){
+		if(gameTime > 260 && gameTime < 300){
 			if(gameTime % 5 == 0){
-				startX = (int)((((float)(gameTime - 220) / 40) * (getScreenWidth() - 1)) - floaterRadius);
+				startX = (int)((((float)(gameTime - 260) / 40) * (getScreenWidth() - 1)) - floaterRadius);
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
@@ -99,7 +99,7 @@ public class GameLevelOne extends GameLevel{
 			}
 		}
 
-		if(gameTime == 330){
+		if(gameTime == 400){
 			for(double i = 0;i < getScreenWidth();){
 				startX = i;
 				startY = -10;
@@ -110,7 +110,7 @@ public class GameLevelOne extends GameLevel{
 			return newEnemies;
 		}
 
-		if(gameTime == 420){
+		if(gameTime == 500){
 			startY = -50;
 			startX = getScreenWidth() / 2 - 32;
 			newEnemies.add(new EnemyStraightFloater(startX, startY, 10000, 0, 0.2, SCORE_BIG_FLOATER,
@@ -121,7 +121,7 @@ public class GameLevelOne extends GameLevel{
 			return newEnemies;
 		}
 
-		if(gameTime >= 460 && gameTime <= 560 && (gameTime - 460) % 50 == 0){
+		if(gameTime >= 580 && gameTime <= 680 && (gameTime - 580) % 25 == 0){
 			ArrayList<Point2D.Double> path = new ArrayList<>();
 			path.add(new Point2D.Double(getScreenWidth() / 2, -20));
 			path.add(new Point2D.Double(getScreenWidth() / 2, 100));
@@ -131,7 +131,7 @@ public class GameLevelOne extends GameLevel{
 
 			HitboxCircle fh = new HitboxCircle(floaterRadius);
 			newEnemies.add(new EnemyStraightPathFollower(250,
-										path, Math.random() + 1,
+										path, Math.random() * 2 + 2,
 										500, 
 										fh,
 										AnimationMapFactory.copyAnimationMap(floaterAnimations),

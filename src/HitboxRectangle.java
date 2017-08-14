@@ -1,13 +1,13 @@
 /**
-* HitboxRectangle represents the hitboxes of non-circular GameObjects
-* by an ordered ArrayList of Points.
-* Each hitbox works on a kind of 'local' coordinate system where
-* all points are relative to the top left point2D.Double of the objects
-* sprite.
+* HitboxRectangle represents a rectangular hitbox
+* (surprise surprise).
+* The rectangle is represented by a Point2D.Double
+* for top left corener, and two doubles for width
+* and height.
 *
 * @author  Will Taylor
 * @version 0.1
-* @since   21-07-2017
+* @since   11-08-2017
 */
 
 package src;
