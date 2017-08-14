@@ -22,7 +22,7 @@ public class PlayerWeapon{
 		if(weaponType == WeaponType.PRIM){
 			maxLevel = 3;
 			projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-											0, -7, 30, Particle.ExplosionType.SMALL_GREEN,
+											7, ProjectileData.DIR_UP, 30, Particle.ExplosionType.SMALL_GREEN,
 											new HitboxCircle(2),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_1));
 			fireDelay = 10;
@@ -81,7 +81,7 @@ public class PlayerWeapon{
 				switch(level){
 					case 2:
 						projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-														0, -9, 45, Particle.ExplosionType.GREEN,
+														9, ProjectileData.DIR_UP, 30, Particle.ExplosionType.GREEN,
 														new HitboxCircle(3),
 														AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_2));
 						fireDelay = 9;
@@ -89,7 +89,7 @@ public class PlayerWeapon{
 
 					case 3:
 						projData = new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-														0, -12, 75, Particle.ExplosionType.RED,
+														12, ProjectileData.DIR_UP, 50, Particle.ExplosionType.RED,
 														new HitboxCircle(3),
 														AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_PLAYER_PRIM_3));
 						fireDelay = 7;

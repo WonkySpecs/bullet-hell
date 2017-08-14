@@ -7,20 +7,23 @@ import src.animation.Animation;
 
 public class ProjectileData{
 	private ProjType projType;
-	private double xVel, yVel;
+	private double speed, angle;
 	private int damage;
 	private Particle.ExplosionType explosionType;
 	private Hitbox hitbox;
 	private HashMap<String, Animation> animations;
 
+	public static double DIR_UP = -Math.PI / 2;
+	public static double DIR_DOWN = Math.PI / 2;
+
 	public enum ProjType{
 		STRAIGHT;
 	}
 
-	public ProjectileData(ProjType projType, double xVel, double yVel, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
+	public ProjectileData(ProjType projType, double speed, double angle, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
 		this.projType = projType;
-		this.xVel = xVel;
-		this.yVel = yVel;
+		this.speed = speed;
+		this.angle = angle;
 		this.damage = damage;
 		this.explosionType = explosionType;
 		this.hitbox = hitbox;
@@ -31,7 +34,7 @@ public class ProjectileData{
 		Projectile proj;
 		switch(projType){
 			case STRAIGHT:
-				proj = new ProjectileStraightLine(x, y, damage, explosionType, xVel, yVel, hitbox, animations);
+				proj = new ProjectileStraightLine(x, y, damage, explosionType, speed * Math.cos(angle), speed * Math.sin(angle), hitbox, animations);
 				break;
 
 			default:
