@@ -136,6 +136,25 @@ public class GameLevelOne extends GameLevel{
 										fh,
 										AnimationMapFactory.copyAnimationMap(floaterAnimations),
 										null, null));
+
+			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
+			newEnemies.add(new EnemyBomb(getScreenWidth() / 2 - 100, -30, 30,
+											0, 3, 500,
+											125 - ((int)gameTime - 550), 80,
+											new HitboxCircle(floaterRadius),
+											AnimationMapFactory.copyAnimationMap(floaterAnimations),
+											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+																3, Math.PI / 2,
+																1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations)));
+
+			newEnemies.add(new EnemyBomb(getScreenWidth()/2  + 100, -30, 30,
+											0, 3, 500,
+											125 - ((int)gameTime - 550), 80,
+											new HitboxCircle(floaterRadius),
+											AnimationMapFactory.copyAnimationMap(floaterAnimations),
+											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+																3, Math.PI / 2,
+																1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations)));
 			return newEnemies;
 		}
 		return null;

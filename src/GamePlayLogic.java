@@ -123,7 +123,7 @@ public class GamePlayLogic{
 				enemyProjectileList.addAll(newEnemyProj);
 			}
 
-			if(enemy.isRemovable() && enemy.isOffScreen(screenWidth, screenHeight)){
+			if(enemy.isRemovable() && enemy.isOffScreen(screenWidth, screenHeight) || enemy.isImmediatelyRemovable()){
 				dead = true;
 			}
 				

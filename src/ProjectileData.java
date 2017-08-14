@@ -30,6 +30,10 @@ public class ProjectileData{
 		this.animations = animations;
 	}
 
+	public void setAngle(double angle){
+		this.angle = angle;
+	}
+
 	public Projectile newProjectile(double x, double y){
 		Projectile proj;
 		switch(projType){

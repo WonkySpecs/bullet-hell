@@ -17,7 +17,7 @@ import src.animation.*;
 
 public abstract class EnemyShip extends GameObject{
 	private int hitPoints, damageTimer, score;
-	private boolean removable;
+	private boolean removable, immediatelyRemovable;
 	private ProjectileData projectileData;
 	private ItemDrop itemDrop;
 
@@ -25,6 +25,7 @@ public abstract class EnemyShip extends GameObject{
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
+		immediatelyRemovable = false;
 		damageTimer = -1;
 		setHitpoints(hp);
 		this.score = score;
@@ -74,6 +75,14 @@ public abstract class EnemyShip extends GameObject{
 
 	public boolean isRemovable(){
 		return removable;
+	}
+
+	public void setImmediatelyRemovable(boolean b){
+		immediatelyRemovable = b;
+	}
+
+	public boolean isImmediatelyRemovable(){
+		return immediatelyRemovable;
 	}
 
 	public ProjectileData getProjectileData(){
