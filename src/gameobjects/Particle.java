@@ -48,10 +48,15 @@ public class Particle extends GameObject{
 		SMALL_GREEN, GREEN, BIG_GREEN,
 		SMALL_BLUE, BLUE, BIG_BLUE,
 		SMALL_RED, RED, BIG_RED,
-		SMALL_RANDOM, RANDOM, BIG_RANDOM;
+		SMALL_RANDOM, RANDOM, BIG_RANDOM,
+		PLAYER;
 	}
 
-	public static ArrayList<Particle> explosion(ExplosionType explosionType, double x, double y){
+	public enum ExplosionDirection{
+		DOWN, NEUTRAL, UP;
+	}
+
+	public static ArrayList<Particle> explosion(ExplosionType explosionType, ExplosionDirection dir, double x, double y){
 		ArrayList<Particle> explosionParticles = new ArrayList<>();
 		int numParticles, fadeTime;
 		HashMap<String, Animation> animationMap = null;
@@ -65,41 +70,47 @@ public class Particle extends GameObject{
 			fadeTime = 30;
 		}
 
+		int animationMapType = 1;
+
 		switch(explosionType){
 			case SMALL_GREEN:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_GREEN);
+				animationMapType = AnimationMapFactory.PARTICLE_SMALL_GREEN;
 				break;
 
 			case GREEN:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_GREEN);
+				animationMapType = AnimationMapFactory.PARTICLE_GREEN;
 				break;
 
 			case BIG_GREEN:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_GREEN);
+				animationMapType = AnimationMapFactory.PARTICLE_BIG_GREEN;
 				break;
 
 			case SMALL_BLUE:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_BLUE);
+				animationMapType = AnimationMapFactory.PARTICLE_SMALL_BLUE;
 				break;
 
 			case BLUE:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BLUE);
+				animationMapType = AnimationMapFactory.PARTICLE_BLUE;
 				break;
 
 			case BIG_BLUE:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_BLUE);
+				animationMapType = AnimationMapFactory.PARTICLE_BIG_BLUE;
 				break;
 
 			case SMALL_RED:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_SMALL_RED);
+				animationMapType = AnimationMapFactory.PARTICLE_SMALL_RED;
 				break;
 
 			case RED:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_RED);
+				animationMapType = AnimationMapFactory.PARTICLE_RED;
 				break;
 
 			case BIG_RED:
-				animationMap = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PARTICLE_BIG_RED);
+				animationMapType = AnimationMapFactory.PARTICLE_BIG_RED;
+				break;
+
+			case PLAYER:
+				animationMapType = AnimationMapFactory.PARTICLE_WHITE;
 				break;
 
 			default:
@@ -107,12 +118,30 @@ public class Particle extends GameObject{
 				explosionParticles = null;
 				break;
 		}
+		animationMap = AnimationMapFactory.getAnimationMap(animationMapType);
 
 		for(int i = 0; i < numParticles; i++){
 			//NOTE: Do not need to use AnimationMapFactory.copy as animations are all static for particles -
 			//change this if no longer true
-			double xvel = 4 * Math.random() - 2;
-			double yvel = 2 * Math.random();
+			double xvel;
+			double yvel;
+			if(dir == ExplosionDirection.DOWN){
+				xvel = 4 * Math.random() - 2;
+				yvel = 2 * Math.random();
+			}
+			else if(dir == ExplosionDirection.NEUTRAL){
+				xvel = 6 * Math.random() - 3;
+				yvel = 6 * Math.random() - 3;
+			}
+			else if(dir == ExplosionDirection.UP){
+				xvel = 4 * Math.random() - 2;
+				yvel = - 2 * Math.random();
+			}
+			else{
+				System.out.println("Invalid direction specified in Particle.explosion()");
+				xvel = 0;
+				yvel = 0;
+			}
 
 			explosionParticles.add(
 				new Particle(x, y, xvel, yvel, fadeTime, animationMap));

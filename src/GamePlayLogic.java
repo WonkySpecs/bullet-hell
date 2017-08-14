@@ -129,6 +129,11 @@ public class GamePlayLogic{
 				
 			if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox())){
 				dead = true;
+				ArrayList<Particle> newParticles = Particle.explosion(Particle.ExplosionType.PLAYER,
+																		Particle.ExplosionDirection.NEUTRAL,
+																		player.getHitbox().getCenter().getX(),
+																		player.getHitbox().getCenter().getY());
+				particleList.addAll(newParticles);
 				System.out.println("player got hit boom");
 			}
 
@@ -169,7 +174,10 @@ public class GamePlayLogic{
 							enemy = null;
 							enemyIterator.remove();					
 						}
-						ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(), proj.getHitbox().getCenter().getX(), proj.getHitbox().getCenter().getY());
+						ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(),
+																				proj.getExplosionDirection(),
+																				proj.getHitbox().getCenter().getX(),
+																				proj.getHitbox().getCenter().getY());
 						if(newParticles != null){
 							particleList.addAll(newParticles);
 						}
@@ -193,6 +201,12 @@ public class GamePlayLogic{
 			}
 			else{
 				if(Hitbox.collisionBetween(proj.getHitbox(), player.getHitbox())){
+					ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(),
+																			proj.getExplosionDirection(),
+																			player.getHitbox().getCenter().getX(),
+																			player.getHitbox().getCenter().getY());
+					System.out.println(newParticles.size());
+					particleList.addAll(newParticles);
 					System.out.println("Shot down");
 					expired = true;
 				}

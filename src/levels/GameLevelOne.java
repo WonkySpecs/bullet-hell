@@ -93,7 +93,7 @@ public class GameLevelOne extends GameLevel{
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
-				ProjectileData shooterProj = new ProjectileData(ProjectileData.ProjType.STRAIGHT, 8, Math.PI / 2, 1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations);
+				ProjectileData shooterProj = new ProjectileData(ProjectileData.ProjType.STRAIGHT, 8, Math.PI / 2, 1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations);
 				newEnemies.add(new EnemyStraightFloaterShooter(startX, startY, 1, 0, 4, 15, SCORE_FLOATER_SHOOTER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), shooterProj, null));
 				return newEnemies;
 			}
@@ -145,7 +145,7 @@ public class GameLevelOne extends GameLevel{
 											AnimationMapFactory.copyAnimationMap(floaterAnimations),
 											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
 																3, Math.PI / 2,
-																1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations)));
+																1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations)));
 
 			newEnemies.add(new EnemyBomb(getScreenWidth()/2  + 100, -30, 30,
 											0, 3, 500,
@@ -154,7 +154,7 @@ public class GameLevelOne extends GameLevel{
 											AnimationMapFactory.copyAnimationMap(floaterAnimations),
 											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
 																3, Math.PI / 2,
-																1, Particle.ExplosionType.SMALL_BLUE, new HitboxCircle(2), projAnimations)));
+																1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations)));
 			return newEnemies;
 		}
 		return null;

@@ -10,6 +10,7 @@ public class ProjectileData{
 	private double speed, angle;
 	private int damage;
 	private Particle.ExplosionType explosionType;
+	private Particle.ExplosionDirection explosionDirection;
 	private Hitbox hitbox;
 	private HashMap<String, Animation> animations;
 
@@ -20,12 +21,13 @@ public class ProjectileData{
 		STRAIGHT;
 	}
 
-	public ProjectileData(ProjType projType, double speed, double angle, int damage, Particle.ExplosionType explosionType, Hitbox hitbox, HashMap<String, Animation> animations){
+	public ProjectileData(ProjType projType, double speed, double angle, int damage, Particle.ExplosionType explosionType, Particle.ExplosionDirection explosionDirection, Hitbox hitbox, HashMap<String, Animation> animations){
 		this.projType = projType;
 		this.speed = speed;
 		this.angle = angle;
 		this.damage = damage;
 		this.explosionType = explosionType;
+		this.explosionDirection = explosionDirection;
 		this.hitbox = hitbox;
 		this.animations = animations;
 	}
@@ -38,7 +40,7 @@ public class ProjectileData{
 		Projectile proj;
 		switch(projType){
 			case STRAIGHT:
-				proj = new ProjectileStraightLine(x, y, damage, explosionType, speed * Math.cos(angle), speed * Math.sin(angle), hitbox, animations);
+				proj = new ProjectileStraightLine(x, y, damage, explosionType, explosionDirection, speed * Math.cos(angle), speed * Math.sin(angle), hitbox, animations);
 				break;
 
 			default:
