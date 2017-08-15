@@ -26,6 +26,10 @@ public class EnemyBomb extends EnemyStraightFloater{
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
 		timer += 1;
+
+		if((double)timer / explosionDelay > 0.5){
+			setCurAnimation("frenzy");
+		}
 	}
 
 	@Override

@@ -27,6 +27,7 @@ public class AnimationMapFactory{
 	public static final int ENEMY_FLOATER_BIG_BLUE = 13;
 	public static final int ENEMY_SUICIDE_SMALL = 20;
 	public static final int ENEMY_HYPNOSQUARE = 30;
+	public static final int ENEMY_BOMB = 31;
 
 	public static final int PROJ_PLAYER_PRIM_1 = 100;
 	public static final int PROJ_PLAYER_PRIM_2 = 101;
@@ -106,6 +107,16 @@ public class AnimationMapFactory{
 													Sprite.getSprite(8, 0, "enemyhypnosquare", 16),
 													Sprite.getSprite(9, 0, "enemyhypnosquare", 16)};
 				animationMap.put("neutral", new Animation(spriteArray, 10));
+				break;
+
+			case ENEMY_BOMB:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemybomb", 9),
+													Sprite.getSprite(1, 0, "enemybomb", 9)};
+				animationMap.put("neutral", new Animation(spriteArray, 25));
+
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 1, "enemybomb", 9),
+													Sprite.getSprite(1, 1, "enemybomb", 9)};
+				animationMap.put("frenzy", new Animation(spriteArray, 15));
 				break;
 
 			case PROJ_PLAYER_PRIM_1:
