@@ -205,7 +205,6 @@ public class GamePlayLogic{
 																			proj.getExplosionDirection(),
 																			player.getHitbox().getCenter().getX(),
 																			player.getHitbox().getCenter().getY());
-					System.out.println(newParticles.size());
 					particleList.addAll(newParticles);
 					System.out.println("Shot down");
 					expired = true;

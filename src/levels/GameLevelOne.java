@@ -121,7 +121,9 @@ public class GameLevelOne extends GameLevel{
 			return newEnemies;
 		}
 
-		if(gameTime >= 580 && gameTime <= 680 && (gameTime - 580) % 25 == 0){
+		final long BOMB_START_TIME = 600;
+
+		if(gameTime >= BOMB_START_TIME && gameTime <= 680 && (gameTime - BOMB_START_TIME) % 25 == 0){
 			ArrayList<Point2D.Double> path = new ArrayList<>();
 			path.add(new Point2D.Double(getScreenWidth() / 2, -20));
 			path.add(new Point2D.Double(getScreenWidth() / 2, 100));
@@ -139,8 +141,8 @@ public class GameLevelOne extends GameLevel{
 
 			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
 			newEnemies.add(new EnemyBomb(getScreenWidth() / 2 - 100, -30, 30,
-											0, 2, 500,
-											185 - ((int)gameTime - 550), 80,
+											0, 1.2, 50,
+											300 - (int)(gameTime - BOMB_START_TIME), 80,
 											new HitboxCircle(floaterRadius),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
 											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
@@ -148,8 +150,8 @@ public class GameLevelOne extends GameLevel{
 																1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations)));
 
 			newEnemies.add(new EnemyBomb(getScreenWidth()/2  + 100, -30, 30,
-											0, 2, 500,
-											185 - ((int)gameTime - 550), 80,
+											0, 1.2, 50,
+											300 - (int)(gameTime - BOMB_START_TIME), 80,
 											new HitboxCircle(floaterRadius),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
 											new ProjectileData(ProjectileData.ProjType.STRAIGHT,

@@ -27,7 +27,7 @@ public class EnemyBomb extends EnemyStraightFloater{
 		super.update(screenWidth, screenHeight);
 		timer += 1;
 
-		if((double)timer / explosionDelay > 0.5){
+		if(timer > explosionDelay / 2.0 && getCurAnimationName() == "neutral"){
 			setCurAnimation("frenzy");
 		}
 	}

@@ -112,11 +112,11 @@ public class AnimationMapFactory{
 			case ENEMY_BOMB:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemybomb", 9),
 													Sprite.getSprite(1, 0, "enemybomb", 9)};
-				animationMap.put("neutral", new Animation(spriteArray, 25));
+				animationMap.put("neutral", new Animation(spriteArray, 40));
 
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 1, "enemybomb", 9),
 													Sprite.getSprite(1, 1, "enemybomb", 9)};
-				animationMap.put("frenzy", new Animation(spriteArray, 15));
+				animationMap.put("frenzy", new Animation(spriteArray, 4));
 				break;
 
 			case PROJ_PLAYER_PRIM_1:
