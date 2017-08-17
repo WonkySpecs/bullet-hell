@@ -15,6 +15,7 @@
 package src;
 
 import javax.swing.*;
+import javax.swing.Box;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -22,15 +23,24 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
-public class GamePlay extends JPanel{
+public class GamePlay extends JPanel implements ActionListener{
 	private GamePlayLogic logic;
 	private int fps;
-	private boolean running, paused;
 	private long gameTime;
+	
+	//Must be volatile to ensure the game thread and the drawing thread
+	//see the same value.
+	private volatile boolean running, paused, pauseMenuDrawn;
 
 	private HashMap<String, Boolean> buttonsPressed;
 
 	private ArrayList<SpriteData> spriteList;
+
+	private static JButton resumeButton = new JButton("Resume");
+	private static JButton mainMenuButton = new JButton("Main Menu");
+
+	private static final int MENU_X_BORDER = 120;
+	private static final int MENU_Y_BORDER = 150;
 
 	private static final String PRESS_UP = "press up";
 	private static final String PRESS_DOWN = "press down";
@@ -64,7 +74,9 @@ public class GamePlay extends JPanel{
 	public static final int GAME_SCREEN_HEIGHT = 640;
 
 	public GamePlay(GameLevel level){
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		logic = new GamePlayLogic(level, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
+		setUpMenu();
 		running = true;
 		gameTime = 0;
 		resetAllButtonsPressed();
@@ -91,10 +103,16 @@ public class GamePlay extends JPanel{
 		long pauseTime = System.nanoTime();
 		int framesSinceLastCount = 0;
 		paused = false;
+		pauseMenuDrawn = false;
 
 		while(running){
 			if(buttonsPressed.get(ACT_PAUSE) && (System.nanoTime() - pauseTime) > 300000000){
-				paused = !paused;
+				if(paused){
+					unpause();
+				}
+				else{
+					pause();
+				}
 				pauseTime = System.nanoTime();
 			}
 			if(!paused){
@@ -115,6 +133,13 @@ public class GamePlay extends JPanel{
 					fps = framesSinceLastCount;
 					framesSinceLastCount = 0;
 					lastFpsCountTime = System.nanoTime();
+				}
+			}
+			else{
+				if(!pauseMenuDrawn){
+					//Not sure if this should be here or in paintComponent
+					//This gets ran multiple times if set in paintComponent but would be guaranteed
+					repaint();
 				}
 			}
 		}
@@ -166,6 +191,38 @@ public class GamePlay extends JPanel{
 		System.out.println("Bindings set");
 	}
 
+	private void setUpMenu(){
+		final int BUTTON_SPACING = 25;
+		this.add(Box.createRigidArea(new Dimension(0, MENU_Y_BORDER + 50)));
+		resumeButton.addActionListener(this);
+		//resumeButton.setLocation(GAME_SCREEN_WIDTH / 2 - resumeButton.getWidth() / 2, 200);
+		resumeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.add(resumeButton);
+		resumeButton.setVisible(false);
+
+		this.add(Box.createRigidArea(new Dimension(0, BUTTON_SPACING)));
+
+		mainMenuButton.addActionListener(this);
+		//mainMenuButton.setLocation(GAME_SCREEN_WIDTH / 2 - mainMenuButton.getWidth() / 2, 300);
+		mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.add(mainMenuButton);
+		mainMenuButton.setVisible(false);
+
+		this.add(Box.createRigidArea(new Dimension(0, MENU_Y_BORDER + 50)));
+	}
+
+	private void pause(){
+		paused = true;
+		resumeButton.setVisible(true);
+		mainMenuButton.setVisible(true);
+	}
+
+	private void unpause(){
+		paused = false;
+		resumeButton.setVisible(false);
+		mainMenuButton.setVisible(false);
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -183,6 +240,14 @@ public class GamePlay extends JPanel{
 		}
 
 		paintGUIElements(g2);
+
+		if(paused){
+			g2.setColor(Color.BLACK);
+			g2.fillRect(MENU_X_BORDER, MENU_Y_BORDER, GAME_SCREEN_WIDTH - MENU_X_BORDER * 2,  GAME_SCREEN_HEIGHT - MENU_Y_BORDER * 2);
+			g2.setColor(Color.RED);
+			g2.drawRect(MENU_X_BORDER, MENU_Y_BORDER, GAME_SCREEN_WIDTH - MENU_X_BORDER * 2,  GAME_SCREEN_HEIGHT - MENU_Y_BORDER * 2);
+			pauseMenuDrawn = true;
+		}
 	}
 
 	public void paintGUIElements(Graphics2D g2){
@@ -201,6 +266,15 @@ public class GamePlay extends JPanel{
 		g2.setColor(Color.WHITE);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		g2.drawString(String.format("%d fps", fps), GAME_SCREEN_WIDTH - 50, 10);		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e){
+		Object actionSource = e.getSource();
+
+		if(actionSource == resumeButton){
+			unpause();
+		}
 	}
 
 	private void resetAllButtonsPressed(){
