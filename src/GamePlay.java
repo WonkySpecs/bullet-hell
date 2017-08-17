@@ -63,7 +63,7 @@ public class GamePlay extends JPanel{
 	public static final int GAME_SCREEN_WIDTH = 600;
 	public static final int GAME_SCREEN_HEIGHT = 640;
 
-	public GamePlay(GameWindow mainWindow, GameLevel level){
+	public GamePlay(GameLevel level){
 		logic = new GamePlayLogic(level, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
 		running = true;
 		gameTime = 0;

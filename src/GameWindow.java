@@ -27,6 +27,7 @@ public class GameWindow extends JFrame implements ActionListener{
 	public GameWindow(){
 		super("As yet unnamed bullet hell game");
 		setSize(WINDOW_SCREEN_WIDTH, WINDOW_SCREEN_HEIGHT);
+		setLocation(40, 40);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -56,10 +57,10 @@ public class GameWindow extends JFrame implements ActionListener{
 		GamePlay gp = null;
 		switch(levelID){
 			case 1: 
-				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
+				gp = new GamePlay(new GameLevelOne(getWidth(), getHeight()));
 				break;
 			default:
-				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
+				gp = new GamePlay(new GameLevelOne(getWidth(), getHeight()));
 				break;
 		}
 

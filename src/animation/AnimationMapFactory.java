@@ -139,6 +139,10 @@ public class AnimationMapFactory{
 				animationMap.put("neutral", new Animation(spriteArray, 1000));
 				break;
 
+			case PROJ_BLUE:
+				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "projblue", 8) };
+				animationMap.put("neutral", new Animation(spriteArray, 1000));
+				break;
 
 
 			case ITEM_UPGRADE:
