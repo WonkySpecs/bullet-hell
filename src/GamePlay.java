@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 
 public class GamePlay extends JPanel implements ActionListener{
 	private GamePlayLogic logic;
+	private GameWindow window;
 	private int fps;
 	private long gameTime;
 	
@@ -73,7 +74,8 @@ public class GamePlay extends JPanel implements ActionListener{
 	public static final int GAME_SCREEN_WIDTH = 600;
 	public static final int GAME_SCREEN_HEIGHT = 640;
 
-	public GamePlay(GameLevel level){
+	public GamePlay(GameWindow window, GameLevel level){
+		this.window = window;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		logic = new GamePlayLogic(level, GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
 		setUpMenu();
@@ -143,6 +145,8 @@ public class GamePlay extends JPanel implements ActionListener{
 				}
 			}
 		}
+
+		window.displayMainMenu();
 	}
 
 	public void setBindings(){
@@ -223,6 +227,10 @@ public class GamePlay extends JPanel implements ActionListener{
 		mainMenuButton.setVisible(false);
 	}
 
+	private void endGame(){
+		running = false;
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -272,8 +280,17 @@ public class GamePlay extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		Object actionSource = e.getSource();
 
+		//Can't switch on an Object
 		if(actionSource == resumeButton){
 			unpause();
+		}
+		else if(actionSource == mainMenuButton){
+			//TODO: Put confirmation message?
+			endGame();
+		}
+		else{
+			System.out.println("Action performed in GamePlay by unhandled object:");
+			System.out.println(actionSource);
 		}
 	}
 

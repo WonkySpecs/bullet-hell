@@ -57,15 +57,27 @@ public class GameWindow extends JFrame implements ActionListener{
 		GamePlay gp = null;
 		switch(levelID){
 			case 1: 
-				gp = new GamePlay(new GameLevelOne(getWidth(), getHeight()));
+				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
 				break;
 			default:
-				gp = new GamePlay(new GameLevelOne(getWidth(), getHeight()));
+				gp = new GamePlay(this, new GameLevelOne(getWidth(), getHeight()));
 				break;
 		}
 
 		gp.setFocusable(true);
 		changeContentPane((JPanel) gp);
+	}
+
+	public void displayMainMenu(){
+		JPanel jp = new JPanel();
+		jp.setSize(WINDOW_SCREEN_WIDTH, WINDOW_SCREEN_HEIGHT);
+		startButton.addActionListener(this);
+		jp.add(startButton);
+
+		content.add(jp);
+
+		setVisible(true);
+		changeContentPane(jp);
 	}
 
 	public void changeContentPane(JPanel newPanel){
