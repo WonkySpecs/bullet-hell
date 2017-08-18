@@ -59,6 +59,9 @@ public class EnemySuicideTracker extends EnemyShip{
 		double dy =  playerHitbox.getCenter().getY() - getHitbox().getCenter().getY();
 		double targetAngle = Math.atan2(dy, dx);
 
+		double curAngleTransformed = curAngle + Math.PI;
+		double targetAngleTransformed = curAngle + Math.PI;
+
 		//When tracker first spawns, head towards player
 		if(xv == 0 && yv == 0){
 			setXvel(speed * Math.cos(targetAngle));
@@ -66,9 +69,9 @@ public class EnemySuicideTracker extends EnemyShip{
 			return null;
 		}
 
-		double absAngleDiff = Math.abs(targetAngle - curAngle);
+		double absAngleDiff = Math.abs(targetAngleTransformed - curAngleTransformed);
 
-		if(absAngleDiff <= turnRate || absAngleDiff >= (2 * Math.PI) - turnRate){
+		if(absAngleDiff <= turnRate){
 			setXvel(speed * Math.cos(targetAngle));
 			setYvel(speed * Math.sin(targetAngle));
 		}
