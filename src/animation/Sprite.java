@@ -37,10 +37,13 @@ public class Sprite{
 		return sprite;
 	}
 
-	public static BufferedImage getSprite(int xGrid, int yGrid, String spriteSheetFile, int tileSize){
+	public static BufferedImage getSprite(int xGrid, int yGrid, String spriteSheetFile, int tileWidth, int tileHeight){
 		spriteSheet = loadSprite(spriteSheetFile);
 	
-		return spriteSheet.getSubimage(xGrid * tileSize, yGrid * tileSize, tileSize, tileSize);
+		return spriteSheet.getSubimage(xGrid * tileWidth, yGrid * tileHeight, tileWidth, tileHeight);
 	}
 
+	public static BufferedImage getSprite(int xGrid, int yGrid, String spriteSheetFile, int tileSize){
+		return getSprite(xGrid, yGrid, spriteSheetFile, tileSize, tileSize);
+	}
 }
