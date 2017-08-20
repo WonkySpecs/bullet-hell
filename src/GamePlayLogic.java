@@ -31,6 +31,7 @@ public class GamePlayLogic{
 	private long pauseTime, score;
 	private double scoreMult;
 	private ArrayList<Particle> particleList;
+	private EnemyBoss boss;
 
 	private static final int DEPTH_PLAYER = 0;
 	private static final int DEPTH_ENEMY = 1;
@@ -52,6 +53,7 @@ public class GamePlayLogic{
 		particleList = new ArrayList<Particle>();
 		pauseTime = System.nanoTime();
 		paused = false;
+		boss = null;
 
 		score = 0;
 		scoreMult = 1;
@@ -63,10 +65,19 @@ public class GamePlayLogic{
 
 	public void update(long gameTime, HashMap<String, Boolean> inputs){
 		//Add any newly spawning enemies, as definied in the current level
-		ArrayList<EnemyShip> newEnemies = level.getEnemySpawns(gameTime);
 
-		if(newEnemies != null){
-			enemyShipList.addAll(newEnemies);			
+		if(boss == null){
+			ArrayList<EnemyShip> newEnemies = level.getEnemySpawns(gameTime);
+
+			if(newEnemies != null){
+				if(level.isBossSpawned()){
+					boss = (EnemyBoss)newEnemies.get(0);
+					enemyShipList.add(boss);
+				}
+				else{
+					enemyShipList.addAll(newEnemies);				
+				}
+			}			
 		}
 
 		updatePlayer(inputs);
@@ -128,13 +139,22 @@ public class GamePlayLogic{
 			}
 				
 			if(Hitbox.collisionBetween(player.getHitbox(), enemy.getHitbox())){
-				dead = true;
-				ArrayList<Particle> newParticles = Particle.explosion(Particle.ExplosionType.PLAYER,
-																		Particle.ExplosionDirection.NEUTRAL,
-																		player.getHitbox().getCenter().getX(),
-																		player.getHitbox().getCenter().getY());
-				particleList.addAll(newParticles);
-				System.out.println("player got hit boom");
+				if(enemy != boss){
+					dead = true;
+					ArrayList<Particle> newParticles = Particle.explosion(Particle.ExplosionType.PLAYER,
+																			Particle.ExplosionDirection.NEUTRAL,
+																			player.getHitbox().getCenter().getX(),
+																			player.getHitbox().getCenter().getY());
+					particleList.addAll(newParticles);
+					System.out.println("player got hit boom");					
+				}
+				else{
+					if(boss != null){
+						if(boss.isStarted()){
+							System.out.println("Don't hit the boss");
+						}
+					}
+				}
 			}
 
 			if(dead){

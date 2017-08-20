@@ -161,6 +161,24 @@ public class GameLevelOne extends GameLevel{
 																new HitboxCircle(1.5), projAnimations)));
 			return newEnemies;
 		}
+
+		final long BOSS_SPAWN_TIME = 100;
+
+		if(gameTime == BOSS_SPAWN_TIME){
+			System.out.println("BOSS COMETH");
+
+			newEnemies.add(new EnemyBossLateralPatroller(
+										EnemyBoss.StartSide.BOTTOM, new Point2D.Double(300, 100),
+										50, getScreenWidth() - 300, 80, 0.8,
+										10000, 10000, 
+										new HitboxRectangle(5, 0, 295, 145, 5, 10), 
+										AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOSS_1),
+										null));
+			setBossSpawned(true);
+			return newEnemies;
+		}
+
 		return null;
 	}
+
 }

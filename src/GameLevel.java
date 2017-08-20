@@ -16,10 +16,12 @@ import src.gameobjects.EnemyShip;
 
 public abstract class GameLevel{
 	private int screenWidth, screenHeight;
+	private boolean bossSpawned;
 
 	public GameLevel(int screenWidth, int screenHeight){
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
+		bossSpawned = false;
 	}
 
 	public int getScreenWidth(){
@@ -28,6 +30,14 @@ public abstract class GameLevel{
 
 	public int getScreenHeight(){
 		return screenHeight;
+	}
+
+	public boolean isBossSpawned(){
+		return bossSpawned;
+	}
+
+	public void setBossSpawned(boolean value){
+		bossSpawned = value;
 	}
 
 	public abstract ArrayList<EnemyShip> getEnemySpawns(long gameTime);
