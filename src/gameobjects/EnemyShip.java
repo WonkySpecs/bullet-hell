@@ -18,10 +18,10 @@ import src.animation.*;
 public abstract class EnemyShip extends GameObject{
 	private int hitPoints, damageTimer, score;
 	private boolean removable, immediatelyRemovable;
-	private ProjectileData projectileData;
+	private HashMap<String, ProjectileData> projectileDataMap;
 	private ItemDrop itemDrop;
 
-	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData, ItemDrop itemDrop){
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, HashMap<String, ProjectileData> projectileDataMap, ItemDrop itemDrop){
 		super(x, y, hitbox, animations);
 		moveTo(x, y);
 		removable = false;
@@ -29,12 +29,12 @@ public abstract class EnemyShip extends GameObject{
 		damageTimer = -1;
 		setHitpoints(hp);
 		this.score = score;
-		this.projectileData = projectileData;
+		this.projectileDataMap = projectileDataMap;
 		this.itemDrop = itemDrop;
 	}
 
-	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData){
-		this(x, y, hp, score, hitbox, animations, projectileData, null);
+	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, HashMap<String, ProjectileData> projectileDataMap){
+		this(x, y, hp, score, hitbox, animations, projectileDataMap, null);
 	}
 
 	public EnemyShip(double x, double y, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ItemDrop itemDrop){
@@ -85,8 +85,12 @@ public abstract class EnemyShip extends GameObject{
 		return immediatelyRemovable;
 	}
 
-	public ProjectileData getProjectileData(){
-		return projectileData;
+	public HashMap<String, ProjectileData> getProjectileDataMap(){
+		return projectileDataMap;
+	}
+
+	public ProjectileData getProjectileData(String key){
+		return projectileDataMap.get(key);
 	}
 
 	public ItemDrop getItemDrop(){

@@ -21,8 +21,9 @@ import src.animation.*;
 import src.ProjectileData;
 
 public class EnemyStraightFloater extends EnemyShip{
-	public EnemyStraightFloater(double x, double y, int hp, double xvel, double yvel, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projType, ItemDrop itemDrop){
-		super(x, y, hp, score, hitbox, animations, projType, itemDrop);
+	public EnemyStraightFloater(double x, double y, int hp, double xvel, double yvel, int score,
+								Hitbox hitbox, HashMap<String, Animation> animations, HashMap<String, ProjectileData> projectileDataMap, ItemDrop itemDrop){
+		super(x, y, hp, score, hitbox, animations, projectileDataMap, itemDrop);
 		setXvel(xvel);
 		setYvel(yvel);
 	}

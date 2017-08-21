@@ -26,8 +26,8 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 
 	public EnemyStraightFloaterShooter(double x, double y, int hp, double xvel, double yvel, int fireDelay,
 									   int score, Hitbox hitbox, HashMap<String, Animation> animations,
-									   ProjectileData projType, ItemDrop itemDrop){
-		super(x, y, hp, xvel, yvel, score, hitbox, animations, projType, itemDrop);
+									   HashMap<String, ProjectileData> projectileDataMap, ItemDrop itemDrop){
+		super(x, y, hp, xvel, yvel, score, hitbox, animations, projectileDataMap, itemDrop);
 		this.fireDelay = fireDelay;
 		this.projXVel = projXVel;
 		this.projYVel = projYVel;
@@ -46,7 +46,7 @@ public class EnemyStraightFloaterShooter extends EnemyStraightFloater{
 	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		if(framesSinceFired > fireDelay){
 			ArrayList<Projectile> projectiles = new ArrayList<>();
-			projectiles.add(getProjectileData().newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));
+			projectiles.add(getProjectileData("main").newProjectile(getX() + getSprite().getWidth()/2, getY() + getSprite().getHeight() - 2));
 			framesSinceFired = 0;
 
 			return projectiles;

@@ -17,8 +17,9 @@ public abstract class EnemyBoss extends EnemyShip{
 		TOP, BOTTOM, RIGHT, LEFT;
 	}
 
-	public EnemyBoss(StartSide startSide, Point2D.Double startPoint, int hp, int score, Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData){
-		super(0, 0, hp, score, hitbox, animations, projectileData, null);
+	public EnemyBoss(StartSide startSide, Point2D.Double startPoint, int hp, int score,
+						Hitbox hitbox, HashMap<String, Animation> animations, HashMap<String, ProjectileData> projectileDataMap){
+		super(0, 0, hp, score, hitbox, animations, projectileDataMap, null);
 		started = false;
 		this.startPoint = startPoint;
 		switch(startSide){

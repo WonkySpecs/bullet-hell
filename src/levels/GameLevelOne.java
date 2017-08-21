@@ -93,8 +93,12 @@ public class GameLevelOne extends GameLevel{
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
 				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
+				HashMap<String, ProjectileData> projDataMap = new HashMap<>();
 				ProjectileData shooterProj = new ProjectileData(ProjectileData.ProjType.STRAIGHT, 8, Math.PI / 2, 1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations);
-				newEnemies.add(new EnemyStraightFloaterShooter(startX, startY, 1, 0, 4, 15, SCORE_FLOATER_SHOOTER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), shooterProj, null));
+				projDataMap.put("main", shooterProj);
+				newEnemies.add(new EnemyStraightFloaterShooter(startX, startY,
+																1, 0, 4, 15, SCORE_FLOATER_SHOOTER, 
+																fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), projDataMap, null));
 				return newEnemies;
 			}
 		}
@@ -140,40 +144,54 @@ public class GameLevelOne extends GameLevel{
 										null, null));
 
 			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_BLUE);
+			HashMap<String, ProjectileData> projDataMap = new HashMap<>();
+			projDataMap.put("main", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+								2, Math.PI / 2,
+								1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
+								new HitboxCircle(1.5), projAnimations));
 			newEnemies.add(new EnemyBomb(getScreenWidth() / 2 - 100, -30, 30,
 											0, 1.2, 100,
 											270 - (int)(gameTime - BOMB_START_TIME), 30,
 											new HitboxCircle(floaterRadius),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
-											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-																2, Math.PI / 2,
-																1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
-																new HitboxCircle(1.5), projAnimations)));
+											projDataMap));
 
+			projDataMap = new HashMap<>();
+			projDataMap.put("main", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+								2, Math.PI / 2,
+								1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
+								new HitboxCircle(1.5), projAnimations));
 			newEnemies.add(new EnemyBomb(getScreenWidth()/2  + 100, -30, 30,
 											0, 1.2, 100,
 											270 - (int)(gameTime - BOMB_START_TIME), 30,
 											new HitboxCircle(floaterRadius),
 											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
-											new ProjectileData(ProjectileData.ProjType.STRAIGHT,
-																2, Math.PI / 2,
-																1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
-																new HitboxCircle(1.5), projAnimations)));
+											projDataMap));
 			return newEnemies;
 		}
 
 		final long BOSS_SPAWN_TIME = 100;
 
 		if(gameTime == BOSS_SPAWN_TIME){
-			System.out.println("BOSS COMETH");
+			HashMap<String, Animation> targetProjAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_BLUE);
 
-			newEnemies.add(new EnemyBossLateralPatroller(
-										EnemyBoss.StartSide.BOTTOM, new Point2D.Double(300, 100),
+			HashMap<String, ProjectileData> projDataMap = new HashMap<>();
+			projDataMap.put("targetted", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+								2, Math.PI / 2,
+								1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
+								new HitboxCircle(1.5), targetProjAnimations));
+			projDataMap.put("main", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
+								2, Math.PI / 2,
+								1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP,
+								new HitboxCircle(1.5), targetProjAnimations));
+
+			newEnemies.add(new EnemyBossDroid(
+										EnemyBoss.StartSide.TOP, new Point2D.Double(300, 100),
 										50, getScreenWidth() - 300, 80, 0.8,
 										10000, 10000, 
 										new HitboxRectangle(5, 0, 295, 145, 5, 10), 
 										AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOSS_1),
-										null));
+										projDataMap));
 			setBossSpawned(true);
 			return newEnemies;
 		}

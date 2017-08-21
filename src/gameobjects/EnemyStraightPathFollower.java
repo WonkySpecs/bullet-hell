@@ -31,11 +31,11 @@ public class EnemyStraightPathFollower extends EnemyStraightFloater{
 										int score, 
 										Hitbox hitbox,
 										HashMap<String, Animation> animations,
-										ProjectileData projType, ItemDrop itemDrop){
+										HashMap<String, ProjectileData> projectileDataMap, ItemDrop itemDrop){
 		super(pointList.get(0).getX(), pointList.get(0).getY(), hp,
 				calcXvel(pointList.get(0), new Point2D.Double(pointList.get(0).getX(), pointList.get(0).getY()), speedList.get(0)),
 				calcYvel(pointList.get(0), new Point2D.Double(pointList.get(0).getX(), pointList.get(0).getY()), speedList.get(0)),
-				score, hitbox, animations, projType, itemDrop);
+				score, hitbox, animations, projectileDataMap, itemDrop);
 		curTargetPoint = 0;
 		this.pointList = pointList;
 		this.speedList = speedList;
@@ -47,13 +47,13 @@ public class EnemyStraightPathFollower extends EnemyStraightFloater{
 										int score, 
 										Hitbox hitbox,
 										HashMap<String, Animation> animations,
-										ProjectileData projType, ItemDrop itemDrop){
+										HashMap<String, ProjectileData> projectileDataMap, ItemDrop itemDrop){
 		this(hp,
 				pointList, buildSpeedList(speed, pointList.size()),
 				score, 
 				hitbox,
 				animations,
-				projType, itemDrop);
+				projectileDataMap, itemDrop);
 	}
 
 	@Override

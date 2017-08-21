@@ -14,8 +14,8 @@ public class EnemyBomb extends EnemyStraightFloater{
 						int explosionDelay, int numProjectiles,
 						Hitbox hitbox,
 						HashMap<String, Animation> animations,
-						ProjectileData projType){
-		super(x, y, hp, xvel, yvel, score, hitbox, animations, projType, null);
+						HashMap<String, ProjectileData> projectileDataMap){
+		super(x, y, hp, xvel, yvel, score, hitbox, animations, projectileDataMap, null);
 		this.explosionDelay = explosionDelay;
 		this. numProjectiles = numProjectiles;
 		timer = 0;
@@ -46,12 +46,12 @@ public class EnemyBomb extends EnemyStraightFloater{
 
 			ArrayList<Projectile> explosion = new ArrayList<>();
 			double curAngle = -Math.PI;
-			getProjectileData().setAngle(curAngle);
+			getProjectileData("main").setAngle(curAngle);
 
 			for(int i = 0; i < numProjectiles; i++){
-				explosion.add(getProjectileData().newProjectile(getX(), getY()));
+				explosion.add(getProjectileData("main").newProjectile(getX(), getY()));
 				curAngle += (2 * Math.PI) / numProjectiles;
-				getProjectileData().setAngle(curAngle);				
+				getProjectileData("main").setAngle(curAngle);				
 			}
 			return explosion;
 		}

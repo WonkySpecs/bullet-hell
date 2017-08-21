@@ -25,8 +25,8 @@ public class EnemyBossLateralPatroller extends EnemyBoss{
 	public EnemyBossLateralPatroller(EnemyBoss.StartSide startSide, Point2D.Double startPoint,
 										double leftEnd, double rightEnd, double y, Double speed,
 										int hp, int score,				
-										Hitbox hitbox, HashMap<String, Animation> animations, ProjectileData projectileData){
-		super(startSide, startPoint, hp, score, hitbox, animations, projectileData);
+										Hitbox hitbox, HashMap<String, Animation> animations, HashMap<String, ProjectileData> projectileDataMap){
+		super(startSide, startPoint, hp, score, hitbox, animations, projectileDataMap);
 		this.leftEnd = leftEnd;
 		this.rightEnd = rightEnd;
 		this.y = y;
@@ -41,6 +41,14 @@ public class EnemyBossLateralPatroller extends EnemyBoss{
 				movingRight = true;
 				break;
 		}
+	}
+
+	public void setSpeed(double speed){
+		this.speed = speed;
+	}
+
+	public double getSpeed(){
+		return speed;
 	}
 
 	@Override
