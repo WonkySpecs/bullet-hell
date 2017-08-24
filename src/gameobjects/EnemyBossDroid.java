@@ -3,6 +3,7 @@ package src.gameobjects;
 import java.awt.geom.*;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.awt.geom.*;
 
 import src.animation.*;
 import src.*;
@@ -48,16 +49,17 @@ public class EnemyBossDroid extends EnemyBossLateralPatroller{
 	public ArrayList<Projectile> fire(HitboxCircle playerHitbox){
 		ArrayList<Projectile> newProjectiles = new ArrayList<>();
 		if(timeSinceTargetShot >= targetShotDelay){
-			double dx = playerHitbox.getCenter().getX() - getHitbox().getCenter().getX();
-			double dy = playerHitbox.getCenter().getY() - getHitbox().getCenter().getY();
+			Point2D.Double targetShotStartPoint = new Point2D.Double(getX() + getSprite().getWidth() / 2, getY() + getSprite().getHeight() - 20);
+			double dx = playerHitbox.getCenter().getX() - targetShotStartPoint.getX();
+			double dy = playerHitbox.getCenter().getY() - targetShotStartPoint.getY();
 			getProjectileData("targetted").setAngle(Math.atan2(dy, dx));
-			newProjectiles.add(getProjectileData("targetted").newProjectile(getX() + getSprite().getWidth() / 2, getY() + getSprite().getHeight()));
+			newProjectiles.add(getProjectileData("targetted").newProjectile(targetShotStartPoint));
 			timeSinceTargetShot = 0;
 		}
 
 		if(timeSinceMainShot >= mainShotDelay){
-			newProjectiles.add(getProjectileData("main").newProjectile(getX() + 20, getY() + getSprite().getHeight()));
-			newProjectiles.add(getProjectileData("main").newProjectile(getX() + getSprite().getWidth() - 20, getY() + getSprite().getHeight()));
+			newProjectiles.add(getProjectileData("main").newProjectile(getX() + 20, getY() + getSprite().getHeight() - 20));
+			newProjectiles.add(getProjectileData("main").newProjectile(getX() + getSprite().getWidth() - 20, getY() + getSprite().getHeight() - 20));
 			timeSinceTargetShot = 0;
 			timeSinceMainShot = 0;
 		}

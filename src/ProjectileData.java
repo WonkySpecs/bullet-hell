@@ -1,6 +1,7 @@
 package src;
 
 import java.util.HashMap;
+import java.awt.geom.*;
 
 import src.gameobjects.*;
 import src.animation.Animation;
@@ -48,5 +49,9 @@ public class ProjectileData{
 				proj = null;
 		}
 		return proj;
+	}
+
+	public Projectile newProjectile(Point2D.Double startPoint){
+		return newProjectile(startPoint.getX(), startPoint.getY());
 	}
 }
