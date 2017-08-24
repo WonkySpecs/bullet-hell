@@ -34,11 +34,11 @@ public class GamePlayLogic{
 	private EnemyBoss boss;
 
 	private static final int DEPTH_PLAYER = 0;
-	private static final int DEPTH_ENEMY = 1;
-	private static final int DEPTH_PLAYER_PROJECTILE = 2;
-	private static final int DEPTH_ENEMY_PROJECTILE = 3;
-	private static final int DEPTH_ITEM = 4;
-	private static final int DEPTH_PARTICLE = 5;
+	private static final int DEPTH_PARTICLE = 1;
+	private static final int DEPTH_ENEMY = 2;
+	private static final int DEPTH_PLAYER_PROJECTILE = 3;
+	private static final int DEPTH_ENEMY_PROJECTILE = 4;
+	private static final int DEPTH_ITEM = 5;
 
 	private static final double SCORE_MULT_INCREMENT = 0.1;
 

@@ -238,13 +238,29 @@ public class GamePlay extends JPanel implements ActionListener{
 		setBackground(Color.BLACK);  // set background color for this JPanel
 
 		if(spriteList != null){
+			int minDepth = 10;
+			int maxDepth = -1;
 			for(SpriteData sd : spriteList){
-				BufferedImage img = sd.getSprite();
-				int x = (int)Math.round(sd.getPos().getX());
-				int y = (int)Math.round(sd.getPos().getY());
-				g2.setComposite(AlphaComposite.SrcOver.derive(sd.getAlpha()));
-				g2.drawImage(img, x, y, null);
-			}			
+				if(sd.getDepth() < minDepth){
+					minDepth = sd.getDepth();
+				}
+
+				if(sd.getDepth() > maxDepth){
+					maxDepth = sd.getDepth();
+				}
+			}
+			
+			for(int curDepth = maxDepth; curDepth >= minDepth; curDepth--){
+				for(SpriteData sd : spriteList){
+					if(sd.getDepth() == curDepth){
+						BufferedImage img = sd.getSprite();
+						int x = (int)Math.round(sd.getPos().getX());
+						int y = (int)Math.round(sd.getPos().getY());
+						g2.setComposite(AlphaComposite.SrcOver.derive(sd.getAlpha()));
+						g2.drawImage(img, x, y, null);						
+					}
+				}				
+			}
 		}
 
 		paintGUIElements(g2);
