@@ -21,7 +21,8 @@ import src.*;
 import src.animation.*;
 
 public class ItemDrop extends GameObject{
-	private static double DROP_SPEED = 3;
+	private static double MAX_DROP_SPEED = 4.5;
+	private static double INITIAL_DROP_SPEED = -1.75;
 	private static double DEFAULT_TRACKING_RANGE = 30;
 	private boolean tracking;
 	private double trackingRange;
@@ -29,7 +30,7 @@ public class ItemDrop extends GameObject{
 	public ItemDrop(double x, double y, double trackingRange, Hitbox hitbox, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		setXvel(0);
-		setYvel(DROP_SPEED);
+		setYvel(INITIAL_DROP_SPEED);
 		tracking = false;
 		this.trackingRange = trackingRange;
 	}
@@ -47,6 +48,9 @@ public class ItemDrop extends GameObject{
 	@Override
 	public void update(int screenWidth, int screenHeight){
 		super.update(screenWidth, screenHeight);
+		if(getYvel() < MAX_DROP_SPEED){
+			setYvel(getYvel() + 0.12);
+		}
 		moveDown();
 		moveRight();
 	}
@@ -62,15 +66,9 @@ public class ItemDrop extends GameObject{
 			double dx = playerHitbox.getCenter().getX() - getHitbox().getCenter().getX();
 			double dy =  playerHitbox.getCenter().getY() - getHitbox().getCenter().getY();
 			double targetAngle = Math.atan2(dy, dx);
-			double dist = Math.sqrt(dx * dx + dy * dy);
 
-			double speed = DROP_SPEED * Math.pow(trackingRange / dist, 2);
-
-			if(dist <= speed){
-				speed = dist;
-			}
-			setXvel(speed * Math.cos(targetAngle));
-			setYvel(speed * Math.sin(targetAngle));
+			setXvel(3 * MAX_DROP_SPEED * Math.cos(targetAngle));
+			setYvel(3 * MAX_DROP_SPEED * Math.sin(targetAngle));
 		}
 	}
 
