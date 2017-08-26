@@ -1,3 +1,14 @@
+/**
+* EnemyBossDroid is the boss used in the examle level.
+* It is an example of a subclass for EnemyBossLateralPatroller
+* which defines a way of shooting, and a frenzy state at a
+* certain hp level.
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   24-08-2017
+*/
+
 package src.gameobjects;
 
 import java.awt.geom.*;

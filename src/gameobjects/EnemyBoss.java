@@ -1,3 +1,13 @@
+/**
+* EnemyBoss is the abstract base class for all of the
+* boss enemies in the game. It defines the starting
+* movement (sliding into the screen from some side).
+*
+* @author  Will Taylor
+* @version 0.1
+* @since   24-08-2017
+*/
+
 package src.gameobjects;
 
 import java.util.HashMap;

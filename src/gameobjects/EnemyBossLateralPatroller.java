@@ -1,12 +1,12 @@
 /**
-* The simplest type of boss, EnemyBossLateralPatroller
-* begins from the given side of the screen then moves
-* from x = leftEnd to x = rightEnd at height y. 
-* 
+* EnemyBossLateralPatroller is a common type of boss
+* which simply moves from side to side at a fixed height,
+* reversing direction whenever it reaches leftEnd or
+* rightEnd
 *
 * @author  Will Taylor
 * @version 0.1
-* @since   20-08-2017
+* @since   24-08-2017
 */
 
 package src.gameobjects;
