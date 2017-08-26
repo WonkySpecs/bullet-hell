@@ -26,7 +26,7 @@ public class GamePlayLogic{
 	private ArrayList<EnemyShip> enemyShipList;
 	private ArrayList<Projectile> enemyProjectileList, playerProjectileList;
 	private ArrayList<ItemDrop> itemList;
-	private int screenWidth, screenHeight;
+	private int screenWidth, screenHeight, initialBossHitPoints;
 	private boolean paused;
 	private long pauseTime, score;
 	private double scoreMult;
@@ -72,6 +72,7 @@ public class GamePlayLogic{
 			if(newEnemies != null){
 				if(level.isBossSpawned()){
 					boss = (EnemyBoss)newEnemies.get(0);
+					initialBossHitPoints = boss.getHitPoints();
 					enemyShipList.add(boss);
 				}
 				else{
@@ -178,30 +179,32 @@ public class GamePlayLogic{
 				for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 					EnemyShip enemy = enemyIterator.next();
 					if(Hitbox.collisionBetween(proj.getHitbox(), enemy.getHitbox())){
-						enemy.reduceHitpoints(proj.getDamage());
+						if(enemy != boss || boss.isStarted()){
+							enemy.reduceHitPoints(proj.getDamage());
 
-						//Enemy killed
-						if(enemy.getHitPoints() <= 0){
-							//Increase score
-							scoreMult += SCORE_MULT_INCREMENT;
-							score += enemy.getScore() * scoreMult;
-							//Drop item if any
-							ItemDrop newItem = enemy.getItemDrop();
-							if(newItem != null){
-								newItem.moveTo(enemy.getX(), enemy.getY());
-								itemList.add(newItem);
+							//Enemy killed
+							if(enemy.getHitPoints() <= 0){
+								//Increase score
+								scoreMult += SCORE_MULT_INCREMENT;
+								score += enemy.getScore() * scoreMult;
+								//Drop item if any
+								ItemDrop newItem = enemy.getItemDrop();
+								if(newItem != null){
+									newItem.moveTo(enemy.getX(), enemy.getY());
+									itemList.add(newItem);
+								}
+								enemy = null;
+								enemyIterator.remove();					
 							}
-							enemy = null;
-							enemyIterator.remove();					
+							ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(),
+																					proj.getExplosionDirection(),
+																					proj.getHitbox().getCenter().getX(),
+																					proj.getHitbox().getCenter().getY());
+							if(newParticles != null){
+								particleList.addAll(newParticles);
+							}
+							expired = true;							
 						}
-						ArrayList<Particle> newParticles = Particle.explosion(proj.getExplosionType(),
-																				proj.getExplosionDirection(),
-																				proj.getHitbox().getCenter().getX(),
-																				proj.getHitbox().getCenter().getY());
-						if(newParticles != null){
-							particleList.addAll(newParticles);
-						}
-						expired = true;
 					}
 				}
 			}
@@ -304,6 +307,15 @@ public class GamePlayLogic{
 		spriteDataList.add(new SpriteData(player.getSprite(), player.getPos(), DEPTH_PLAYER));
 
 		return spriteDataList;
+	}
+
+	public double getBossHitPointPercentage(){
+		if(boss == null){
+			return -1;
+		}
+		else{
+			return (double)boss.getHitPoints() / (double)initialBossHitPoints;
+		}
 	}
 
 	public long getScore(){

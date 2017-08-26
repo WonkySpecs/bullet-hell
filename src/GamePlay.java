@@ -262,6 +262,12 @@ public class GamePlay extends JPanel implements ActionListener{
 				}				
 			}
 		}
+		
+		if(logic.getBossHitPointPercentage() > 0){
+			g2.setColor(Color.RED);
+			g2.drawRect(30, 20, GAME_SCREEN_WIDTH - 60, 25);
+			g2.fillRect(30, 20, (int)((GAME_SCREEN_WIDTH - 60) * logic.getBossHitPointPercentage()), 25);
+		}
 
 		paintGUIElements(g2);
 

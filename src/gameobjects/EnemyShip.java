@@ -27,7 +27,7 @@ public abstract class EnemyShip extends GameObject{
 		removable = false;
 		immediatelyRemovable = false;
 		damageTimer = -1;
-		setHitpoints(hp);
+		this.hitPoints = hp;
 		this.score = score;
 		this.projectileDataMap = projectileDataMap;
 		this.itemDrop = itemDrop;
@@ -45,7 +45,7 @@ public abstract class EnemyShip extends GameObject{
 		this(x, y, hp, score, hitbox, animations, null, null);
 	}
 
-	public void setHitpoints(int hp){
+	public void setHitPoints(int hp){
 		hitPoints = hp;
 	}
 
@@ -53,7 +53,7 @@ public abstract class EnemyShip extends GameObject{
 		return hitPoints;
 	}
 
-	public void reduceHitpoints(int damage){
+	public void reduceHitPoints(int damage){
 		//TODO: Implement taking damge animations
 		hitPoints -= damage;
 		if(hasAnimation("damaged")){
