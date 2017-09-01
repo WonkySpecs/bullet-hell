@@ -40,7 +40,8 @@ public class AnimationMapFactory{
 
 	public static final int ITEM_UPGRADE = 200;
 	public static final int ITEM_POINTS_SMALL = 201;
-	public static final int ITEM_POINTS_BIG = 202;
+	public static final int ITEM_POINTS = 202;
+	public static final int ITEM_POINTS_BIG = 203;
 
 	public static final int PARTICLE_SMALL_GREEN = 301;
 	public static final int PARTICLE_GREEN = 302;

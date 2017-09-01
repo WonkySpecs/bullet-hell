@@ -64,9 +64,16 @@ public class GameLevelOne extends GameLevel{
 			for(int i = -100;i < 101;i += 100){
 				startX = getScreenWidth() / 2 + i;
 				startY = 200;
-				ItemDrop item = new ItemDrop(startX, startY, 65, new HitboxCircle(10), getPreloadedAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
+				ItemDrop item = new ItemDrop(startX, startY,
+												65, new HitboxCircle(10),
+												ItemDrop.ItemType.UPGRADE,
+												getPreloadedAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 0, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, item));
+				newEnemies.add(new EnemyStraightFloater(startX, startY,
+														100, 0, 0, SCORE_RED_FLOATER,
+														fh,
+														getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED),
+														null, item));
 			}
 
 			return newEnemies;
@@ -79,17 +86,29 @@ public class GameLevelOne extends GameLevel{
 				startX = getScreenWidth() / 2 - floaterRadius;
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 4, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY,
+														100, 0, 4, SCORE_RED_FLOATER,
+														fh,
+														getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED),
+														null, null));
 
 				startX = -20;
 				startY = getScreenHeight() / 2;
 				fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 3, -2, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY,
+														100, 3, -2, SCORE_RED_FLOATER,
+														fh,
+														getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED),
+														null, null));
 
 				startX = getScreenWidth() + 20;
 				startY = getScreenHeight() / 2;
 				fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -3, -2, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY,
+														100, -3, -2, SCORE_RED_FLOATER,
+														fh,
+														getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED),
+														null, null));
 
 				return newEnemies;
 			}
@@ -178,7 +197,7 @@ public class GameLevelOne extends GameLevel{
 			return newEnemies;
 		}
 
-		final long BOSS_SPAWN_TIME = 100;
+		final long BOSS_SPAWN_TIME = 1000;
 
 		if(gameTime == BOSS_SPAWN_TIME){
 			HashMap<String, Animation> targetProjAnimations = getPreloadedAnimationMap(AnimationMapFactory.PROJ_BLUE);

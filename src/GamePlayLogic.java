@@ -123,7 +123,7 @@ public class GamePlayLogic{
 		}
 	}
 
-	//Move all enemies, check if they should be removed, and check for collision with player
+	//Move anbd shoot with all enemies, check if they should be removed, and check for collision with player
 	private void updateEnemies(){
 		for (Iterator<EnemyShip> enemyIterator = enemyShipList.iterator(); enemyIterator.hasNext();){
 			boolean dead = false;
@@ -253,8 +253,27 @@ public class GamePlayLogic{
 			else{
 				if(Hitbox.collisionBetween(item.getHitbox(), player.getHitbox())){
 					dead = true;
-					//TODO: Get actual behaviour from item object and act on it accordingly
-					player.upgradeWeapon();
+					switch(item.getItemType()){
+						case UPGRADE:
+							player.upgradeWeapon();
+							break;
+
+						case POINTS:
+								scoreMult += SCORE_MULT_INCREMENT;
+								score += item.getPoints() * scoreMult;
+								//TODO: Implemented some floating marker thing
+							break;
+
+						case EXTRA_LIFE:
+							break;
+
+						case EXTRA_SPECIAL:
+							break;
+
+						default:
+							System.out.println("ItemDorp had invalid ItemType when collected by player");
+							break;
+					}
 				}
 			}
 

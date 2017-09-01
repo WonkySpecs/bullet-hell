@@ -26,21 +26,35 @@ public class ItemDrop extends GameObject{
 	private static double DEFAULT_TRACKING_RANGE = 30;
 	private boolean tracking;
 	private double trackingRange;
+	private ItemType type;
 
-	public ItemDrop(double x, double y, double trackingRange, Hitbox hitbox, HashMap<String, Animation> animations){
+	public enum ItemType{
+		UPGRADE, EXTRA_LIFE, POINTS, EXTRA_SPECIAL;
+	}
+
+	public ItemDrop(double x, double y, double trackingRange, Hitbox hitbox, ItemType type, HashMap<String, Animation> animations){
 		super(x, y, hitbox, animations);
 		setXvel(0);
 		setYvel(INITIAL_DROP_SPEED);
 		tracking = false;
+		this.type = type;
 		this.trackingRange = trackingRange;
 	}
 
-	public ItemDrop(double x, double y, Hitbox hitbox, HashMap<String, Animation> animations){
-		this(x, y, DEFAULT_TRACKING_RANGE, hitbox, animations);
+	public ItemDrop(double x, double y, double trackingRange, Hitbox hitbox, ItemType type){
+		this(x, y, trackingRange, hitbox, type, getDefaultAnimations(type));
+	}
+
+	public ItemDrop(double x, double y, Hitbox hitbox, ItemType type, HashMap<String, Animation> animations){
+		this(x, y, DEFAULT_TRACKING_RANGE, hitbox, type, animations);
 	}
 
 	public ItemDrop(ItemDrop original){
-		this(original.getX(), original.getX(), original.getTrackingRange(), Hitbox.copy(original.getHitbox()), AnimationMapFactory.copyAnimationMap(original.getAnimationMap()));
+		this(original.getX(), original.getX(),
+				original.getTrackingRange(), 
+				Hitbox.copy(original.getHitbox()), 
+				original.getItemType(),
+				AnimationMapFactory.copyAnimationMap(original.getAnimationMap()));
 	}
 
 	//Before getting close to the player, move straight down
@@ -78,5 +92,38 @@ public class ItemDrop extends GameObject{
 
 	public double getTrackingRange(){
 		return trackingRange;
+	}
+
+	public ItemType getItemType(){
+		return type;
+	}
+
+	public int getPoints(){
+		if(type == ItemType.POINTS){
+			return 500;
+		}
+		else{
+			System.out.println("Tried to getPoints from non-points ItemDrop");
+			return 0;
+		}
+	}
+
+	private static HashMap<String, Animation> getDefaultAnimations(ItemType type){
+		int objectType = 0;
+		switch(type){
+			case UPGRADE:
+				objectType  = AnimationMapFactory.ITEM_UPGRADE;
+				break;
+
+			//Split this into size classes based on amount of points?
+			case POINTS:
+				objectType  = AnimationMapFactory.ITEM_POINTS;
+				break;
+
+			default:
+				System.out.println("Invalid type passed to ItemDrop.getDefaultAnimations()");
+		}
+
+		return AnimationMapFactory.getAnimationMap(objectType);
 	}
 }
