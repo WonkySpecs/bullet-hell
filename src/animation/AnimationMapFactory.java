@@ -28,7 +28,7 @@ public class AnimationMapFactory{
 	public static final int ENEMY_SUICIDE_SMALL = 20;
 	public static final int ENEMY_HYPNOSQUARE = 30;
 	public static final int ENEMY_BOMB = 31;
-	public static final int ENEMY_BOSS_1 = 50;
+	public static final int ENEMY_BOSS_DROID = 50;
 
 	public static final int PROJ_PLAYER_PRIM_1 = 100;
 	public static final int PROJ_PLAYER_PRIM_2 = 101;
@@ -122,7 +122,7 @@ public class AnimationMapFactory{
 
 
 
-			case ENEMY_BOSS_1:
+			case ENEMY_BOSS_DROID:
 				spriteArray = new BufferedImage[] { Sprite.getSprite(0, 0, "enemyboss1", 300, 160),
 													Sprite.getSprite(1, 0, "enemyboss1", 300, 160)};
 				animationMap.put("neutral", new Animation(spriteArray, 10));

@@ -18,7 +18,6 @@ import javax.imageio.ImageIO;
 import java.io.File;
 
 public class Sprite{
-	private static BufferedImage spriteSheet;
 	private static final String SPRITE_FOLDER_PATH = System.getProperty("user.dir")
 														+ File.separator + "bin"
 														+ File.separator + "src"
@@ -38,7 +37,7 @@ public class Sprite{
 	}
 
 	public static BufferedImage getSprite(int xGrid, int yGrid, String spriteSheetFile, int tileWidth, int tileHeight){
-		spriteSheet = loadSprite(spriteSheetFile);
+		BufferedImage spriteSheet = loadSprite(spriteSheetFile);
 	
 		return spriteSheet.getSubimage(xGrid * tileWidth, yGrid * tileHeight, tileWidth, tileHeight);
 	}

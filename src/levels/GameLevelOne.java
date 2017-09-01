@@ -21,12 +21,20 @@ public class GameLevelOne extends GameLevel{
 	private static final int SCORE_RED_FLOATER = 100;
 	private static final int SCORE_FLOATER_SHOOTER = 200;
 	private static final int SCORE_BIG_FLOATER = 1000;
-	
-	HashMap<String, Animation> floaterAnimations;
+
+	private static final Integer[] animationsToLoad = new Integer[] { 
+																AnimationMapFactory.ENEMY_FLOATER_RED,
+																AnimationMapFactory.ENEMY_HYPNOSQUARE,
+																AnimationMapFactory.ENEMY_SUICIDE_SMALL,
+																AnimationMapFactory.ENEMY_BOMB,
+																AnimationMapFactory.ENEMY_FLOATER_BIG_BLUE,
+																AnimationMapFactory.ENEMY_BOSS_DROID,
+																AnimationMapFactory.PROJ_TINY_BLUE,
+																AnimationMapFactory.PROJ_BLUE,
+																AnimationMapFactory.ITEM_UPGRADE};
 
 	public GameLevelOne(int screnWidth, int screenHeight){
-		super(screnWidth, screenHeight);
-		floaterAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED);
+		super(screnWidth, screenHeight, animationsToLoad);
 	}
 
 	@Override
@@ -42,7 +50,7 @@ public class GameLevelOne extends GameLevel{
 			HitboxRectangle squareHitbox = new HitboxRectangle(startX, startY, 16, 16);
 			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0.4, 2, SCORE_RED_FLOATER,
 													squareHitbox,
-													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
+													getPreloadedAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
 													null, null));
 
 			startX = getScreenWidth() - 65;
@@ -50,15 +58,15 @@ public class GameLevelOne extends GameLevel{
 			squareHitbox = new HitboxRectangle(startX, startY, 16, 16);
 			newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -0.4, 2, SCORE_RED_FLOATER,
 													squareHitbox,
-													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
+													getPreloadedAnimationMap(AnimationMapFactory.ENEMY_HYPNOSQUARE),
 													null, null));
 
 			for(int i = -100;i < 101;i += 100){
 				startX = getScreenWidth() / 2 + i;
 				startY = 200;
-				ItemDrop item = new ItemDrop(startX, startY, 65, new HitboxCircle(10), AnimationMapFactory.getAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
+				ItemDrop item = new ItemDrop(startX, startY, 65, new HitboxCircle(10), getPreloadedAnimationMap(AnimationMapFactory.ITEM_UPGRADE));
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 0, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, item));
+				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 0, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, item));
 			}
 
 			return newEnemies;
@@ -71,17 +79,17 @@ public class GameLevelOne extends GameLevel{
 				startX = getScreenWidth() / 2 - floaterRadius;
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 4, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 0, 4, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
 
 				startX = -20;
 				startY = getScreenHeight() / 2;
 				fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 3, -2, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, 3, -2, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
 
 				startX = getScreenWidth() + 20;
 				startY = getScreenHeight() / 2;
 				fh = new HitboxCircle(floaterRadius);
-				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -3, -2, SCORE_RED_FLOATER, fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), null, null));
+				newEnemies.add(new EnemyStraightFloater(startX, startY, 100, -3, -2, SCORE_RED_FLOATER, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), null, null));
 
 				return newEnemies;
 			}
@@ -92,13 +100,13 @@ public class GameLevelOne extends GameLevel{
 				startX = (int)((((float)(gameTime - 260) / 40) * (getScreenWidth() - 1)) - floaterRadius);
 				startY = -25;
 				HitboxCircle fh = new HitboxCircle(floaterRadius);
-				HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
+				HashMap<String, Animation> projAnimations = getPreloadedAnimationMap(AnimationMapFactory.PROJ_TINY_BLUE);
 				HashMap<String, ProjectileData> projDataMap = new HashMap<>();
 				ProjectileData shooterProj = new ProjectileData(ProjectileData.ProjType.STRAIGHT, 8, Math.PI / 2, 1, Particle.ExplosionType.SMALL_BLUE, Particle.ExplosionDirection.UP, new HitboxCircle(2), projAnimations);
 				projDataMap.put("main", shooterProj);
 				newEnemies.add(new EnemyStraightFloaterShooter(startX, startY,
 																1, 0, 4, 15, SCORE_FLOATER_SHOOTER, 
-																fh, AnimationMapFactory.copyAnimationMap(floaterAnimations), projDataMap, null));
+																fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED), projDataMap, null));
 				return newEnemies;
 			}
 		}
@@ -108,7 +116,7 @@ public class GameLevelOne extends GameLevel{
 				startX = i;
 				startY = -10;
 				HitboxCircle fh = new HitboxCircle(8);
-				newEnemies.add(new EnemySuicideTracker(startX, startY, 1, 2, 0.05, 50, fh, AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL), null, null));				
+				newEnemies.add(new EnemySuicideTracker(startX, startY, 1, 2, 0.05, 50, fh, getPreloadedAnimationMap(AnimationMapFactory.ENEMY_SUICIDE_SMALL), null, null));				
 				i += 30;
 			}
 			return newEnemies;
@@ -119,7 +127,7 @@ public class GameLevelOne extends GameLevel{
 			startX = getScreenWidth() / 2 - 32;
 			newEnemies.add(new EnemyStraightFloater(startX, startY, 10000, 0, 0.2, SCORE_BIG_FLOATER,
 													new HitboxCircle(33), 
-													AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_FLOATER_BIG_BLUE),
+													getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_BIG_BLUE),
 													null,
 													null));
 			return newEnemies;
@@ -140,10 +148,10 @@ public class GameLevelOne extends GameLevel{
 										path, Math.random() * 2 + 2,
 										500, 
 										fh,
-										AnimationMapFactory.copyAnimationMap(floaterAnimations),
+										getPreloadedAnimationMap(AnimationMapFactory.ENEMY_FLOATER_RED),
 										null, null));
 
-			HashMap<String, Animation> projAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_BLUE);
+			HashMap<String, Animation> projAnimations = getPreloadedAnimationMap(AnimationMapFactory.PROJ_BLUE);
 			HashMap<String, ProjectileData> projDataMap = new HashMap<>();
 			projDataMap.put("main", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
 								2, Math.PI / 2,
@@ -153,7 +161,7 @@ public class GameLevelOne extends GameLevel{
 											0, 1.2, 100,
 											270 - (int)(gameTime - BOMB_START_TIME), 30,
 											new HitboxCircle(floaterRadius),
-											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
+											getPreloadedAnimationMap(AnimationMapFactory.ENEMY_BOMB),
 											projDataMap));
 
 			projDataMap = new HashMap<>();
@@ -165,7 +173,7 @@ public class GameLevelOne extends GameLevel{
 											0, 1.2, 100,
 											270 - (int)(gameTime - BOMB_START_TIME), 30,
 											new HitboxCircle(floaterRadius),
-											AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOMB),
+											getPreloadedAnimationMap(AnimationMapFactory.ENEMY_BOMB),
 											projDataMap));
 			return newEnemies;
 		}
@@ -173,7 +181,7 @@ public class GameLevelOne extends GameLevel{
 		final long BOSS_SPAWN_TIME = 100;
 
 		if(gameTime == BOSS_SPAWN_TIME){
-			HashMap<String, Animation> targetProjAnimations = AnimationMapFactory.getAnimationMap(AnimationMapFactory.PROJ_BLUE);
+			HashMap<String, Animation> targetProjAnimations = getPreloadedAnimationMap(AnimationMapFactory.PROJ_BLUE);
 
 			HashMap<String, ProjectileData> projDataMap = new HashMap<>();
 			projDataMap.put("targetted", new ProjectileData(ProjectileData.ProjType.STRAIGHT,
@@ -190,7 +198,7 @@ public class GameLevelOne extends GameLevel{
 										50, getScreenWidth() - 300, 80, 0.8,
 										10000, 10000, 
 										new HitboxRectangle(5, 0, 295, 145, 5, 10), 
-										AnimationMapFactory.getAnimationMap(AnimationMapFactory.ENEMY_BOSS_1),
+										getPreloadedAnimationMap(AnimationMapFactory.ENEMY_BOSS_DROID),
 										projDataMap));
 			setBossSpawned(true);
 			return newEnemies;
@@ -198,5 +206,4 @@ public class GameLevelOne extends GameLevel{
 
 		return null;
 	}
-
 }
